@@ -391,8 +391,8 @@
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(99, 10);
-            orgName_label.Margin = new Padding(3, 5, 3, 0);
+            orgName_label.Location = new Point(98, 5);
+            orgName_label.Margin = new Padding(4, 0, 4, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;
             orgName_label.Size = new Size(85, 23);
@@ -404,7 +404,7 @@
             notify_pictureBox.BackColor = Color.Transparent;
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
-            notify_pictureBox.Location = new Point(46, 8);
+            notify_pictureBox.Location = new Point(44, 8);
             notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
@@ -416,12 +416,14 @@
             // search_textBox
             // 
             search_textBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            search_textBox.ForeColor = Color.FromArgb(0, 11, 71);
-            search_textBox.Location = new Point(9, 12);
+            search_textBox.ForeColor = Color.FromArgb(43, 42, 76);
+            search_textBox.Location = new Point(15, 15);
+            search_textBox.Margin = new Padding(4);
             search_textBox.Name = "search_textBox";
             search_textBox.PlaceholderText = "Search";
-            search_textBox.Size = new Size(318, 27);
-            search_textBox.TabIndex = 1;
+            search_textBox.Size = new Size(396, 27);
+            search_textBox.TabIndex = 0;
+            search_textBox.TextChanged += search_textBox_TextChanged;
             // 
             // panel2
             // 
@@ -472,9 +474,11 @@
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             groupBox2.Location = new Point(0, 0);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4);
             groupBox2.Size = new Size(462, 590);
-            groupBox2.TabIndex = 10;
+            groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "Items Low in Stock";
             // 
@@ -503,7 +507,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             lowItems_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             lowItems_dataGridView.Dock = DockStyle.Fill;
-            lowItems_dataGridView.Location = new Point(3, 30);
+            lowItems_dataGridView.Location = new Point(4, 31);
             lowItems_dataGridView.Name = "lowItems_dataGridView";
             lowItems_dataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -517,8 +521,9 @@
             lowItems_dataGridView.RowHeadersVisible = false;
             lowItems_dataGridView.RowHeadersWidth = 51;
             lowItems_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            lowItems_dataGridView.Size = new Size(456, 557);
+            lowItems_dataGridView.Size = new Size(454, 555);
             lowItems_dataGridView.TabIndex = 0;
+            lowItems_dataGridView.CellContentClick += lowItems_dataGridView_CellContentClick;
             // 
             // groupBox3
             // 
@@ -527,11 +532,13 @@
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             groupBox3.Location = new Point(0, 0);
+            groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(4);
             groupBox3.Size = new Size(751, 590);
-            groupBox3.TabIndex = 11;
+            groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Your Restock Requests";
+            groupBox3.Text = "Restock Requests";
             // 
             // requests_dataGridView
             // 
@@ -558,7 +565,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             requests_dataGridView.DefaultCellStyle = dataGridViewCellStyle5;
             requests_dataGridView.Dock = DockStyle.Fill;
-            requests_dataGridView.Location = new Point(3, 30);
+            requests_dataGridView.Location = new Point(4, 31);
             requests_dataGridView.Name = "requests_dataGridView";
             requests_dataGridView.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -572,8 +579,9 @@
             requests_dataGridView.RowHeadersVisible = false;
             requests_dataGridView.RowHeadersWidth = 51;
             requests_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            requests_dataGridView.Size = new Size(745, 557);
+            requests_dataGridView.Size = new Size(743, 555);
             requests_dataGridView.TabIndex = 1;
+            requests_dataGridView.CellContentClick += requests_dataGridView_CellContentClick;
             // 
             // panel7
             // 
@@ -755,260 +763,6 @@
             label4.Size = new Size(148, 23);
             label4.TabIndex = 0;
             label4.Text = "Quantity in Hand";
-            // 
-            // groupBox2
-            // 
-            groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox2.Controls.Add(lowItems_dataGridView);
-            groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            groupBox2.Location = new Point(4, 228);
-            groupBox2.Margin = new Padding(4);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4);
-            groupBox2.Size = new Size(670, 336);
-            groupBox2.TabIndex = 2;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Items Low in Stock";
-            // 
-            // lowItems_dataGridView
-            // 
-            lowItems_dataGridView.AllowUserToAddRows = false;
-            lowItems_dataGridView.AllowUserToDeleteRows = false;
-            lowItems_dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lowItems_dataGridView.BackgroundColor = Color.FromArgb(238, 226, 222);
-            lowItems_dataGridView.BorderStyle = BorderStyle.None;
-            lowItems_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            lowItems_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            lowItems_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            lowItems_dataGridView.Columns.AddRange(new DataGridViewColumn[] { lowItems, itemAmount });
-            lowItems_dataGridView.Location = new Point(8, 41);
-            lowItems_dataGridView.Margin = new Padding(4);
-            lowItems_dataGridView.Name = "lowItems_dataGridView";
-            lowItems_dataGridView.ReadOnly = true;
-            lowItems_dataGridView.RowHeadersVisible = false;
-            lowItems_dataGridView.RowHeadersWidth = 51;
-            lowItems_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            lowItems_dataGridView.Size = new Size(655, 288);
-            lowItems_dataGridView.TabIndex = 0;
-            lowItems_dataGridView.CellContentClick += lowItems_dataGridView_CellContentClick_1;
-            // 
-            // lowItems
-            // 
-            lowItems.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            lowItems.HeaderText = "Item Name";
-            lowItems.MinimumWidth = 6;
-            lowItems.Name = "lowItems";
-            lowItems.ReadOnly = true;
-            // 
-            // itemAmount
-            // 
-            itemAmount.HeaderText = "Amount";
-            itemAmount.MinimumWidth = 6;
-            itemAmount.Name = "itemAmount";
-            itemAmount.ReadOnly = true;
-            itemAmount.Width = 125;
-            // 
-            // groupBox3
-            // 
-            groupBox3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox3.Controls.Add(requests_dataGridView);
-            groupBox3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            groupBox3.Location = new Point(682, 228);
-            groupBox3.Margin = new Padding(4);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(4);
-            groupBox3.Size = new Size(841, 336);
-            groupBox3.TabIndex = 3;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Restock Requests";
-            // 
-            // requests_dataGridView
-            // 
-            requests_dataGridView.AllowUserToAddRows = false;
-            requests_dataGridView.AllowUserToDeleteRows = false;
-            requests_dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            requests_dataGridView.BackgroundColor = Color.FromArgb(238, 226, 222);
-            requests_dataGridView.BorderStyle = BorderStyle.None;
-            requests_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            requests_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            requests_dataGridView.Columns.AddRange(new DataGridViewColumn[] { requestedItem, requestStatus });
-            requests_dataGridView.Location = new Point(8, 41);
-            requests_dataGridView.Margin = new Padding(4);
-            requests_dataGridView.Name = "requests_dataGridView";
-            requests_dataGridView.ReadOnly = true;
-            requests_dataGridView.RowHeadersVisible = false;
-            requests_dataGridView.RowHeadersWidth = 51;
-            requests_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            requests_dataGridView.Size = new Size(826, 288);
-            requests_dataGridView.TabIndex = 1;
-            requests_dataGridView.CellContentClick += requests_dataGridView_CellContentClick;
-            // 
-            // requestedItem
-            // 
-            requestedItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            requestedItem.HeaderText = "Item Name";
-            requestedItem.MinimumWidth = 6;
-            requestedItem.Name = "requestedItem";
-            requestedItem.ReadOnly = true;
-            // 
-            // requestStatus
-            // 
-            requestStatus.HeaderText = "Status";
-            requestStatus.MinimumWidth = 6;
-            requestStatus.Name = "requestStatus";
-            requestStatus.ReadOnly = true;
-            requestStatus.Width = 200;
-            // 
-            // groupBox4
-            // 
-            groupBox4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox4.Controls.Add(flowLayoutPanel2);
-            groupBox4.Controls.Add(comboBox1);
-            groupBox4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            groupBox4.Location = new Point(4, 572);
-            groupBox4.Margin = new Padding(4);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(4);
-            groupBox4.Size = new Size(1519, 520);
-            groupBox4.TabIndex = 4;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Top Selling Items";
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            flowLayoutPanel2.AutoScroll = true;
-            flowLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel2.Controls.Add(topItem_tableLayoutPanel);
-            flowLayoutPanel2.Controls.Add(pictureBox11);
-            flowLayoutPanel2.Controls.Add(pictureBox9);
-            flowLayoutPanel2.Controls.Add(pictureBox10);
-            flowLayoutPanel2.Location = new Point(14, 99);
-            flowLayoutPanel2.Margin = new Padding(4);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1420, 456);
-            flowLayoutPanel2.TabIndex = 1;
-            flowLayoutPanel2.WrapContents = false;
-            // 
-            // topItem_tableLayoutPanel
-            // 
-            topItem_tableLayoutPanel.ColumnCount = 1;
-            topItem_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            topItem_tableLayoutPanel.Controls.Add(pictureBox1, 0, 0);
-            topItem_tableLayoutPanel.Controls.Add(topItemName_label, 0, 1);
-            topItem_tableLayoutPanel.Location = new Point(4, 4);
-            topItem_tableLayoutPanel.Margin = new Padding(4);
-            topItem_tableLayoutPanel.Name = "topItem_tableLayoutPanel";
-            topItem_tableLayoutPanel.RowCount = 2;
-            topItem_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 81.76796F));
-            topItem_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 18.2320442F));
-            topItem_tableLayoutPanel.Size = new Size(372, 405);
-            topItem_tableLayoutPanel.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = Properties.Resources.huawei_matebook13_removebg_preview1;
-            pictureBox1.Location = new Point(4, 4);
-            pictureBox1.Margin = new Padding(4);
-            pictureBox1.MaximumSize = new Size(365, 322);
-            pictureBox1.MinimumSize = new Size(365, 322);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(365, 322);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // topItemName_label
-            // 
-            topItemName_label.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            topItemName_label.AutoSize = true;
-            topItemName_label.Location = new Point(4, 331);
-            topItemName_label.Margin = new Padding(4, 0, 4, 0);
-            topItemName_label.Name = "topItemName_label";
-            topItemName_label.Size = new Size(364, 74);
-            topItemName_label.TabIndex = 1;
-            topItemName_label.Text = "Item Name";
-            topItemName_label.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox11
-            // 
-            pictureBox11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox11.Image = Properties.Resources.hp_removebg_preview;
-            pictureBox11.Location = new Point(384, 4);
-            pictureBox11.Margin = new Padding(4);
-            pictureBox11.Name = "pictureBox11";
-            pictureBox11.Size = new Size(365, 405);
-            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox11.TabIndex = 2;
-            pictureBox11.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            pictureBox9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox9.Image = Properties.Resources.samsung_removebg_preview;
-            pictureBox9.Location = new Point(757, 4);
-            pictureBox9.Margin = new Padding(4);
-            pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(365, 405);
-            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox9.TabIndex = 3;
-            pictureBox9.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            pictureBox10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox10.Image = Properties.Resources.Apple_MacBook_Air_13_inch_M3_2024_Space_Gray_1000_0001_removebg_preview;
-            pictureBox10.Location = new Point(1130, 4);
-            pictureBox10.Margin = new Padding(4);
-            pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(311, 405);
-            pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox10.TabIndex = 4;
-            pictureBox10.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            comboBox1.Font = new Font("Segoe UI", 9F);
-            comboBox1.ForeColor = Color.FromArgb(43, 42, 76);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(8, 56);
-            comboBox1.Margin = new Padding(4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(188, 33);
-            comboBox1.TabIndex = 0;
-            comboBox1.Text = "This Month";
-            // 
-            // orgName_label
-            // 
-            orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            orgName_label.AutoSize = true;
-            orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(1355, 30);
-            orgName_label.Margin = new Padding(4, 0, 4, 0);
-            orgName_label.Name = "orgName_label";
-            orgName_label.RightToLeft = RightToLeft.Yes;
-            orgName_label.Size = new Size(98, 28);
-            orgName_label.TabIndex = 2;
-            orgName_label.Text = "C-SHARK";
-            // 
-            // search_textBox
-            // 
-            search_textBox.ForeColor = Color.FromArgb(43, 42, 76);
-            search_textBox.Location = new Point(15, 15);
-            search_textBox.Margin = new Padding(4);
-            search_textBox.Name = "search_textBox";
-            search_textBox.PlaceholderText = "Search";
-            search_textBox.Size = new Size(396, 31);
-            search_textBox.TabIndex = 0;
-            search_textBox.TextChanged += search_textBox_TextChanged;
             // 
             // Dashboard
             // 

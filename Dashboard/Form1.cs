@@ -250,6 +250,9 @@ namespace Dashboard_STAFF
 
         }
 
+        private void requests_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }

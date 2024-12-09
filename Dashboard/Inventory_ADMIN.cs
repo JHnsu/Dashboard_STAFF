@@ -337,8 +337,7 @@ namespace Dashboard_STAFF
                     }
 
                     if (itemIDsToDelete.Count > 0)
-                    {
-                        DeleteItems(itemIDsToDelete);  
+                    {  
                         LoadInventoryData();
                         TotalItemsCount();
                         LowStockCount();
@@ -369,7 +368,7 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-                    string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemIDs)})";
+                    string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemID)})";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.ExecuteNonQuery();  
