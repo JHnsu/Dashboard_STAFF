@@ -38,11 +38,11 @@ namespace Dashboard_STAFF
                     adapter.Fill(notificationsTable);
 
                     // Bind the DataTable to the DataGridView
-                    dataGridView1.DataSource = notificationsTable;
+                    notif_dataGridView.DataSource = notificationsTable;
 
                     // Customize DataGridView appearance
-                    dataGridView1.Columns["Details"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView1.Columns["Timestamp"].DefaultCellStyle.Format = "g"; // General date/time format
+                    notif_dataGridView.Columns["Details"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    notif_dataGridView.Columns["Timestamp"].DefaultCellStyle.Format = "g"; // General date/time format
                 }
             }
             catch (Exception ex)
@@ -52,12 +52,7 @@ namespace Dashboard_STAFF
         }
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void notif_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

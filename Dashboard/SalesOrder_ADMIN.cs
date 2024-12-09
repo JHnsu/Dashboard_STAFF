@@ -33,22 +33,12 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
-
-
         private void salesOrders_btn_Click(object sender, EventArgs e)
         {
             SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
             salesorder.Show();
             this.Hide();
         }
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn_ADMIN salesreturn = new SalesReturn_ADMIN();
-            salesreturn.Show();
-            this.Hide();
-        }
-
         private void purchaseOrders_btn_Click(object sender, EventArgs e)
         {
             PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
@@ -177,8 +167,26 @@ namespace Dashboard_STAFF
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AddOrder_ADMIN addOrder_ADMIN = new AddOrder_ADMIN();
+            AddSale_ADMIN addOrder_ADMIN = new AddSale_ADMIN();
             addOrder_ADMIN.Show();
+        }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

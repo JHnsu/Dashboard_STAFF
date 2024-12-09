@@ -122,6 +122,15 @@ namespace Dashboard_STAFF
                 }
             }
         }
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(0, 93, 217);
+        }
 
         private void SignUp_Load(object sender, EventArgs e)
         {
@@ -146,6 +155,21 @@ namespace Dashboard_STAFF
         {
             new LogInForm().Show();
             this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

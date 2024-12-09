@@ -19,11 +19,35 @@ namespace Dashboard_STAFF
             InitializeComponent();
         }
 
-        private void home_btn_Click_1(object sender, EventArgs e)
+        private void home_btn_Click(object sender, EventArgs e)
         {
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
             this.Hide();
+        }
+        private void inventory_btn_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Hide();
+        }
+
+        private void salesOrders_btn_Click(object sender, EventArgs e)
+        {
+            SalesOrder salesorder = new SalesOrder();
+            salesorder.Show();
+            this.Hide();
+        }
+
+        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders purchaseOrders = new PurchaseOrders();
+            purchaseOrders.Show();
+            this.Hide();
+        }
+        private void profile_pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void search_textBox_TextChanged(object sender, EventArgs e)
@@ -85,7 +109,10 @@ namespace Dashboard_STAFF
                 }
             }
         }
+        private void notify_pictureBox_Click(object sender, EventArgs e)
+        {
 
+        }
         private void LoadInventoryData()
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
@@ -344,41 +371,21 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void inventory_btn_Click(object sender, EventArgs e)
-        {
-            Inventory inventory= new Inventory();
-            inventory.Show();
-            this.Hide();
-        }
-
-        private void salesOrders_btn_Click(object sender, EventArgs e)
-        {
-            SalesOrder salesorder = new SalesOrder();
-            salesorder.Show();
-            this.Hide();
-        }
-
-        
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn salesreturn = new SalesReturn();
-            salesreturn.Show();
-            this.Hide();
-        }
-
-        private void purchaseOrders_btn_Click(object sender, EventArgs e)
-        {
-            PurchaseOrders purchaseOrders = new PurchaseOrders();
-            purchaseOrders.Show();
-            this.Hide();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             RestockRequest restockRequest = new RestockRequest();
             restockRequest.Show();
             this.Hide();
         }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
     }
 }

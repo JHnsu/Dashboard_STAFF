@@ -11,23 +11,22 @@ using System.Windows.Forms;
 
 namespace Dashboard_STAFF
 {
-    public partial class AddOrder_ADMIN : Form
+    public partial class AddSale_ADMIN : Form
     {
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
-        public AddOrder_ADMIN()
+        public AddSale_ADMIN()
         {
             InitializeComponent();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string itemName = textBox1.Text;   
-            string brandName = textBox2.Text;  
+            string itemName = textBox1.Text;
             int quantity = (int)numericUpDown2.Value;
             string receiverName = textBox4.Text;
             DateTime orderDate = dateTimePicker1.Value;
 
-            if (string.IsNullOrWhiteSpace(itemName) || string.IsNullOrWhiteSpace(brandName) ||
+            if (string.IsNullOrWhiteSpace(itemName) ||
                 quantity <= 0 || string.IsNullOrWhiteSpace(receiverName))
             {
                 MessageBox.Show("Please fill in all fields correctly.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -47,7 +46,6 @@ namespace Dashboard_STAFF
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ItemName", itemName);
-                        command.Parameters.AddWithValue("@Brand", brandName);
                         command.Parameters.AddWithValue("@Quantity", quantity);
                         command.Parameters.AddWithValue("@Receiver", receiverName);
                         command.Parameters.AddWithValue("@OrderDate", orderDate);
@@ -75,15 +73,14 @@ namespace Dashboard_STAFF
                 }
             }
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button3_MouseHover(object sender, EventArgs e)
         {
-            //for item name
+            button3.BackColor = Color.FromArgb(99, 218, 255);
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void button3_MouseLeave(object sender, EventArgs e)
         {
-            //for brand name
+            button3.BackColor = Color.FromArgb(0, 93, 217);
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
@@ -99,6 +96,15 @@ namespace Dashboard_STAFF
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             //for date and time
+        }
+
+        private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            //for selected item
         }
     }
 }

@@ -19,60 +19,15 @@ namespace Dashboard_STAFF
         public RestockRequest()
         {
             InitializeComponent();
-            LoadComboBoxData();
             textBox1.Text = CurrentUser.Username;
-        }
-
-        private void LoadComboBoxData()
-        {
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    string itemQuery = "SELECT DISTINCT ItemName FROM Inventory";
-                    using (MySqlCommand itemCmd = new MySqlCommand(itemQuery, conn))
-                    using (MySqlDataReader itemReader = itemCmd.ExecuteReader())
-                    {
-                        while (itemReader.Read())
-                        {
-                            comboBox1.Items.Add(itemReader["ItemName"].ToString());
-                        }
-                    }
-
-                    string brandQuery = "SELECT DISTINCT Brand FROM Inventory";
-                    using (MySqlCommand brandCmd = new MySqlCommand(brandQuery, conn))
-                    {
-                        using (MySqlDataReader brandReader = brandCmd.ExecuteReader())
-                        {
-                            while (brandReader.Read())
-                            {
-                                comboBox2.Items.Add(brandReader["Brand"].ToString());
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
             string serialNumber = textBox2.Text.Trim();
-            string selectedItemName = comboBox1.SelectedItem?.ToString();
-            string selectedBrandName = comboBox2.SelectedItem?.ToString();
             int quantity = (int)numericUpDown1.Value;
 
-            if (string.IsNullOrEmpty(selectedItemName) || string.IsNullOrEmpty(selectedBrandName))
-            {
-                MessageBox.Show("Please select a valid Item Name and Brand Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -88,8 +43,6 @@ namespace Dashboard_STAFF
                     using (MySqlCommand cmd = new MySqlCommand(validationQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
-                        cmd.Parameters.AddWithValue("@ItemName", selectedItemName);
-                        cmd.Parameters.AddWithValue("@Brand", selectedBrandName);
 
                         int count = Convert.ToInt32(cmd.ExecuteScalar());
                         if (count == 0)
@@ -109,8 +62,6 @@ namespace Dashboard_STAFF
                     {
                         insertCmd.Parameters.AddWithValue("@RequestedBy", CurrentUser.Username);
                         insertCmd.Parameters.AddWithValue("@QuantityRequested", quantity);
-                        insertCmd.Parameters.AddWithValue("@ItemName", selectedItemName);
-                        insertCmd.Parameters.AddWithValue("@Brand", selectedBrandName);
                         insertCmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
 
                         insertCmd.ExecuteNonQuery();
@@ -122,24 +73,18 @@ namespace Dashboard_STAFF
                 }
             }
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_MouseHover(object sender, EventArgs e)
         {
-            // COMBOBOX ITEM NAME
-            string selectedItemName = comboBox1.SelectedItem?.ToString();
-            MessageBox.Show("Selected Item Name: " + selectedItemName);
+            button1.BackColor = Color.FromArgb(99, 218, 255);
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_MouseLeave(object sender, EventArgs e)
         {
-            //COMBOBOX BRAND NAME
-            string selectedBrandName = comboBox2.SelectedItem?.ToString();
-            MessageBox.Show("Selected Brand Name: " + selectedBrandName);
+            button1.BackColor = Color.FromArgb(0, 93, 217);
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //requested by
+
         }
     }
 }

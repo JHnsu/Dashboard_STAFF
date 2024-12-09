@@ -29,70 +29,79 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label1 = new Label();
-            dataGridView1 = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            panel1 = new Panel();
+            groupBox1 = new GroupBox();
+            notif_dataGridView = new DataGridView();
             Type = new DataGridViewTextBoxColumn();
             Item = new DataGridViewTextBoxColumn();
             Details = new DataGridViewTextBoxColumn();
-            flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)notif_dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // panel1
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(dataGridView1);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.ForeColor = Color.FromArgb(43, 42, 76);
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Margin = new Padding(4, 4, 4, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(664, 748);
-            flowLayoutPanel1.TabIndex = 1;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            panel1.Controls.Add(groupBox1);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(10);
+            panel1.Size = new Size(531, 598);
+            panel1.TabIndex = 0;
             // 
-            // label1
+            // groupBox1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label1.Location = new Point(25, 12);
-            label1.Margin = new Padding(25, 12, 4, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(136, 28);
-            label1.TabIndex = 1;
-            label1.Text = "Notifications";
+            groupBox1.Controls.Add(notif_dataGridView);
+            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.FlatStyle = FlatStyle.Flat;
+            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.FromArgb(0, 11, 71);
+            groupBox1.Location = new Point(10, 10);
+            groupBox1.Margin = new Padding(0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(10);
+            groupBox1.Size = new Size(511, 578);
+            groupBox1.TabIndex = 6;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Notifications";
             // 
-            // dataGridView1
+            // notif_dataGridView
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = Color.FromArgb(238, 226, 222);
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.ColumnHeadersVisible = false;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Type, Item, Details });
+            notif_dataGridView.AllowUserToAddRows = false;
+            notif_dataGridView.AllowUserToDeleteRows = false;
+            notif_dataGridView.BackgroundColor = Color.White;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(43, 42, 76);
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Transparent;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.Location = new Point(0, 52);
-            dataGridView1.Margin = new Padding(0);
-            dataGridView1.MaximumSize = new Size(669, 605);
-            dataGridView1.MinimumSize = new Size(669, 605);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(669, 605);
-            dataGridView1.TabIndex = 2;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            notif_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            notif_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            notif_dataGridView.Columns.AddRange(new DataGridViewColumn[] { Type, Item, Details });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            notif_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            notif_dataGridView.Dock = DockStyle.Fill;
+            notif_dataGridView.Location = new Point(10, 37);
+            notif_dataGridView.Margin = new Padding(0);
+            notif_dataGridView.Name = "notif_dataGridView";
+            notif_dataGridView.ReadOnly = true;
+            notif_dataGridView.RowHeadersVisible = false;
+            notif_dataGridView.RowHeadersWidth = 51;
+            notif_dataGridView.Size = new Size(491, 531);
+            notif_dataGridView.TabIndex = 3;
+            notif_dataGridView.CellContentClick += notif_dataGridView_CellContentClick;
             // 
             // Type
             // 
@@ -100,7 +109,6 @@
             Type.MinimumWidth = 6;
             Type.Name = "Type";
             Type.ReadOnly = true;
-            Type.Visible = false;
             Type.Width = 125;
             // 
             // Item
@@ -109,7 +117,6 @@
             Item.MinimumWidth = 6;
             Item.Name = "Item";
             Item.ReadOnly = true;
-            Item.Visible = false;
             Item.Width = 125;
             // 
             // Details
@@ -118,31 +125,30 @@
             Details.MinimumWidth = 6;
             Details.Name = "Details";
             Details.ReadOnly = true;
-            Details.Visible = false;
             Details.Width = 125;
             // 
             // Notifications
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(238, 226, 222);
-            ClientSize = new Size(664, 748);
-            Controls.Add(flowLayoutPanel1);
-            Margin = new Padding(4, 4, 4, 4);
-            MaximumSize = new Size(686, 804);
+            AutoScaleMode = AutoScaleMode.None;
+            BackColor = Color.White;
+            ClientSize = new Size(531, 598);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            MaximumSize = new Size(552, 653);
             Name = "Notifications";
-            Text = "Notifications";
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            panel1.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)notif_dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label1;
-        private DataGridView dataGridView1;
+        private Panel panel1;
+        private GroupBox groupBox1;
+        private DataGridView notif_dataGridView;
         private DataGridViewTextBoxColumn Type;
         private DataGridViewTextBoxColumn Item;
         private DataGridViewTextBoxColumn Details;

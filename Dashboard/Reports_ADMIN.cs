@@ -53,12 +53,6 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn_ADMIN salesreturn = new SalesReturn_ADMIN();
-            salesreturn.Show();
-            this.Hide();
-        }
 
         private void purchaseOrders_btn_Click(object sender, EventArgs e)
         {
@@ -66,20 +60,14 @@ namespace Dashboard_STAFF
             purchaseOrders.Show();
             this.Hide();
         }
-
-        private void orgName_label_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void orderPDF_button_Click(object sender, EventArgs e)
         {
             //orders report
             try
             {
                 string ordersReportData = GetOrdersReportData();
 
-                string filePath = @"C:\Reports\OrdersReport.pdf"; 
+                string filePath = @"C:\Reports\OrdersReport.pdf";
                 using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                 {
 
@@ -111,11 +99,11 @@ namespace Dashboard_STAFF
         {
             StringBuilder reportData = new StringBuilder();
 
- 
+
             string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
 
- 
-            string query = "SELECT OrderID, CustomerName, ItemName, Quantity, Price FROM Orders";  
+
+            string query = "SELECT OrderID, CustomerName, ItemName, Quantity, Price FROM Orders";
 
             try
             {
@@ -126,19 +114,19 @@ namespace Dashboard_STAFF
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-    
+
                         reportData.AppendLine("Order ID | Customer Name | Item Name | Quantity | Price");
                         reportData.AppendLine("-------------------------------------------------------------");
 
                         while (reader.Read())
                         {
- 
+
                             int orderId = reader.GetInt32("OrderID");
                             string customerName = reader.GetString("CustomerName");
                             string itemName = reader.GetString("ItemName");
                             int quantity = reader.GetInt32("Quantity");
                             decimal price = reader.GetDecimal("Price");
- 
+
                             reportData.AppendLine($"{orderId} | {customerName} | {itemName} | {quantity} | ${price:F2}");
                         }
                     }
@@ -152,6 +140,78 @@ namespace Dashboard_STAFF
             }
 
             return reportData.ToString();
+        }
+        private void orderPDF_button_MouseHover(object sender, EventArgs e)
+        {
+            orderPDF_button.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void orderPDF_button_MouseLeave(object sender, EventArgs e)
+        {
+            orderPDF_button.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void notify_pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button2_MouseHover(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button2_MouseLeave(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button6_MouseHover(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.FromArgb(99, 218, 255);
+        }
+        private void button6_MouseLeave(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.FromArgb(0, 93, 217);
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button7_MouseHover(object sender, EventArgs e)
+        {
+            button7.BackColor = Color.FromArgb(99, 218, 255);
+        }
+        private void button7_MouseLeave(object sender, EventArgs e)
+        {
+            button7.BackColor = Color.FromArgb(0, 93, 217);
         }
     }
 }

@@ -48,23 +48,12 @@ namespace Dashboard_STAFF
             inventory.Show();
             this.Hide();
         }
-
-
-
         private void salesOrders_btn_Click(object sender, EventArgs e)
         {
             SalesOrder salesorder = new SalesOrder();
             salesorder.Show();
             this.Hide();
         }
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn salesreturn = new SalesReturn();
-            salesreturn.Show();
-            this.Hide();
-        }
-
         private void purchaseOrders_btn_Click(object sender, EventArgs e)
         {
             PurchaseOrders purchaseOrders = new PurchaseOrders();
@@ -167,6 +156,60 @@ namespace Dashboard_STAFF
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void notify_pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

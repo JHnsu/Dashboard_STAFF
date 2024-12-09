@@ -63,9 +63,49 @@ namespace Dashboard_STAFF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1564534_customer_man_user_account_profile_icon {
+            get {
+                object obj = ResourceManager.GetObject("_1564534_customer_man_user_account_profile_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1564535_customer_user_userphoto_account_person_icon {
+            get {
+                object obj = ResourceManager.GetObject("_1564535_customer_user_userphoto_account_person_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2203538_alarm_bell_notification_ring_icon {
+            get {
+                object obj = ResourceManager.GetObject("_2203538_alarm_bell_notification_ring_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _565422 {
             get {
                 object obj = ResourceManager.GetObject("565422", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _565423 {
+            get {
+                object obj = ResourceManager.GetObject("565423", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +123,29 @@ namespace Dashboard_STAFF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Apple_MacBook_Air_13_inch_M3_2024_Space_Gray_1000_0001_removebg_preview {
+        internal static System.Drawing.Bitmap _9054423_bx_arrow_back_icon {
             get {
-                object obj = ResourceManager.GetObject("Apple_MacBook_Air_13_inch_M3_2024_Space_Gray_1000_0001-removebg-preview", resourceCulture);
+                object obj = ResourceManager.GetObject("_9054423_bx_arrow_back_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _9054423_bx_arrow_back_icon__1_ {
+            get {
+                object obj = ResourceManager.GetObject("_9054423_bx_arrow_back_icon__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _9111058_refresh_ccw_icon {
+            get {
+                object obj = ResourceManager.GetObject("_9111058_refresh_ccw_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,46 +193,6 @@ namespace Dashboard_STAFF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hp_removebg_preview {
-            get {
-                object obj = ResourceManager.GetObject("hp-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap huawei_matebook13 {
-            get {
-                object obj = ResourceManager.GetObject("huawei matebook13", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap huawei_matebook13_removebg_preview {
-            get {
-                object obj = ResourceManager.GetObject("huawei_matebook13-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap huawei_matebook13_removebg_preview1 {
-            get {
-                object obj = ResourceManager.GetObject("huawei_matebook13-removebg-preview1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap image_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("image-removebg-preview", resourceCulture);
@@ -194,19 +214,9 @@ namespace Dashboard_STAFF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Laptop_computer {
+        internal static System.Drawing.Bitmap logout_button {
             get {
-                object obj = ResourceManager.GetObject("Laptop-computer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lcok {
-            get {
-                object obj = ResourceManager.GetObject("lcok", resourceCulture);
+                object obj = ResourceManager.GetObject("logout_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -237,16 +247,6 @@ namespace Dashboard_STAFF.Properties {
         internal static System.Drawing.Bitmap returns_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("returns-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap samsung_removebg_preview {
-            get {
-                object obj = ResourceManager.GetObject("samsung-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

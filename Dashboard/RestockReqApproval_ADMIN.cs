@@ -33,7 +33,7 @@ namespace Dashboard_STAFF
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
-                    dataGridView1.DataSource = dt;
+                    requests_dataGridView.DataSource = dt;
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +54,7 @@ namespace Dashboard_STAFF
                     cmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
 
                     object result = cmd.ExecuteScalar();
-                    textBox6.Text = result != null ? result.ToString() : "0";
+                    textBox2.Text = result != null ? result.ToString() : "0";
                 }
                 catch (Exception ex)
                 {
@@ -116,23 +116,24 @@ namespace Dashboard_STAFF
                 }
             }
         }
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(0, 93, 217);
+        }
         private void ClearFields()
         {
             selectedRequestID = 0;
-            textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
             textBox5.Clear();
-            textBox6.Clear();
             radioButton1.Checked = false;
             radioButton2.Checked = false;
-        }
-
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -145,7 +146,27 @@ namespace Dashboard_STAFF
             //reject
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void requests_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
             {
@@ -154,21 +175,15 @@ namespace Dashboard_STAFF
             }
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow row = requests_dataGridView.Rows[e.RowIndex];
                 selectedRequestID = Convert.ToInt32(row.Cells["RequestID"].Value);
-                textBox1.Text = row.Cells["RequestID"].Value.ToString();
-                textBox2.Text = row.Cells["SerialNumber"].Value.ToString();
+                textBox2.Text = row.Cells["RequestID"].Value.ToString();
                 textBox3.Text = row.Cells["ItemName"].Value.ToString();
                 textBox5.Text = row.Cells["QuantityRequested"].Value.ToString();
                 textBox4.Text = row.Cells["RequestDate"].Value.ToString();
 
                 GetCurrentStock(row.Cells["SerialNumber"].Value.ToString());
             }
-        }
-
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

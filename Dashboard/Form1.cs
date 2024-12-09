@@ -27,6 +27,43 @@ namespace Dashboard_STAFF
 
 
         }
+        private void home_btn_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Hide();
+        }
+
+        private void inventory_btn_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Hide();
+        }
+
+
+        private void salesOrders_btn_Click(object sender, EventArgs e)
+        {
+            SalesOrder salesorder = new SalesOrder();
+            salesorder.Show();
+            this.Hide();
+        }
+
+        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders purchaseOrders = new PurchaseOrders();
+            purchaseOrders.Show();
+            this.Hide();
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void notify_pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void SearchItems(string searchQuery)
         {
@@ -112,10 +149,12 @@ namespace Dashboard_STAFF
 
             SearchItems(searchQuery);
         }
+
         private void lowItems_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             LoadLowStockItems();
         }
+
 
         private void LoadTotalRestockCount()
         {
@@ -194,52 +233,6 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void inventory_btn_Click(object sender, EventArgs e)
-        {
-            Inventory inventory = new Inventory();
-            inventory.Show();
-            this.Hide();
-        }
-
-
-        private void home_btn_Click(object sender, EventArgs e)
-        {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Hide();
-        }
-
-        private void salesOrders_btn_Click(object sender, EventArgs e)
-        {
-            SalesOrder salesorder = new SalesOrder();
-            salesorder.Show();
-            this.Hide();
-        }
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn salesreturn = new SalesReturn();
-            salesreturn.Show();
-            this.Hide();
-        }
-
-        private void purchaseOrders_btn_Click(object sender, EventArgs e)
-        {
-            PurchaseOrders purchaseOrders = new PurchaseOrders();
-            purchaseOrders.Show();
-            this.Hide();
-        }
-
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void salesAct_groupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void search_textBox_TextChanged(object sender, EventArgs e)
         {
@@ -247,15 +240,6 @@ namespace Dashboard_STAFF
             SearchAll(searchQuery);
         }
 
-        private void notify_pictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void profile_pictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
@@ -266,44 +250,6 @@ namespace Dashboard_STAFF
 
         }
 
-        private void requests_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
-        private void totalRestocked_label_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lowItems_dataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void quantityHand_progressBar_Click(object sender, EventArgs e)
-        {
-            //progress bar for quantity in hand
-        }
-
-        private void quantityReceived_progressBar_Click(object sender, EventArgs e)
-        {
-            //progress bar for quantity to be received
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void home_btn_ChangeUICues(object sender, UICuesEventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

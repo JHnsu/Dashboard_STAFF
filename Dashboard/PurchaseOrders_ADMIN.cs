@@ -149,13 +149,6 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn_ADMIN salesreturn = new SalesReturn_ADMIN();
-            salesreturn.Show();
-            this.Hide();
-        }
-
         private void purchaseOrders_btn_Click(object sender, EventArgs e)
         {
             PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
@@ -174,6 +167,50 @@ namespace Dashboard_STAFF
         {
             RestockReqApproval_ADMIN restockReqApproval_ADMIN = new RestockReqApproval_ADMIN();
             restockReqApproval_ADMIN.Show();
+
+        }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void notify_pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }

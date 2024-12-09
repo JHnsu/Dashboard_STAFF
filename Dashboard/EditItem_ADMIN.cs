@@ -19,38 +19,8 @@ namespace Dashboard_STAFF
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp",
-                Title = "Select an Image"
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
-                pictureBox1.Tag = openFileDialog.FileName;
-            }
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text.Trim()))
-            {
-                MessageBox.Show("Serial Number is required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            byte[] imageData = null;
-            if (pictureBox1.Image != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
-                    imageData = ms.ToArray();
-                }
-            }
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -69,13 +39,11 @@ namespace Dashboard_STAFF
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@SerialNumber", textBox1.Text.Trim()); // Serial Number as key to find the item
                         cmd.Parameters.AddWithValue("@Category", textBox2.Text.Trim());
                         cmd.Parameters.AddWithValue("@ItemName", textBox3.Text.Trim());
                         cmd.Parameters.AddWithValue("@Brand", textBox4.Text.Trim());
                         cmd.Parameters.AddWithValue("@StockLevel", numericUpDown1.Value);
                         cmd.Parameters.AddWithValue("@UnitPrice", numericUpDown2.Value);
-                        cmd.Parameters.AddWithValue("@ItemImage", imageData ?? (object)DBNull.Value); // Handle the image as nullable (if no image, it will store NULL)
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -98,6 +66,15 @@ namespace Dashboard_STAFF
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Dashboard_STAFF
 {
-    partial class EditItem_ADMIN
+    partial class AddSale_ADMIN
     {
         /// <summary>
         /// Required designer variable.
@@ -34,26 +34,23 @@
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
             inventory_dataGridView = new DataGridView();
+            ItemNo = new DataGridViewTextBoxColumn();
+            ItemName = new DataGridViewTextBoxColumn();
+            Brand = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
+            UnitPrice = new DataGridViewTextBoxColumn();
             groupBox2 = new GroupBox();
             panel2 = new Panel();
             button3 = new Button();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            label6 = new Label();
-            numericUpDown2 = new NumericUpDown();
-            splitContainer2 = new SplitContainer();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            label5 = new Label();
-            numericUpDown1 = new NumericUpDown();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            label8 = new Label();
-            numericUpDown3 = new NumericUpDown();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            label1 = new Label();
+            textBox1 = new TextBox();
             label3 = new Label();
-            textBox3 = new TextBox();
-            label2 = new Label();
-            textBox2 = new TextBox();
+            numericUpDown2 = new NumericUpDown();
             label4 = new Label();
             textBox4 = new TextBox();
+            label5 = new Label();
+            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -62,22 +59,14 @@
             ((System.ComponentModel.ISupportInitialize)inventory_dataGridView).BeginInit();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
-            flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
             flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.IsSplitterFixed = true;
             splitContainer1.Location = new Point(0, 0);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -90,9 +79,9 @@
             // 
             splitContainer1.Panel2.Controls.Add(groupBox2);
             splitContainer1.Panel2.Padding = new Padding(15, 10, 15, 15);
-            splitContainer1.Size = new Size(1175, 567);
-            splitContainer1.SplitterDistance = 776;
-            splitContainer1.TabIndex = 1;
+            splitContainer1.Size = new Size(1176, 504);
+            splitContainer1.SplitterDistance = 748;
+            splitContainer1.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -105,10 +94,10 @@
             groupBox1.Margin = new Padding(0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(10);
-            groupBox1.Size = new Size(746, 542);
+            groupBox1.Size = new Size(718, 479);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Current Item List";
+            groupBox1.Text = "Current Inventory";
             // 
             // inventory_dataGridView
             // 
@@ -127,6 +116,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             inventory_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            inventory_dataGridView.Columns.AddRange(new DataGridViewColumn[] { ItemNo, ItemName, Brand, Quantity, UnitPrice });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -149,14 +139,49 @@
             inventory_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             inventory_dataGridView.RowHeadersWidth = 51;
             inventory_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            inventory_dataGridView.Size = new Size(726, 488);
+            inventory_dataGridView.Size = new Size(698, 425);
             inventory_dataGridView.TabIndex = 19;
+            inventory_dataGridView.CellContentClick += inventory_dataGridView_CellContentClick;
+            // 
+            // ItemNo
+            // 
+            ItemNo.HeaderText = "Item No.";
+            ItemNo.MinimumWidth = 6;
+            ItemNo.Name = "ItemNo";
+            ItemNo.ReadOnly = true;
+            ItemNo.Visible = false;
+            // 
+            // ItemName
+            // 
+            ItemName.HeaderText = "Item Name";
+            ItemName.MinimumWidth = 6;
+            ItemName.Name = "ItemName";
+            ItemName.ReadOnly = true;
+            // 
+            // Brand
+            // 
+            Brand.HeaderText = "Brand";
+            Brand.MinimumWidth = 6;
+            Brand.Name = "Brand";
+            Brand.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            Quantity.HeaderText = "Quantity";
+            Quantity.MinimumWidth = 6;
+            Quantity.Name = "Quantity";
+            Quantity.ReadOnly = true;
+            // 
+            // UnitPrice
+            // 
+            UnitPrice.HeaderText = "Unit Price";
+            UnitPrice.MinimumWidth = 6;
+            UnitPrice.Name = "UnitPrice";
+            UnitPrice.ReadOnly = true;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(panel2);
-            groupBox2.Controls.Add(flowLayoutPanel4);
-            groupBox2.Controls.Add(splitContainer2);
             groupBox2.Controls.Add(flowLayoutPanel1);
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.FlatStyle = FlatStyle.Flat;
@@ -166,20 +191,20 @@
             groupBox2.Margin = new Padding(0);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(10);
-            groupBox2.Size = new Size(365, 542);
-            groupBox2.TabIndex = 1;
+            groupBox2.Size = new Size(394, 479);
+            groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Edit Selected Item";
+            groupBox2.Text = "Order Form";
             // 
             // panel2
             // 
             panel2.Controls.Add(button3);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(10, 406);
+            panel2.Location = new Point(10, 331);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(40, 30, 40, 40);
-            panel2.Size = new Size(345, 126);
-            panel2.TabIndex = 3;
+            panel2.Size = new Size(374, 138);
+            panel2.TabIndex = 4;
             // 
             // button3
             // 
@@ -191,208 +216,127 @@
             button3.ForeColor = Color.White;
             button3.Location = new Point(40, 30);
             button3.Name = "button3";
-            button3.Size = new Size(265, 37);
+            button3.Size = new Size(294, 37);
             button3.TabIndex = 18;
-            button3.Text = "UPDATE";
+            button3.Text = "SUBMIT";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             button3.MouseEnter += button3_MouseHover;
             button3.MouseLeave += button3_MouseLeave;
             button3.MouseHover += button3_MouseHover;
             // 
-            // flowLayoutPanel4
-            // 
-            flowLayoutPanel4.Controls.Add(label6);
-            flowLayoutPanel4.Controls.Add(numericUpDown2);
-            flowLayoutPanel4.Dock = DockStyle.Top;
-            flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel4.Location = new Point(10, 338);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(345, 68);
-            flowLayoutPanel4.TabIndex = 2;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(3, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(81, 20);
-            label6.TabIndex = 12;
-            label6.Text = "Unit Price:";
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.Location = new Point(3, 23);
-            numericUpDown2.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(331, 27);
-            numericUpDown2.TabIndex = 13;
-            // 
-            // splitContainer2
-            // 
-            splitContainer2.Dock = DockStyle.Top;
-            splitContainer2.Location = new Point(10, 261);
-            splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            splitContainer2.Panel1.Controls.Add(flowLayoutPanel2);
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.Controls.Add(flowLayoutPanel3);
-            splitContainer2.Size = new Size(345, 77);
-            splitContainer2.SplitterDistance = 165;
-            splitContainer2.SplitterWidth = 10;
-            splitContainer2.TabIndex = 1;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.Controls.Add(label5);
-            flowLayoutPanel2.Controls.Add(numericUpDown1);
-            flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel2.Location = new Point(0, 0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(165, 77);
-            flowLayoutPanel2.TabIndex = 0;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(3, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(96, 20);
-            label5.TabIndex = 10;
-            label5.Text = "Initial Stock:";
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(3, 23);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(140, 27);
-            numericUpDown1.TabIndex = 11;
-            // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Controls.Add(label8);
-            flowLayoutPanel3.Controls.Add(numericUpDown3);
-            flowLayoutPanel3.Dock = DockStyle.Fill;
-            flowLayoutPanel3.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel3.Location = new Point(0, 0);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(170, 77);
-            flowLayoutPanel3.TabIndex = 0;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(3, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(147, 20);
-            label8.TabIndex = 14;
-            label8.Text = "Restock Alert Level:";
-            // 
-            // numericUpDown3
-            // 
-            numericUpDown3.Location = new Point(3, 23);
-            numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new Size(143, 27);
-            numericUpDown3.TabIndex = 15;
-            // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.Controls.Add(label1);
+            flowLayoutPanel1.Controls.Add(textBox1);
             flowLayoutPanel1.Controls.Add(label3);
-            flowLayoutPanel1.Controls.Add(textBox3);
-            flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(textBox2);
+            flowLayoutPanel1.Controls.Add(numericUpDown2);
             flowLayoutPanel1.Controls.Add(label4);
             flowLayoutPanel1.Controls.Add(textBox4);
+            flowLayoutPanel1.Controls.Add(label5);
+            flowLayoutPanel1.Controls.Add(dateTimePicker1);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            flowLayoutPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             flowLayoutPanel1.Location = new Point(10, 44);
-            flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(345, 217);
+            flowLayoutPanel1.Padding = new Padding(5);
+            flowLayoutPanel1.Size = new Size(374, 287);
             flowLayoutPanel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(8, 5);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 20);
+            label1.TabIndex = 14;
+            label1.Text = "Selected Item:";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 9F);
+            textBox1.Location = new Point(8, 28);
+            textBox1.Margin = new Padding(3, 3, 3, 20);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(359, 27);
+            textBox1.TabIndex = 15;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(3, 0);
+            label3.Location = new Point(8, 75);
             label3.Name = "label3";
-            label3.Size = new Size(92, 20);
-            label3.TabIndex = 6;
-            label3.Text = "Item Name:";
+            label3.Size = new Size(74, 20);
+            label3.TabIndex = 16;
+            label3.Text = "Quantity:";
             // 
-            // textBox3
+            // numericUpDown2
             // 
-            textBox3.Font = new Font("Segoe UI", 9F);
-            textBox3.Location = new Point(3, 23);
-            textBox3.Margin = new Padding(3, 3, 3, 20);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(331, 27);
-            textBox3.TabIndex = 7;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(3, 70);
-            label2.Name = "label2";
-            label2.Size = new Size(96, 20);
-            label2.TabIndex = 8;
-            label2.Text = "Device Type:";
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 9F);
-            textBox2.Location = new Point(3, 93);
-            textBox2.Margin = new Padding(3, 3, 3, 20);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(331, 27);
-            textBox2.TabIndex = 9;
+            numericUpDown2.Location = new Point(8, 98);
+            numericUpDown2.Margin = new Padding(3, 3, 40, 20);
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(108, 27);
+            numericUpDown2.TabIndex = 17;
+            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(3, 140);
+            label4.Location = new Point(8, 145);
             label4.Name = "label4";
-            label4.Size = new Size(55, 20);
-            label4.TabIndex = 10;
-            label4.Text = "Brand:";
+            label4.Size = new Size(128, 20);
+            label4.TabIndex = 18;
+            label4.Text = "Receiver's Name:";
             // 
             // textBox4
             // 
             textBox4.Font = new Font("Segoe UI", 9F);
-            textBox4.Location = new Point(3, 163);
+            textBox4.Location = new Point(8, 168);
+            textBox4.Margin = new Padding(3, 3, 3, 20);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(331, 27);
-            textBox4.TabIndex = 11;
+            textBox4.Size = new Size(359, 27);
+            textBox4.TabIndex = 19;
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
-            // EditItem_ADMIN
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(8, 215);
+            label5.Name = "label5";
+            label5.Size = new Size(108, 20);
+            label5.TabIndex = 21;
+            label5.Text = "Delivery Date:";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(8, 238);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(359, 27);
+            dateTimePicker1.TabIndex = 20;
+            dateTimePicker1.Value = new DateTime(2024, 12, 8, 0, 0, 0, 0);
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            // 
+            // AddOrder_ADMIN
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(0, 11, 71);
-            ClientSize = new Size(1175, 567);
+            ClientSize = new Size(1176, 504);
             Controls.Add(splitContainer1);
+            Font = new Font("Segoe UI", 10F);
+            ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            Name = "EditItem_ADMIN";
+            Name = "AddOrder_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
@@ -402,47 +346,33 @@
             ((System.ComponentModel.ISupportInitialize)inventory_dataGridView).EndInit();
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            flowLayoutPanel4.ResumeLayout(false);
-            flowLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
         private SplitContainer splitContainer1;
         private GroupBox groupBox1;
         private DataGridView inventory_dataGridView;
         private GroupBox groupBox2;
-        private Panel panel2;
-        private Button button3;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private Label label6;
-        private NumericUpDown numericUpDown2;
-        private SplitContainer splitContainer2;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private Label label5;
-        private NumericUpDown numericUpDown1;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Label label8;
-        private NumericUpDown numericUpDown3;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Label label1;
+        private TextBox textBox1;
         private Label label3;
-        private TextBox textBox3;
-        private Label label2;
-        private TextBox textBox2;
+        private NumericUpDown numericUpDown2;
+        private DataGridViewTextBoxColumn ItemNo;
+        private DataGridViewTextBoxColumn ItemName;
+        private DataGridViewTextBoxColumn Brand;
+        private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn UnitPrice;
         private Label label4;
         private TextBox textBox4;
+        private Label label5;
+        private DateTimePicker dateTimePicker1;
+        private Panel panel2;
+        private Button button3;
     }
 }

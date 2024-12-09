@@ -33,6 +33,35 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
+        private void inventory_btn_Click(object sender, EventArgs e)
+        {
+            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
+            inventoryAdmin.Show();
+            this.Hide();
+        }
+
+
+        private void salesOrders_btn_Click(object sender, EventArgs e)
+        {
+            SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
+            salesorder.Show();
+            this.Hide();
+        }
+
+        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
+            purchaseOrders.Show();
+            this.Hide();
+        }
+
+        private void reports_btn_Click(object sender, EventArgs e)
+        {
+            Reports_ADMIN reports_ADMIN = new Reports_ADMIN();
+            reports_ADMIN.Show();
+            this.Hide();
+        }
+
         private void search_textBox_TextChanged(object sender, EventArgs e)
         {
             string searchQuery = search_textBox.Text.Trim();
@@ -212,71 +241,22 @@ namespace Dashboard_STAFF
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-        private void inventory_btn_Click(object sender, EventArgs e)
-        {
-            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
-            inventoryAdmin.Show();
-            this.Hide();
-        }
-
-        
-
-        private void salesOrders_btn_Click(object sender, EventArgs e)
-        {
-            SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
-            salesorder.Show();
-            this.Hide();
-        }
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn_ADMIN salesreturn = new SalesReturn_ADMIN();
-            salesreturn.Show();
-            this.Hide();
-        }
-
-        private void purchaseOrders_btn_Click(object sender, EventArgs e)
-        {
-            PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
-            purchaseOrders.Show();
-            this.Hide();
-        }
-
-        private void reports_btn_Click(object sender, EventArgs e)
-        {
-            Reports_ADMIN reports_ADMIN = new Reports_ADMIN();
-            reports_ADMIN.Show();
-            this.Hide();
-        }
-
-        private void lowItems_dataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void totalShipped_label_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void requests_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+
+        private void notify_pictureBox_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void pictureBox11_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
     }
 }

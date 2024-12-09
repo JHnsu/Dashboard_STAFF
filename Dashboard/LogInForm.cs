@@ -125,51 +125,14 @@ namespace Dashboard_STAFF
 
         private void button1_MouseHover(object sender, EventArgs e)
         {
-            button1.BackColor = Color.Salmon;
+            button1.BackColor = Color.FromArgb(99, 218, 255);
         }
 
         private void button1_MouseLeave(object sender, EventArgs e)
         {
-            button1.BackColor = Color.DarkRed;
+            button1.BackColor = Color.FromArgb(0, 93, 217);
         }
 
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            if (textBox1.Text == "Enter Username")
-            {
-                textBox1.Text = "";
-                textBox1.ForeColor = Color.Black;
-            }
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (textBox1.Text == "")
-            {
-                textBox1.Text = "Enter Username";
-                textBox1.ForeColor = Color.Gray;
-            }
-        }
-
-        private void textBox2_Enter(object sender, EventArgs e)
-        {
-            if (textBox2.Text == "Enter Password")
-            {
-                textBox2.Text = "";
-                textBox2.ForeColor = Color.Black;
-                textBox2.PasswordChar = '*';
-            }
-        }
-
-        private void textBox2_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBox2.Text))
-            {
-                textBox2.Text = "Enter Password";
-                textBox2.ForeColor = Color.Gray;
-                textBox2.PasswordChar = '\0';
-            }
-        }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -219,10 +182,6 @@ namespace Dashboard_STAFF
             timer1.Start();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -231,7 +190,7 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
-        private void pictureBox1_Click_1(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -241,10 +200,6 @@ namespace Dashboard_STAFF
 
         }
 
-        private void textbox1_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -258,18 +213,9 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            SignUp signUp = new SignUp();
-            signUp.Show();
-            this.Hide();
-        }
 
-        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ForgotPassword forgotPassword = new ForgotPassword();
-            forgotPassword.Show();
-            this.Hide();
         }
     }
 }

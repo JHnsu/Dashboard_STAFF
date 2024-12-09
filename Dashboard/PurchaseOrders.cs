@@ -19,14 +19,30 @@ namespace Dashboard_STAFF
         {
             InitializeComponent();
         }
-
         private void home_btn_Click(object sender, EventArgs e)
         {
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
             this.Hide();
         }
-
+        private void inventory_btn_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Hide();
+        }
+        private void salesOrders_btn_Click(object sender, EventArgs e)
+        {
+            SalesOrder salesorder = new SalesOrder();
+            salesorder.Show();
+            this.Hide();
+        }
+        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders purchaseOrders = new PurchaseOrders();
+            purchaseOrders.Show();
+            this.Hide();
+        }
         private void purchaseOrders_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -133,34 +149,34 @@ namespace Dashboard_STAFF
             LoadPurchaseOrders();
         }
 
-        private void inventory_btn_Click(object sender, EventArgs e)
+        private void pictureBox7_Click(object sender, EventArgs e)
         {
-            Inventory inventory = new Inventory();
-            inventory.Show();
-            this.Hide();
+
         }
 
-        
-
-        private void salesOrders_btn_Click(object sender, EventArgs e)
+        private void notify_pictureBox_Click(object sender, EventArgs e)
         {
-            SalesReturn salesreturn = new SalesReturn();
-            salesreturn.Show();
-            this.Hide();
+
         }
 
-        private void salesReturns_btn_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SalesReturn salesreturn = new SalesReturn();
-            salesreturn.Show();
-            this.Hide();
+
         }
 
-        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PurchaseOrders purchaseOrders = new PurchaseOrders();
-            purchaseOrders.Show();
-            this.Hide();
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseOrders_dataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -106,6 +106,15 @@ namespace Dashboard_STAFF
                 MessageBox.Show($"An error occurred while updating the password. Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(0, 93, 217);
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -127,6 +136,15 @@ namespace Dashboard_STAFF
             {
                 MessageBox.Show("Incorrect OTP. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void button2_MouseHover(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button2_MouseLeave(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.FromArgb(0, 93, 217);
         }
 
         private bool IsValidEmail(string email)
@@ -194,8 +212,17 @@ namespace Dashboard_STAFF
                 MessageBox.Show($"Failed to send email. Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
 
-        private void pictureBox1_Click_1(object sender, EventArgs e)
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             LogInForm login = new LogInForm();
             login.Show();

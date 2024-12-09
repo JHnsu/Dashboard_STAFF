@@ -25,7 +25,38 @@ namespace Dashboard_STAFF
             Form1_ADMIN form1_ADMIN = new Form1_ADMIN();
             form1_ADMIN.Show();
             this.Hide();
+        }
 
+        private void inventory_btn_Click(object sender, EventArgs e)
+        {
+            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
+            inventoryAdmin.Show();
+            this.Hide();
+        }
+
+        private void salesOrders_btn_Click(object sender, EventArgs e)
+        {
+            SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
+            salesorder.Show();
+            this.Hide();
+        }
+
+        private void purchaseOrders_btn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
+            purchaseOrders.Show();
+            this.Hide();
+        }
+
+        private void reports_btn_Click(object sender, EventArgs e)
+        {
+            Reports_ADMIN reportsAdmin = new Reports_ADMIN();
+            reportsAdmin.Show();
+            this.Hide();
+        }
+
+        private void profile_pictureBox_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -89,7 +120,7 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void notify_pictureBox_Click(object sender, EventArgs e)
         {
 
         }
@@ -106,10 +137,26 @@ namespace Dashboard_STAFF
             addItem_ADMIN.Show();
         }
 
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             EditItem_ADMIN editItem_ADMIN = new EditItem_ADMIN();
             editItem_ADMIN.Show();
+        }
+        private void button4_MouseHover(object sender, EventArgs e)
+        {
+            button4.BackColor = Color.FromArgb(99, 218, 255);
+        }
+        private void button4_MouseLeave(object sender, EventArgs e)
+        {
+            button4.BackColor = Color.FromArgb(0, 93, 217);
         }
 
         private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -274,6 +321,16 @@ namespace Dashboard_STAFF
             }
         }
 
+        private void button5_MouseHover(object sender, EventArgs e)
+        {
+            button5.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            button5.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
         private void DeleteItem(string serialNumber)
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
@@ -310,51 +367,5 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void profile_pictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void salesOrders_btn_Click(object sender, EventArgs e)
-        {
-            SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
-            salesorder.Show();
-            this.Hide();
-        }
-
-        private void inventory_btn_Click(object sender, EventArgs e)
-        {
-            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
-            inventoryAdmin.Show();
-            this.Hide();
-        }
-
-        
-
-        private void salesReturns_btn_Click(object sender, EventArgs e)
-        {
-            SalesReturn_ADMIN salesreturn = new SalesReturn_ADMIN();
-            salesreturn.Show();
-            this.Hide();
-        }
-
-        private void purchaseOrders_btn_Click(object sender, EventArgs e)
-        {
-            PurchaseOrders_ADMIN purchaseOrders = new PurchaseOrders_ADMIN();
-            purchaseOrders.Show();
-            this.Hide();
-        }
-
-        private void reports_btn_Click(object sender, EventArgs e)
-        {
-            Reports_ADMIN reportsAdmin = new Reports_ADMIN();
-            reportsAdmin.Show();
-            this.Hide();
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
