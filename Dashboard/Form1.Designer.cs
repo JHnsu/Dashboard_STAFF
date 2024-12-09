@@ -803,7 +803,7 @@
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(1355, 30);
+            orgName_label.Location = new Point(1343, 30);
             orgName_label.Margin = new Padding(4, 0, 4, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;

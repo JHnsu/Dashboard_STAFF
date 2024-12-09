@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             inventory_dataGridView = new DataGridView();
             button1 = new Button();
             label2 = new Label();
@@ -102,30 +102,30 @@
             inventory_dataGridView.BackgroundColor = Color.FromArgb(238, 226, 222);
             inventory_dataGridView.BorderStyle = BorderStyle.None;
             inventory_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            inventory_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            inventory_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             inventory_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(43, 42, 76);
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            inventory_dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(43, 42, 76);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            inventory_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             inventory_dataGridView.Location = new Point(19, 328);
             inventory_dataGridView.Margin = new Padding(4);
             inventory_dataGridView.Name = "inventory_dataGridView";
             inventory_dataGridView.ReadOnly = true;
             inventory_dataGridView.RowHeadersWidth = 51;
             inventory_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            inventory_dataGridView.Size = new Size(1479, 605);
+            inventory_dataGridView.Size = new Size(1474, 605);
             inventory_dataGridView.TabIndex = 8;
             inventory_dataGridView.CellContentClick += inventory_dataGridView_CellContentClick;
             // 
@@ -234,7 +234,7 @@
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(1366, 30);
+            orgName_label.Location = new Point(1361, 30);
             orgName_label.Margin = new Padding(4, 0, 4, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;
@@ -681,6 +681,7 @@
             comboBox1.Size = new Size(188, 33);
             comboBox1.TabIndex = 0;
             comboBox1.Text = "SORT";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // comboBox2
             // 
@@ -693,6 +694,7 @@
             comboBox2.Size = new Size(188, 33);
             comboBox2.TabIndex = 1;
             comboBox2.Text = "FILTER";
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // notify_pictureBox
             // 
@@ -720,6 +722,7 @@
             Name = "Inventory_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inventory_ADMIN";
+            WindowState = FormWindowState.Maximized;
             Load += Inventory_ADMIN_Load;
             ((System.ComponentModel.ISupportInitialize)inventory_dataGridView).EndInit();
             flowLayoutPanel2.ResumeLayout(false);

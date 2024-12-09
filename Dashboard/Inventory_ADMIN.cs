@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using PdfSharp.Pdf.Filters;
 
 namespace Dashboard_STAFF
 {
@@ -42,30 +43,23 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
                     string query = @"
-                    SELECT 
-                        po.PurchaseOrderID AS 'Order ID',
-                        i.SerialNumber AS 'Serial No',
-                        i.Category AS 'Type',
-                        i.ItemName AS 'Item Name',
-                        i.Brand,
-                        i.StockLevel AS 'Quantity',
-                        i.UnitPrice AS 'Price',
-                        i.StockStatus AS 'Stock Status',
-                        po.Status AS 'Order Status',
-                        po.OrderDate AS 'Order Date'
-                    FROM PurchaseOrders po
-                    INNER JOIN Inventory i ON po.ItemID = i.ItemID
-                    WHERE 
-                        po.PurchaseOrderID LIKE @SearchQuery OR
-                        i.SerialNumber LIKE @SearchQuery OR
-                        i.Category LIKE @SearchQuery OR
-                        i.ItemName LIKE @SearchQuery OR
-                        i.Brand LIKE @SearchQuery OR
-                        i.StockLevel LIKE @SearchQuery OR
-                        i.UnitPrice LIKE @SearchQuery OR
-                        i.StockStatus LIKE @SearchQuery OR
-                        po.Status LIKE @SearchQuery OR
-                        po.OrderDate LIKE @SearchQuery;";
+            SELECT 
+                i.ItemID  AS 'Item ID',
+                i.Category AS 'Type',
+                i.ItemName AS 'Item Name',
+                i.Brand,
+                i.StockLevel AS 'Quantity',
+                i.UnitPrice AS 'Price',
+                i.StockStatus AS 'Stock Status'
+            FROM Inventory i
+            WHERE 
+                i.ItemID LIKE @SearchQuery OR
+                i.Category LIKE @SearchQuery OR
+                i.ItemName LIKE @SearchQuery OR
+                i.Brand LIKE @SearchQuery OR
+                i.StockLevel LIKE @SearchQuery OR
+                i.UnitPrice LIKE @SearchQuery OR
+                i.StockStatus LIKE @SearchQuery;"; 
 
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
@@ -97,7 +91,22 @@ namespace Dashboard_STAFF
         private void Inventory_ADMIN_Load(object sender, EventArgs e)
         {
             LoadInventoryData();
+            TotalItemsCount();
+            LowStockCount();
+            OutofStockCount();
+            PopulateFilters();
 
+        }
+        private void PopulateFilters()
+        {
+            comboBox2.Items.Clear();
+            comboBox2.Items.Add("Item ID");
+            comboBox2.Items.Add("Item Name");
+            comboBox2.Items.Add("Category");
+            comboBox2.Items.Add("Brand");
+            comboBox2.Items.Add("Stock Status");
+            comboBox2.Items.Add("Price");
+            comboBox2.SelectedIndex = 0; 
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -114,7 +123,11 @@ namespace Dashboard_STAFF
 
         private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            LoadInventoryData();
+            var columnName = inventory_dataGridView.Columns[e.ColumnIndex].Name;
+            if (columnName == "Item ID") // Ensure the column name is correct
+            {
+                LoadInventoryData();
+            }
         }
         private void LoadInventoryData()
         {
@@ -123,25 +136,26 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-
                     string query = @"
-                    SELECT 
-                    SerialNumber AS 'Serial No', 
-                    Category AS 'Type', 
+                SELECT 
+                    ItemID AS 'Item ID',
                     ItemName AS 'Item Name', 
+                    Category AS 'Type', 
                     Brand, 
                     StockLevel AS 'Quantity', 
                     UnitPrice AS 'Price', 
                     StockStatus AS 'Stock Status'
-                    FROM Inventory;";
+                FROM Inventory;";
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-
-                        inventory_dataGridView.DataSource = dataTable;
+                        adapter.Fill(dataTable); // Populate DataTable
+                        inventory_dataGridView.DataSource = dataTable; // Bind DataTable to DataGridView
                     }
+                    TotalItemsCount();
+                    LowStockCount();
+                    OutofStockCount();
                 }
                 catch (MySqlException ex)
                 {
@@ -157,11 +171,13 @@ namespace Dashboard_STAFF
         private void label4_Click(object sender, EventArgs e)
         {
             TotalItemsCount();
+
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             OutofStockCount();
+
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -249,54 +265,60 @@ namespace Dashboard_STAFF
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            LoadInventoryData();
-            TotalItemsCount();
-            LowStockCount();
-            OutofStockCount();
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             if (inventory_dataGridView.SelectedRows.Count > 0)
             {
-                string serialNumber = inventory_dataGridView.SelectedRows[0].Cells["Serial No"].Value.ToString();
-
-                DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                // Confirmation Dialog
+                DialogResult confirmDelete = MessageBox.Show(
+                    "Are you sure you want to delete the selected items?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
 
                 if (confirmDelete == DialogResult.Yes)
                 {
-                    DeleteItem(serialNumber);
+                    // Collect Item IDs for deletion
+                    List<int> itemIDsToDelete = new List<int>();
+                    foreach (DataGridViewRow row in inventory_dataGridView.SelectedRows)
+                    {
+                        if (row.Cells["Item ID"].Value != null) // Use column alias defined in LoadInventoryData
+                        {
+                            itemIDsToDelete.Add(Convert.ToInt32(row.Cells["Item ID"].Value));
+                        }
+                    }
+
+                    if (itemIDsToDelete.Count > 0)
+                    {
+                        DeleteItems(itemIDsToDelete); // Delete all items in a batch
+                        LoadInventoryData();
+                        TotalItemsCount();
+                        LowStockCount();
+                        OutofStockCount();
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Please select an item to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select items to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void DeleteItem(string serialNumber)
+        private void DeleteItems(List<int> itemIDs)
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-
-                    string query = "DELETE FROM Inventory WHERE SerialNumber = @SerialNumber";
+                    // Create a single DELETE query using IN clause
+                    string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemIDs)})";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Item deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadInventoryData();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Item could not be deleted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        cmd.ExecuteNonQuery(); // Execute the batch deletion
                     }
                 }
                 catch (MySqlException ex)
@@ -309,6 +331,8 @@ namespace Dashboard_STAFF
                 }
             }
         }
+
+
 
         private void profile_pictureBox_Click(object sender, EventArgs e)
         {
@@ -329,7 +353,7 @@ namespace Dashboard_STAFF
             this.Hide();
         }
 
-        
+
 
         private void salesReturns_btn_Click(object sender, EventArgs e)
         {
@@ -356,5 +380,159 @@ namespace Dashboard_STAFF
         {
 
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+            string selectedSort = comboBox1.SelectedItem?.ToString();
+
+            if (!string.IsNullOrEmpty(selectedFilter) && !string.IsNullOrEmpty(selectedSort))
+            {
+                ApplyFilterAndSort(selectedFilter, selectedSort);
+            }
+        }
+        private void ApplyFilterAndSort(string filter, string sort)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    ItemID AS 'Item ID',
+                    ItemName AS 'Item Name', 
+                    Category AS 'Type', 
+                    Brand, 
+                    StockLevel AS 'Quantity', 
+                    UnitPrice AS 'Price', 
+                    StockStatus AS 'Stock Status'
+                FROM Inventory 
+                WHERE 1=1";
+                    /*string query = @"
+                    SELECT 
+                        ItemID AS 'Item ID',
+                        ItemName AS 'Item Name',
+                        Category AS 'Type',
+                        Brand,
+                        StockLevel AS 'Quantity',
+                        StockStatus AS 'Stock Status',
+                        CreatedAt AS 'Created At'
+                    FROM Inventory 
+                    WHERE 1=1";*/
+
+
+                    switch (filter)
+                    {
+                        case "Item ID":
+                            query += " ORDER BY ItemID";
+                            break;
+                        case "Item Name":
+                            query += " ORDER BY ItemName";
+                            break;
+                        case "Category":
+                            query += " ORDER BY Category";
+                            break;
+                        case "Brand":
+                            query += " ORDER BY Brand";
+                            break;
+                        case "Stock Status":
+                            query += " ORDER BY StockStatus";
+                            break;
+                        case "Price":
+                            query += " ORDER BY UnitPrice";
+                            break;
+                    }
+
+                    if (filter == "Item ID" || filter == "Price")
+                    {
+                        if (sort.Contains("Ascending") || sort.Contains("Low to High"))
+                            query += " ASC";
+                        else if (sort.Contains("Descending") || sort.Contains("High to Low"))
+                            query += " DESC";
+                    }
+                    else
+                    {
+                        if (sort.Contains("A-Z"))
+                            query += " ASC";
+                        else if (sort.Contains("Z-A"))
+                            query += " DESC";
+                        /*else if (sort.Contains("Newest"))
+                            query += " DESC";
+                        else if (sort.Contains("Oldest"))
+                            query += " ASC";*/
+                    }
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        inventory_dataGridView.DataSource = dataTable;
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+
+            comboBox1.Items.Clear();  
+            comboBox1.Enabled = false;  
+
+            if (!string.IsNullOrEmpty(selectedFilter))
+            {
+                switch (selectedFilter)
+                {
+                    case "Item ID":
+                        comboBox1.Items.Add("Item ID (Ascending)");
+                        comboBox1.Items.Add("Item ID (Descending)");
+                        break;
+
+                    case "Item Name":
+                        comboBox1.Items.Add("Item Name (A-Z)");
+                        comboBox1.Items.Add("Item Name (Z-A)");
+                        break;
+
+                    case "Category":
+                        comboBox1.Items.Add("Category (A-Z)");
+                        comboBox1.Items.Add("Category (Z-A)");
+                        break;
+
+                    case "Brand":
+                        comboBox1.Items.Add("Brand (A-Z)");
+                        comboBox1.Items.Add("Brand (Z-A)");
+                        break;
+
+                    case "Price":
+                        comboBox1.Items.Add("Lowest to Highest");
+                        comboBox1.Items.Add("Highest to Lowest");
+                        break;
+
+                    case "Stock Status":
+                        comboBox1.Items.Add("In Stock");
+                        comboBox1.Items.Add("Out of Stock");
+                        comboBox1.Items.Add("Low Stock");
+                        break;
+
+                    default:
+                        MessageBox.Show("Invalid filter selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                }
+
+                comboBox1.Enabled = true; 
+                comboBox1.SelectedIndex = 0;
+            }
+        }
+
     }
 }
+
