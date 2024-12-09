@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
             inventory_dataGridView = new DataGridView();
@@ -136,7 +137,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             inventory_dataGridView.Dock = DockStyle.Fill;
-            inventory_dataGridView.Location = new Point(10, 44);
+            inventory_dataGridView.Location = new Point(10, 37);
             inventory_dataGridView.Name = "inventory_dataGridView";
             inventory_dataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -148,9 +149,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             inventory_dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            inventory_dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             inventory_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            inventory_dataGridView.Size = new Size(726, 488);
+            inventory_dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            inventory_dataGridView.Size = new Size(726, 495);
             inventory_dataGridView.TabIndex = 19;
+            inventory_dataGridView.CellClick += inventory_dataGridView_CellClick;
             // 
             // groupBox2
             // 
@@ -175,10 +180,10 @@
             // 
             panel2.Controls.Add(button3);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(10, 406);
+            panel2.Location = new Point(10, 399);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(40, 30, 40, 40);
-            panel2.Size = new Size(345, 126);
+            panel2.Size = new Size(345, 133);
             panel2.TabIndex = 3;
             // 
             // button3
@@ -207,7 +212,7 @@
             flowLayoutPanel4.Dock = DockStyle.Top;
             flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel4.Location = new Point(10, 338);
+            flowLayoutPanel4.Location = new Point(10, 331);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(345, 68);
             flowLayoutPanel4.TabIndex = 2;
@@ -219,22 +224,22 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(3, 0);
             label6.Name = "label6";
-            label6.Size = new Size(81, 20);
+            label6.Size = new Size(65, 15);
             label6.TabIndex = 12;
             label6.Text = "Unit Price:";
             // 
             // numericUpDown2
             // 
-            numericUpDown2.Location = new Point(3, 23);
-            numericUpDown2.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
+            numericUpDown2.Location = new Point(3, 18);
+            numericUpDown2.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(331, 27);
+            numericUpDown2.Size = new Size(331, 23);
             numericUpDown2.TabIndex = 13;
             // 
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Top;
-            splitContainer2.Location = new Point(10, 261);
+            splitContainer2.Location = new Point(10, 254);
             splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -268,15 +273,16 @@
             label5.ForeColor = Color.White;
             label5.Location = new Point(3, 0);
             label5.Name = "label5";
-            label5.Size = new Size(96, 20);
+            label5.Size = new Size(76, 15);
             label5.TabIndex = 10;
             label5.Text = "Initial Stock:";
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(3, 23);
+            numericUpDown1.Location = new Point(3, 18);
+            numericUpDown1.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(140, 27);
+            numericUpDown1.Size = new Size(140, 23);
             numericUpDown1.TabIndex = 11;
             // 
             // flowLayoutPanel3
@@ -298,15 +304,16 @@
             label8.ForeColor = Color.White;
             label8.Location = new Point(3, 0);
             label8.Name = "label8";
-            label8.Size = new Size(147, 20);
+            label8.Size = new Size(119, 15);
             label8.TabIndex = 14;
             label8.Text = "Restock Alert Level:";
             // 
             // numericUpDown3
             // 
-            numericUpDown3.Location = new Point(3, 23);
+            numericUpDown3.Location = new Point(3, 18);
+            numericUpDown3.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new Size(143, 27);
+            numericUpDown3.Size = new Size(143, 23);
             numericUpDown3.TabIndex = 15;
             // 
             // flowLayoutPanel1
@@ -320,7 +327,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            flowLayoutPanel1.Location = new Point(10, 44);
+            flowLayoutPanel1.Location = new Point(10, 37);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(345, 217);
@@ -333,17 +340,17 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(92, 20);
+            label3.Size = new Size(73, 15);
             label3.TabIndex = 6;
             label3.Text = "Item Name:";
             // 
             // textBox3
             // 
             textBox3.Font = new Font("Segoe UI", 9F);
-            textBox3.Location = new Point(3, 23);
+            textBox3.Location = new Point(3, 18);
             textBox3.Margin = new Padding(3, 3, 3, 20);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(331, 27);
+            textBox3.Size = new Size(331, 23);
             textBox3.TabIndex = 7;
             // 
             // label2
@@ -351,19 +358,19 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(3, 70);
+            label2.Location = new Point(3, 61);
             label2.Name = "label2";
-            label2.Size = new Size(96, 20);
+            label2.Size = new Size(78, 15);
             label2.TabIndex = 8;
             label2.Text = "Device Type:";
             // 
             // textBox2
             // 
             textBox2.Font = new Font("Segoe UI", 9F);
-            textBox2.Location = new Point(3, 93);
+            textBox2.Location = new Point(3, 79);
             textBox2.Margin = new Padding(3, 3, 3, 20);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(331, 27);
+            textBox2.Size = new Size(331, 23);
             textBox2.TabIndex = 9;
             // 
             // label4
@@ -371,18 +378,18 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(3, 140);
+            label4.Location = new Point(3, 122);
             label4.Name = "label4";
-            label4.Size = new Size(55, 20);
+            label4.Size = new Size(43, 15);
             label4.TabIndex = 10;
             label4.Text = "Brand:";
             // 
             // textBox4
             // 
             textBox4.Font = new Font("Segoe UI", 9F);
-            textBox4.Location = new Point(3, 163);
+            textBox4.Location = new Point(3, 140);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(331, 27);
+            textBox4.Size = new Size(331, 23);
             textBox4.TabIndex = 11;
             // 
             // EditItem_ADMIN
@@ -394,6 +401,7 @@
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "EditItem_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += EditItem_ADMIN_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();

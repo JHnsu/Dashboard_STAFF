@@ -143,7 +143,12 @@ namespace Dashboard_STAFF
         private void button3_Click(object sender, EventArgs e)
         {
             AddItem_ADMIN addItem_ADMIN = new AddItem_ADMIN();
+            addItem_ADMIN.ItemAdded += new AddItem_ADMIN.ItemAddedEventHandler(AddItem_ADMIN_ItemAdded);
             addItem_ADMIN.Show();
+        }
+        private void AddItem_ADMIN_ItemAdded()
+        {
+            LoadInventoryData();  
         }
 
         private void button3_MouseHover(object sender, EventArgs e)
@@ -157,7 +162,12 @@ namespace Dashboard_STAFF
         private void button4_Click(object sender, EventArgs e)
         {
             EditItem_ADMIN editItem_ADMIN = new EditItem_ADMIN();
+            editItem_ADMIN.ItemEdited += new EditItem_ADMIN.ItemEditedEventHandler(EditItem_ADMIN_ItemEdited);
             editItem_ADMIN.Show();
+        }
+        private void EditItem_ADMIN_ItemEdited()
+        {
+            LoadInventoryData();  
         }
         private void button4_MouseHover(object sender, EventArgs e)
         {
@@ -288,7 +298,7 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-                    string query = "SELECT COUNT(*) FROM Inventory WHERE StockLevel < MinimumStockLevel;";
+                    string query = "SELECT COUNT(*) FROM Inventory WHERE StockLevel > 0 AND StockLevel <= MinimumStockLevel;";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         int lowStockItems = Convert.ToInt32(cmd.ExecuteScalar());
@@ -330,18 +340,16 @@ namespace Dashboard_STAFF
                     List<int> itemIDsToDelete = new List<int>();
                     foreach (DataGridViewRow row in inventory_dataGridView.SelectedRows)
                     {
-                        if (row.Cells["Item ID"].Value != null)  
+                        if (row.Cells["Item ID"].Value != null) 
                         {
                             itemIDsToDelete.Add(Convert.ToInt32(row.Cells["Item ID"].Value));
                         }
                     }
 
                     if (itemIDsToDelete.Count > 0)
-                    {  
-                        LoadInventoryData();
-                        TotalItemsCount();
-                        LowStockCount();
-                        OutofStockCount();
+                    {
+                        DeleteItems(itemIDsToDelete); 
+                        LoadInventoryData(); 
                     }
                 }
             }
@@ -351,27 +359,17 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void button5_MouseHover(object sender, EventArgs e)
-        {
-            button5.BackColor = Color.FromArgb(99, 218, 255);
-        }
-
-        private void button5_MouseLeave(object sender, EventArgs e)
-        {
-            button5.BackColor = Color.FromArgb(0, 93, 217);
-        }
-
-        private void DeleteItem(string serialNumber)
+        private void DeleteItems(List<int> itemIDs)
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemID)})";
+                    string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemIDs)})";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.ExecuteNonQuery();  
+                        cmd.ExecuteNonQuery();
                     }
                 }
                 catch (MySqlException ex)
@@ -384,6 +382,16 @@ namespace Dashboard_STAFF
                 }
             }
         }
+
+        private void button5_MouseHover(object sender, EventArgs e)
+        {
+            button5.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            button5.BackColor = Color.FromArgb(0, 93, 217);
+        }  
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -430,6 +438,21 @@ namespace Dashboard_STAFF
                     FROM Inventory 
                     WHERE 1=1";*/
 
+                    if (filter == "Stock Status")
+                    {
+                        switch (sort)
+                        {
+                            case "In Stock":
+                                query += " AND StockStatus = 'In Stock'";
+                                break;
+                            case "Out of Stock":
+                                query += " AND StockStatus = 'Out of Stock'";
+                                break;
+                            case "Low Stock":
+                                query += " AND StockStatus = 'Low Stock'";
+                                break;
+                        }
+                    }
 
                     switch (filter)
                     {
@@ -455,9 +478,9 @@ namespace Dashboard_STAFF
 
                     if (filter == "Item ID" || filter == "Price")
                     {
-                        if (sort.Contains("Ascending") || sort.Contains("Low to High"))
+                        if (sort.Contains("Ascending") || sort.Contains("Lowest to Highest"))
                             query += " ASC";
-                        else if (sort.Contains("Descending") || sort.Contains("High to Low"))
+                        else if (sort.Contains("Descending") || sort.Contains("Highest to Lowest"))
                             query += " DESC";
                     }
                     else
