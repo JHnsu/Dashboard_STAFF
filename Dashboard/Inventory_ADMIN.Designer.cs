@@ -680,6 +680,16 @@
             // 
             // label6
             // 
+            comboBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            comboBox1.ForeColor = Color.FromArgb(43, 42, 76);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(4, 4);
+            comboBox1.Margin = new Padding(4, 4, 50, 4);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(188, 33);
+            comboBox1.TabIndex = 0;
+            comboBox1.Text = "SORT";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             label6.AutoSize = true;
             label6.Location = new Point(395, 10);
             label6.Margin = new Padding(0, 0, 52, 0);
@@ -691,6 +701,16 @@
             // 
             // label7
             // 
+            comboBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            comboBox2.ForeColor = Color.FromArgb(43, 42, 76);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(246, 4);
+            comboBox2.Margin = new Padding(4);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(188, 33);
+            comboBox2.TabIndex = 1;
+            comboBox2.Text = "FILTER";
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             label7.AutoSize = true;
             label7.Location = new Point(492, 10);
             label7.Margin = new Padding(21, 0, 10, 0);
@@ -721,6 +741,7 @@
             Name = "Inventory_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inventory_ADMIN";
+            WindowState = FormWindowState.Maximized;
             Load += Inventory_ADMIN_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
