@@ -124,7 +124,7 @@ namespace Dashboard_STAFF
         private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var columnName = inventory_dataGridView.Columns[e.ColumnIndex].Name;
-            if (columnName == "Item ID") // Ensure the column name is correct
+            if (columnName == "Item ID")  
             {
                 LoadInventoryData();
             }
@@ -150,8 +150,8 @@ namespace Dashboard_STAFF
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable); // Populate DataTable
-                        inventory_dataGridView.DataSource = dataTable; // Bind DataTable to DataGridView
+                        adapter.Fill(dataTable); 
+                        inventory_dataGridView.DataSource = dataTable;  
                     }
                     TotalItemsCount();
                     LowStockCount();
@@ -272,7 +272,6 @@ namespace Dashboard_STAFF
         {
             if (inventory_dataGridView.SelectedRows.Count > 0)
             {
-                // Confirmation Dialog
                 DialogResult confirmDelete = MessageBox.Show(
                     "Are you sure you want to delete the selected items?",
                     "Confirm Delete",
@@ -281,11 +280,10 @@ namespace Dashboard_STAFF
 
                 if (confirmDelete == DialogResult.Yes)
                 {
-                    // Collect Item IDs for deletion
                     List<int> itemIDsToDelete = new List<int>();
                     foreach (DataGridViewRow row in inventory_dataGridView.SelectedRows)
                     {
-                        if (row.Cells["Item ID"].Value != null) // Use column alias defined in LoadInventoryData
+                        if (row.Cells["Item ID"].Value != null)  
                         {
                             itemIDsToDelete.Add(Convert.ToInt32(row.Cells["Item ID"].Value));
                         }
@@ -293,7 +291,7 @@ namespace Dashboard_STAFF
 
                     if (itemIDsToDelete.Count > 0)
                     {
-                        DeleteItems(itemIDsToDelete); // Delete all items in a batch
+                        DeleteItems(itemIDsToDelete);  
                         LoadInventoryData();
                         TotalItemsCount();
                         LowStockCount();
@@ -314,11 +312,10 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-                    // Create a single DELETE query using IN clause
                     string query = $"DELETE FROM Inventory WHERE ItemID IN ({string.Join(",", itemIDs)})";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.ExecuteNonQuery(); // Execute the batch deletion
+                        cmd.ExecuteNonQuery();  
                     }
                 }
                 catch (MySqlException ex)
