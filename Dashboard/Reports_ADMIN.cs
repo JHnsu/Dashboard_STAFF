@@ -39,7 +39,7 @@ namespace Dashboard_STAFF
 
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
+            Inventory inventoryAdmin = new Inventory();
             inventoryAdmin.Show();
             this.Hide();
         }
@@ -158,7 +158,9 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-
+            UserProfile userprofile = new UserProfile();
+            userprofile.Show();
+            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -191,7 +193,9 @@ namespace Dashboard_STAFF
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            EditUserProfile editUserProfile = new EditUserProfile();
+            editUserProfile.Show();
+            this.Hide();
         }
         private void button6_MouseHover(object sender, EventArgs e)
         {
@@ -212,6 +216,11 @@ namespace Dashboard_STAFF
         private void button7_MouseLeave(object sender, EventArgs e)
         {
             button7.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

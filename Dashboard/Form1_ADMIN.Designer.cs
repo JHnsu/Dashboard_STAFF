@@ -79,10 +79,6 @@
             totalRestocked_label = new Label();
             groupBox4 = new GroupBox();
             dataGridView1 = new DataGridView();
-            Item = new DataGridViewTextBoxColumn();
-            TotalShipped = new DataGridViewTextBoxColumn();
-            TotalPrice = new DataGridViewTextBoxColumn();
-            Date = new DataGridViewTextBoxColumn();
             comboBox1 = new ComboBox();
             groupBox1 = new GroupBox();
             percentReceived_label = new Label();
@@ -146,7 +142,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(panel1);
-            splitContainer1.Size = new Size(1539, 840);
+            splitContainer1.Size = new Size(1370, 749);
             splitContainer1.SplitterDistance = 312;
             splitContainer1.TabIndex = 1;
             // 
@@ -169,7 +165,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(312, 840);
+            panel3.Size = new Size(312, 749);
             panel3.TabIndex = 40;
             // 
             // panel4
@@ -177,11 +173,12 @@
             panel4.Controls.Add(tableLayoutPanel2);
             panel4.Controls.Add(pictureBox7);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 719);
+            panel4.Location = new Point(0, 628);
             panel4.Margin = new Padding(0);
             panel4.Name = "panel4";
             panel4.Size = new Size(312, 121);
             panel4.TabIndex = 0;
+            panel4.Paint += panel4_Paint;
             // 
             // tableLayoutPanel2
             // 
@@ -241,6 +238,7 @@
             pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox7.TabIndex = 31;
             pictureBox7.TabStop = false;
+            pictureBox7.Click += pictureBox7_Click;
             // 
             // panel6
             // 
@@ -400,7 +398,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1223, 840);
+            panel1.Size = new Size(1054, 749);
             panel1.TabIndex = 7;
             // 
             // panel5
@@ -412,7 +410,7 @@
             panel5.Location = new Point(0, 0);
             panel5.Margin = new Padding(0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1223, 48);
+            panel5.Size = new Size(1054, 48);
             panel5.TabIndex = 1;
             // 
             // flowLayoutPanel4
@@ -422,7 +420,7 @@
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
-            flowLayoutPanel4.Location = new Point(1016, 0);
+            flowLayoutPanel4.Location = new Point(847, 0);
             flowLayoutPanel4.Margin = new Padding(0);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Padding = new Padding(10, 5, 10, 0);
@@ -434,11 +432,11 @@
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(99, 10);
+            orgName_label.Location = new Point(113, 10);
             orgName_label.Margin = new Padding(3, 5, 3, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;
-            orgName_label.Size = new Size(85, 23);
+            orgName_label.Size = new Size(71, 19);
             orgName_label.TabIndex = 2;
             orgName_label.Text = "C-SHARK";
             // 
@@ -447,7 +445,7 @@
             notify_pictureBox.BackColor = Color.Transparent;
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
-            notify_pictureBox.Location = new Point(46, 8);
+            notify_pictureBox.Location = new Point(60, 8);
             notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
@@ -463,7 +461,7 @@
             search_textBox.Location = new Point(9, 12);
             search_textBox.Name = "search_textBox";
             search_textBox.PlaceholderText = "Search";
-            search_textBox.Size = new Size(318, 27);
+            search_textBox.Size = new Size(318, 23);
             search_textBox.TabIndex = 1;
             search_textBox.TextChanged += search_textBox_TextChanged;
             // 
@@ -476,7 +474,7 @@
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(0, 50, 3, 0);
-            panel2.Size = new Size(1223, 840);
+            panel2.Size = new Size(1054, 749);
             panel2.TabIndex = 0;
             // 
             // panel8
@@ -487,7 +485,7 @@
             panel8.Location = new Point(0, 402);
             panel8.Margin = new Padding(0);
             panel8.Name = "panel8";
-            panel8.Size = new Size(1220, 438);
+            panel8.Size = new Size(1051, 347);
             panel8.TabIndex = 10;
             // 
             // splitContainer3
@@ -505,7 +503,7 @@
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(groupBox3);
-            splitContainer3.Size = new Size(1220, 438);
+            splitContainer3.Size = new Size(1051, 347);
             splitContainer3.SplitterDistance = 462;
             splitContainer3.TabIndex = 0;
             // 
@@ -517,7 +515,7 @@
             groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(462, 438);
+            groupBox2.Size = new Size(462, 347);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Items Low in Stock";
@@ -526,6 +524,7 @@
             // 
             lowItems_dataGridView.AllowUserToAddRows = false;
             lowItems_dataGridView.AllowUserToDeleteRows = false;
+            lowItems_dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             lowItems_dataGridView.BackgroundColor = Color.White;
             lowItems_dataGridView.BorderStyle = BorderStyle.None;
             lowItems_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -547,7 +546,7 @@
             dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
             lowItems_dataGridView.DefaultCellStyle = dataGridViewCellStyle11;
             lowItems_dataGridView.Dock = DockStyle.Fill;
-            lowItems_dataGridView.Location = new Point(3, 30);
+            lowItems_dataGridView.Location = new Point(3, 25);
             lowItems_dataGridView.Name = "lowItems_dataGridView";
             lowItems_dataGridView.ReadOnly = true;
             dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -561,8 +560,9 @@
             lowItems_dataGridView.RowHeadersVisible = false;
             lowItems_dataGridView.RowHeadersWidth = 51;
             lowItems_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            lowItems_dataGridView.Size = new Size(456, 405);
+            lowItems_dataGridView.Size = new Size(456, 319);
             lowItems_dataGridView.TabIndex = 0;
+            lowItems_dataGridView.CellContentClick += lowItems_dataGridView_CellContentClick_1;
             // 
             // groupBox3
             // 
@@ -572,7 +572,7 @@
             groupBox3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             groupBox3.Location = new Point(0, 0);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(754, 438);
+            groupBox3.Size = new Size(585, 347);
             groupBox3.TabIndex = 11;
             groupBox3.TabStop = false;
             groupBox3.Text = "All Restock Requests";
@@ -602,7 +602,7 @@
             dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
             requests_dataGridView.DefaultCellStyle = dataGridViewCellStyle14;
             requests_dataGridView.Dock = DockStyle.Fill;
-            requests_dataGridView.Location = new Point(3, 30);
+            requests_dataGridView.Location = new Point(3, 25);
             requests_dataGridView.Name = "requests_dataGridView";
             requests_dataGridView.ReadOnly = true;
             dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -616,8 +616,9 @@
             requests_dataGridView.RowHeadersVisible = false;
             requests_dataGridView.RowHeadersWidth = 51;
             requests_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            requests_dataGridView.Size = new Size(748, 405);
+            requests_dataGridView.Size = new Size(579, 319);
             requests_dataGridView.TabIndex = 1;
+            requests_dataGridView.CellContentClick += requests_dataGridView_CellContentClick_1;
             // 
             // panel7
             // 
@@ -625,7 +626,7 @@
             panel7.Dock = DockStyle.Top;
             panel7.Location = new Point(0, 184);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1220, 218);
+            panel7.Size = new Size(1051, 218);
             panel7.TabIndex = 9;
             // 
             // splitContainer2
@@ -643,7 +644,7 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(groupBox4);
-            splitContainer2.Size = new Size(1220, 218);
+            splitContainer2.Size = new Size(1051, 218);
             splitContainer2.SplitterDistance = 413;
             splitContainer2.TabIndex = 0;
             // 
@@ -672,12 +673,12 @@
             tableLayoutPanel1.Controls.Add(totalShipped_label, 0, 0);
             tableLayoutPanel1.Controls.Add(totalRestocked_label, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(20, 47);
+            tableLayoutPanel1.Location = new Point(20, 42);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(373, 151);
+            tableLayoutPanel1.Size = new Size(373, 156);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label3
@@ -685,21 +686,22 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(190, 76);
+            label3.Location = new Point(190, 79);
             label3.Name = "label3";
-            label3.Size = new Size(178, 73);
+            label3.Size = new Size(178, 75);
             label3.TabIndex = 3;
             label3.Text = "To be Restocked";
             label3.TextAlign = ContentAlignment.MiddleCenter;
+            label3.Click += label3_Click;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label2.Location = new Point(5, 76);
+            label2.Location = new Point(5, 79);
             label2.Name = "label2";
-            label2.Size = new Size(177, 73);
+            label2.Size = new Size(177, 75);
             label2.TabIndex = 2;
             label2.Text = "To be Shipped";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -710,10 +712,11 @@
             totalShipped_label.AutoSize = true;
             totalShipped_label.Location = new Point(5, 2);
             totalShipped_label.Name = "totalShipped_label";
-            totalShipped_label.Size = new Size(177, 72);
+            totalShipped_label.Size = new Size(177, 75);
             totalShipped_label.TabIndex = 0;
             totalShipped_label.Text = "000";
             totalShipped_label.TextAlign = ContentAlignment.MiddleCenter;
+            totalShipped_label.Click += totalShipped_label_Click;
             // 
             // totalRestocked_label
             // 
@@ -721,7 +724,7 @@
             totalRestocked_label.AutoSize = true;
             totalRestocked_label.Location = new Point(190, 2);
             totalRestocked_label.Name = "totalRestocked_label";
-            totalRestocked_label.Size = new Size(178, 72);
+            totalRestocked_label.Size = new Size(178, 75);
             totalRestocked_label.TabIndex = 1;
             totalRestocked_label.Text = "000";
             totalRestocked_label.TextAlign = ContentAlignment.MiddleCenter;
@@ -736,7 +739,7 @@
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(140, 3, 10, 3);
-            groupBox4.Size = new Size(803, 218);
+            groupBox4.Size = new Size(634, 218);
             groupBox4.TabIndex = 9;
             groupBox4.TabStop = false;
             groupBox4.Text = "Top Selling Items";
@@ -745,6 +748,7 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -757,7 +761,6 @@
             dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Item, TotalShipped, TotalPrice, Date });
             dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = SystemColors.Window;
             dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -767,7 +770,7 @@
             dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(140, 30);
+            dataGridView1.Location = new Point(140, 25);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -780,52 +783,21 @@
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(653, 185);
+            dataGridView1.Size = new Size(484, 190);
             dataGridView1.TabIndex = 0;
-            // 
-            // Item
-            // 
-            Item.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Item.HeaderText = "Item Name";
-            Item.MinimumWidth = 90;
-            Item.Name = "Item";
-            Item.ReadOnly = true;
-            // 
-            // TotalShipped
-            // 
-            TotalShipped.HeaderText = "Total Shipped";
-            TotalShipped.MinimumWidth = 90;
-            TotalShipped.Name = "TotalShipped";
-            TotalShipped.ReadOnly = true;
-            TotalShipped.Width = 90;
-            // 
-            // TotalPrice
-            // 
-            TotalPrice.HeaderText = "Total Price";
-            TotalPrice.MinimumWidth = 90;
-            TotalPrice.Name = "TotalPrice";
-            TotalPrice.ReadOnly = true;
-            TotalPrice.Width = 90;
-            // 
-            // Date
-            // 
-            Date.HeaderText = "Date";
-            Date.MinimumWidth = 90;
-            Date.Name = "Date";
-            Date.ReadOnly = true;
-            Date.Width = 90;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // comboBox1
             // 
             comboBox1.Font = new Font("Segoe UI", 9F);
             comboBox1.ForeColor = Color.FromArgb(0, 11, 71);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Year", "Month", "Week" });
             comboBox1.Location = new Point(14, 30);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(120, 28);
+            comboBox1.Size = new Size(120, 23);
             comboBox1.TabIndex = 0;
-            comboBox1.Text = "This Month";
+            comboBox1.Text = "-Select-";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // groupBox1
             // 
@@ -841,7 +813,7 @@
             groupBox1.Location = new Point(0, 50);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(5);
-            groupBox1.Size = new Size(1220, 134);
+            groupBox1.Size = new Size(1051, 134);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Inventory Summary";
@@ -852,7 +824,7 @@
             percentReceived_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             percentReceived_label.Location = new Point(308, 91);
             percentReceived_label.Name = "percentReceived_label";
-            percentReceived_label.Size = new Size(35, 23);
+            percentReceived_label.Size = new Size(29, 19);
             percentReceived_label.TabIndex = 5;
             percentReceived_label.Text = "0%";
             // 
@@ -862,7 +834,7 @@
             percentHand_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             percentHand_label.Location = new Point(308, 44);
             percentHand_label.Name = "percentHand_label";
-            percentHand_label.Size = new Size(35, 23);
+            percentHand_label.Size = new Size(29, 19);
             percentHand_label.TabIndex = 4;
             percentHand_label.Text = "0%";
             // 
@@ -879,6 +851,7 @@
             quantityHand_progressBar.Name = "quantityHand_progressBar";
             quantityHand_progressBar.Size = new Size(811, 23);
             quantityHand_progressBar.TabIndex = 2;
+            quantityHand_progressBar.Click += quantityHand_progressBar_Click;
             // 
             // label5
             // 
@@ -886,7 +859,7 @@
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label5.Location = new Point(37, 91);
             label5.Name = "label5";
-            label5.Size = new Size(203, 23);
+            label5.Size = new Size(170, 19);
             label5.TabIndex = 1;
             label5.Text = "Quantity to be Received";
             // 
@@ -896,7 +869,7 @@
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label4.Location = new Point(37, 44);
             label4.Name = "label4";
-            label4.Size = new Size(148, 23);
+            label4.Size = new Size(122, 19);
             label4.TabIndex = 0;
             label4.Text = "Quantity in Hand";
             // 
@@ -905,7 +878,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
-            ClientSize = new Size(1539, 840);
+            ClientSize = new Size(1370, 749);
             Controls.Add(splitContainer1);
             ForeColor = Color.FromArgb(0, 11, 71);
             Name = "Form1_ADMIN";
@@ -1000,10 +973,6 @@
         private Label totalRestocked_label;
         private GroupBox groupBox4;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Item;
-        private DataGridViewTextBoxColumn TotalShipped;
-        private DataGridViewTextBoxColumn TotalPrice;
-        private DataGridViewTextBoxColumn Date;
         private ComboBox comboBox1;
         private Panel panel8;
         private SplitContainer splitContainer3;

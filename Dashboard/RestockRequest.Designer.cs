@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             label3 = new Label();
             textBox2 = new TextBox();
             label5 = new Label();
@@ -61,24 +62,24 @@
             label3.AutoSize = true;
             label3.Location = new Point(7, 3);
             label3.Name = "label3";
-            label3.Size = new Size(108, 20);
+            label3.Size = new Size(89, 15);
             label3.TabIndex = 5;
             label3.Text = "Selected Item:";
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(7, 26);
+            textBox2.Location = new Point(7, 21);
             textBox2.Margin = new Padding(3, 3, 50, 15);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(295, 27);
+            textBox2.Size = new Size(295, 23);
             textBox2.TabIndex = 6;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(7, 68);
+            label5.Location = new Point(7, 59);
             label5.Name = "label5";
-            label5.Size = new Size(135, 20);
+            label5.Size = new Size(107, 15);
             label5.TabIndex = 18;
             label5.Text = "Request Quantity:";
             // 
@@ -93,7 +94,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel1.Location = new Point(7, 41);
+            flowLayoutPanel1.Location = new Point(7, 34);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(4, 3, 4, 3);
             flowLayoutPanel1.Size = new Size(312, 217);
@@ -101,27 +102,27 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(7, 91);
+            numericUpDown1.Location = new Point(7, 77);
             numericUpDown1.Margin = new Padding(3, 3, 3, 15);
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(152, 27);
+            numericUpDown1.Size = new Size(152, 23);
             numericUpDown1.TabIndex = 23;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(7, 133);
+            label1.Location = new Point(7, 115);
             label1.Name = "label1";
-            label1.Size = new Size(150, 20);
+            label1.Size = new Size(120, 15);
             label1.TabIndex = 24;
             label1.Text = "Total Price Per Item:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(7, 156);
+            textBox1.Location = new Point(7, 133);
             textBox1.Margin = new Padding(3, 3, 50, 15);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(295, 27);
+            textBox1.Size = new Size(295, 23);
             textBox1.TabIndex = 25;
             // 
             // button1
@@ -147,10 +148,10 @@
             // 
             panel2.Controls.Add(button1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(7, 258);
+            panel2.Location = new Point(7, 251);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(28, 20, 28, 26);
-            panel2.Size = new Size(312, 222);
+            panel2.Size = new Size(312, 229);
             panel2.TabIndex = 4;
             // 
             // groupBox2
@@ -212,7 +213,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             inventory_dataGridView.Dock = DockStyle.Fill;
-            inventory_dataGridView.Location = new Point(7, 41);
+            inventory_dataGridView.Location = new Point(7, 34);
             inventory_dataGridView.Name = "inventory_dataGridView";
             inventory_dataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -224,9 +225,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             inventory_dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            inventory_dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             inventory_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            inventory_dataGridView.Size = new Size(788, 439);
+            inventory_dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            inventory_dataGridView.Size = new Size(788, 446);
             inventory_dataGridView.TabIndex = 19;
+            inventory_dataGridView.CellClick += inventory_dataGridView_CellClick;
             inventory_dataGridView.CellContentClick += inventory_dataGridView_CellContentClick;
             // 
             // splitContainer1
@@ -259,6 +264,7 @@
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "RestockRequest";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += RestockRequest_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();

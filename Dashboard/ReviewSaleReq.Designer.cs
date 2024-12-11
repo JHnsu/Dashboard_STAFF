@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             button3 = new Button();
             panel2 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -43,12 +44,6 @@
             label5 = new Label();
             dateTimePicker1 = new DateTimePicker();
             pendingOrders_dataGridView = new DataGridView();
-            OrderNo = new DataGridViewTextBoxColumn();
-            ItemName = new DataGridViewTextBoxColumn();
-            Quantity = new DataGridViewTextBoxColumn();
-            TotalPrice = new DataGridViewTextBoxColumn();
-            Receiver = new DataGridViewTextBoxColumn();
-            DeliveryDate = new DataGridViewTextBoxColumn();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -110,7 +105,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel1.Location = new Point(7, 41);
+            flowLayoutPanel1.Location = new Point(7, 34);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(4, 3, 4, 3);
             flowLayoutPanel1.Size = new Size(328, 273);
@@ -123,17 +118,17 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(7, 3);
             label1.Name = "label1";
-            label1.Size = new Size(108, 20);
+            label1.Size = new Size(89, 15);
             label1.TabIndex = 22;
             label1.Text = "Selected Item:";
             // 
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 9F);
-            textBox1.Location = new Point(7, 26);
+            textBox1.Location = new Point(7, 21);
             textBox1.Margin = new Padding(3, 3, 3, 20);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(318, 27);
+            textBox1.Size = new Size(318, 23);
             textBox1.TabIndex = 23;
             // 
             // label3
@@ -141,18 +136,18 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(7, 73);
+            label3.Location = new Point(7, 64);
             label3.Name = "label3";
-            label3.Size = new Size(74, 20);
+            label3.Size = new Size(58, 15);
             label3.TabIndex = 24;
             label3.Text = "Quantity:";
             // 
             // numericUpDown2
             // 
-            numericUpDown2.Location = new Point(7, 96);
+            numericUpDown2.Location = new Point(7, 82);
             numericUpDown2.Margin = new Padding(3, 3, 40, 20);
             numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(108, 27);
+            numericUpDown2.Size = new Size(108, 23);
             numericUpDown2.TabIndex = 25;
             // 
             // label4
@@ -160,19 +155,19 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(7, 143);
+            label4.Location = new Point(7, 125);
             label4.Name = "label4";
-            label4.Size = new Size(128, 20);
+            label4.Size = new Size(104, 15);
             label4.TabIndex = 26;
             label4.Text = "Receiver's Name:";
             // 
             // textBox4
             // 
             textBox4.Font = new Font("Segoe UI", 9F);
-            textBox4.Location = new Point(7, 166);
+            textBox4.Location = new Point(7, 143);
             textBox4.Margin = new Padding(3, 3, 3, 20);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(318, 27);
+            textBox4.Size = new Size(318, 23);
             textBox4.TabIndex = 27;
             // 
             // label5
@@ -180,18 +175,18 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(7, 213);
+            label5.Location = new Point(7, 186);
             label5.Name = "label5";
-            label5.Size = new Size(108, 20);
+            label5.Size = new Size(87, 15);
             label5.TabIndex = 29;
             label5.Text = "Delivery Date:";
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(7, 236);
+            dateTimePicker1.Location = new Point(7, 204);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(318, 27);
+            dateTimePicker1.Size = new Size(318, 23);
             dateTimePicker1.TabIndex = 28;
             dateTimePicker1.Value = new DateTime(2024, 12, 8, 0, 0, 0, 0);
             // 
@@ -212,7 +207,6 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             pendingOrders_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             pendingOrders_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            pendingOrders_dataGridView.Columns.AddRange(new DataGridViewColumn[] { OrderNo, ItemName, Quantity, TotalPrice, Receiver, DeliveryDate });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -222,7 +216,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             pendingOrders_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             pendingOrders_dataGridView.Dock = DockStyle.Fill;
-            pendingOrders_dataGridView.Location = new Point(7, 41);
+            pendingOrders_dataGridView.Location = new Point(7, 34);
             pendingOrders_dataGridView.Name = "pendingOrders_dataGridView";
             pendingOrders_dataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -234,53 +228,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             pendingOrders_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             pendingOrders_dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            pendingOrders_dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             pendingOrders_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            pendingOrders_dataGridView.Size = new Size(772, 439);
+            pendingOrders_dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            pendingOrders_dataGridView.Size = new Size(772, 446);
             pendingOrders_dataGridView.TabIndex = 19;
-            pendingOrders_dataGridView.CellContentClick += pendingOrders_dataGridView_CellContentClick;
-            // 
-            // OrderNo
-            // 
-            OrderNo.HeaderText = "Order No.";
-            OrderNo.MinimumWidth = 6;
-            OrderNo.Name = "OrderNo";
-            OrderNo.ReadOnly = true;
-            OrderNo.Visible = false;
-            // 
-            // ItemName
-            // 
-            ItemName.HeaderText = "Item Name";
-            ItemName.MinimumWidth = 6;
-            ItemName.Name = "ItemName";
-            ItemName.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Quantity";
-            Quantity.MinimumWidth = 6;
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
-            // 
-            // TotalPrice
-            // 
-            TotalPrice.HeaderText = "Total Price";
-            TotalPrice.MinimumWidth = 6;
-            TotalPrice.Name = "TotalPrice";
-            TotalPrice.ReadOnly = true;
-            // 
-            // Receiver
-            // 
-            Receiver.HeaderText = "Receiver";
-            Receiver.MinimumWidth = 6;
-            Receiver.Name = "Receiver";
-            Receiver.ReadOnly = true;
-            // 
-            // DeliveryDate
-            // 
-            DeliveryDate.HeaderText = "Delivery Date";
-            DeliveryDate.MinimumWidth = 6;
-            DeliveryDate.Name = "DeliveryDate";
-            DeliveryDate.ReadOnly = true;
+            pendingOrders_dataGridView.CellClick += pendingOrders_dataGridView_CellClick;
             // 
             // groupBox1
             // 
@@ -324,11 +278,11 @@
             tableLayoutPanel1.Controls.Add(radioButton2, 1, 0);
             tableLayoutPanel1.Controls.Add(radioButton1, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(7, 314);
+            tableLayoutPanel1.Location = new Point(7, 307);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(328, 76);
+            tableLayoutPanel1.Size = new Size(328, 83);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // radioButton2
@@ -339,11 +293,12 @@
             radioButton2.Location = new Point(174, 10);
             radioButton2.Margin = new Padding(10);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(144, 56);
+            radioButton2.Size = new Size(144, 63);
             radioButton2.TabIndex = 2;
             radioButton2.TabStop = true;
             radioButton2.Text = "Reject";
             radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
             // 
             // radioButton1
             // 
@@ -353,11 +308,12 @@
             radioButton1.Location = new Point(10, 10);
             radioButton1.Margin = new Padding(10);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(144, 56);
+            radioButton1.Size = new Size(144, 63);
             radioButton1.TabIndex = 1;
             radioButton1.TabStop = true;
             radioButton1.Text = "Approve";
             radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
             // splitContainer1
             // 
@@ -379,7 +335,7 @@
             splitContainer1.TabIndex = 1;
             splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
-            // ReviewSale
+            // ReviewSaleReq
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(0, 11, 71);
@@ -387,8 +343,9 @@
             Controls.Add(splitContainer1);
             Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            Name = "ReviewSale";
+            Name = "ReviewSaleReq";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += ReviewSaleReq_Load;
             panel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
@@ -413,12 +370,6 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private SplitContainer splitContainer1;
-        private DataGridViewTextBoxColumn OrderNo;
-        private DataGridViewTextBoxColumn ItemName;
-        private DataGridViewTextBoxColumn Quantity;
-        private DataGridViewTextBoxColumn TotalPrice;
-        private DataGridViewTextBoxColumn Receiver;
-        private DataGridViewTextBoxColumn DeliveryDate;
         private TableLayoutPanel tableLayoutPanel1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;

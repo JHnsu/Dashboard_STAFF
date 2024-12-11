@@ -30,7 +30,7 @@ namespace Dashboard_STAFF
 
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
+            Inventory inventoryAdmin = new Inventory();
             inventoryAdmin.Show();
             this.Hide();
         }
@@ -58,7 +58,9 @@ namespace Dashboard_STAFF
 
         private void profile_pictureBox_Click(object sender, EventArgs e)
         {
-
+            UserProfile userprofile = new UserProfile();
+            userprofile.Show();
+            this.Hide();
         }
 
         private void search_textBox_TextChanged(object sender, EventArgs e)
@@ -90,7 +92,7 @@ namespace Dashboard_STAFF
                 i.Brand LIKE @SearchQuery OR
                 i.StockLevel LIKE @SearchQuery OR
                 i.UnitPrice LIKE @SearchQuery OR
-                i.StockStatus LIKE @SearchQuery;"; 
+                i.StockStatus LIKE @SearchQuery;";
 
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
@@ -137,7 +139,7 @@ namespace Dashboard_STAFF
             comboBox2.Items.Add("Brand");
             comboBox2.Items.Add("Stock Status");
             comboBox2.Items.Add("Price");
-            comboBox2.SelectedIndex = 0; 
+            comboBox2.SelectedIndex = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -148,7 +150,7 @@ namespace Dashboard_STAFF
         }
         private void AddItem_ADMIN_ItemAdded()
         {
-            LoadInventoryData();  
+            LoadInventoryData();
         }
 
         private void button3_MouseHover(object sender, EventArgs e)
@@ -167,7 +169,7 @@ namespace Dashboard_STAFF
         }
         private void EditItem_ADMIN_ItemEdited()
         {
-            LoadInventoryData();  
+            LoadInventoryData();
         }
         private void button4_MouseHover(object sender, EventArgs e)
         {
@@ -181,7 +183,7 @@ namespace Dashboard_STAFF
         private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var columnName = inventory_dataGridView.Columns[e.ColumnIndex].Name;
-            if (columnName == "Item ID")  
+            if (columnName == "Item ID")
             {
                 LoadInventoryData();
             }
@@ -207,8 +209,8 @@ namespace Dashboard_STAFF
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable); 
-                        inventory_dataGridView.DataSource = dataTable;  
+                        adapter.Fill(dataTable);
+                        inventory_dataGridView.DataSource = dataTable;
                     }
                     TotalItemsCount();
                     LowStockCount();
@@ -322,7 +324,10 @@ namespace Dashboard_STAFF
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            LowStockCount();
+            OutofStockCount();
+            TotalItemsCount();
+            LoadInventoryData();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -340,7 +345,7 @@ namespace Dashboard_STAFF
                     List<int> itemIDsToDelete = new List<int>();
                     foreach (DataGridViewRow row in inventory_dataGridView.SelectedRows)
                     {
-                        if (row.Cells["Item ID"].Value != null) 
+                        if (row.Cells["Item ID"].Value != null)
                         {
                             itemIDsToDelete.Add(Convert.ToInt32(row.Cells["Item ID"].Value));
                         }
@@ -348,8 +353,8 @@ namespace Dashboard_STAFF
 
                     if (itemIDsToDelete.Count > 0)
                     {
-                        DeleteItems(itemIDsToDelete); 
-                        LoadInventoryData(); 
+                        DeleteItems(itemIDsToDelete);
+                        LoadInventoryData();
                     }
                 }
             }
@@ -391,7 +396,7 @@ namespace Dashboard_STAFF
         private void button5_MouseLeave(object sender, EventArgs e)
         {
             button5.BackColor = Color.FromArgb(0, 93, 217);
-        }  
+        }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -517,8 +522,8 @@ namespace Dashboard_STAFF
         {
             string selectedFilter = comboBox2.SelectedItem?.ToString();
 
-            comboBox1.Items.Clear();  
-            comboBox1.Enabled = false;  
+            comboBox1.Items.Clear();
+            comboBox1.Enabled = false;
 
             if (!string.IsNullOrEmpty(selectedFilter))
             {
@@ -560,11 +565,15 @@ namespace Dashboard_STAFF
                         return;
                 }
 
-                comboBox1.Enabled = true; 
+                comboBox1.Enabled = true;
                 comboBox1.SelectedIndex = 0;
             }
         }
 
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

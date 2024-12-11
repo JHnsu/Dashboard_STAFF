@@ -31,8 +31,10 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
+            requests_dataGridView = new DataGridView();
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             radioButton2 = new RadioButton();
@@ -48,17 +50,16 @@
             textBox4 = new TextBox();
             label6 = new Label();
             textBox5 = new TextBox();
-            requests_dataGridView = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)requests_dataGridView).BeginInit();
             groupBox2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)requests_dataGridView).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -96,6 +97,52 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Pending Requests";
             // 
+            // requests_dataGridView
+            // 
+            requests_dataGridView.AllowUserToAddRows = false;
+            requests_dataGridView.AllowUserToDeleteRows = false;
+            requests_dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            requests_dataGridView.BackgroundColor = Color.White;
+            requests_dataGridView.BorderStyle = BorderStyle.None;
+            requests_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            requests_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            requests_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            requests_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            requests_dataGridView.Dock = DockStyle.Fill;
+            requests_dataGridView.Location = new Point(7, 34);
+            requests_dataGridView.Name = "requests_dataGridView";
+            requests_dataGridView.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            requests_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            requests_dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            requests_dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            requests_dataGridView.ScrollBars = ScrollBars.Horizontal;
+            requests_dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            requests_dataGridView.Size = new Size(788, 446);
+            requests_dataGridView.TabIndex = 2;
+            requests_dataGridView.CellClick += requests_dataGridView_CellClick;
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(tableLayoutPanel1);
@@ -122,11 +169,11 @@
             tableLayoutPanel1.Controls.Add(radioButton2, 1, 0);
             tableLayoutPanel1.Controls.Add(radioButton1, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(7, 336);
+            tableLayoutPanel1.Location = new Point(7, 329);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(312, 51);
+            tableLayoutPanel1.Size = new Size(312, 58);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // radioButton2
@@ -137,7 +184,7 @@
             radioButton2.Location = new Point(166, 10);
             radioButton2.Margin = new Padding(10);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(136, 31);
+            radioButton2.Size = new Size(136, 38);
             radioButton2.TabIndex = 2;
             radioButton2.TabStop = true;
             radioButton2.Text = "Reject";
@@ -152,7 +199,7 @@
             radioButton1.Location = new Point(10, 10);
             radioButton1.Margin = new Padding(10);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(136, 31);
+            radioButton1.Size = new Size(136, 38);
             radioButton1.TabIndex = 1;
             radioButton1.TabStop = true;
             radioButton1.Text = "Approve";
@@ -201,7 +248,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            flowLayoutPanel1.Location = new Point(7, 41);
+            flowLayoutPanel1.Location = new Point(7, 34);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(4, 3, 4, 3);
             flowLayoutPanel1.Size = new Size(312, 295);
@@ -212,115 +259,72 @@
             label3.AutoSize = true;
             label3.Location = new Point(7, 3);
             label3.Name = "label3";
-            label3.Size = new Size(90, 20);
+            label3.Size = new Size(72, 15);
             label3.TabIndex = 5;
             label3.Text = "Request ID:";
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(7, 26);
+            textBox2.Location = new Point(7, 21);
             textBox2.Margin = new Padding(3, 3, 50, 15);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(295, 27);
+            textBox2.Size = new Size(295, 23);
             textBox2.TabIndex = 6;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(7, 68);
+            label4.Location = new Point(7, 59);
             label4.Name = "label4";
-            label4.Size = new Size(92, 20);
+            label4.Size = new Size(73, 15);
             label4.TabIndex = 14;
             label4.Text = "Item Name:";
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(7, 91);
+            textBox3.Location = new Point(7, 77);
             textBox3.Margin = new Padding(3, 3, 50, 15);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(295, 27);
+            textBox3.Size = new Size(295, 23);
             textBox3.TabIndex = 15;
             textBox3.TextChanged += textBox3_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(7, 133);
+            label5.Location = new Point(7, 115);
             label5.Name = "label5";
-            label5.Size = new Size(74, 20);
+            label5.Size = new Size(58, 15);
             label5.TabIndex = 18;
             label5.Text = "Quantity:";
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(7, 156);
+            textBox4.Location = new Point(7, 133);
             textBox4.Margin = new Padding(3, 3, 50, 15);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(135, 27);
+            textBox4.Size = new Size(135, 23);
             textBox4.TabIndex = 21;
             textBox4.TextChanged += textBox4_TextChanged;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(7, 198);
+            label6.Location = new Point(7, 171);
             label6.Name = "label6";
-            label6.Size = new Size(109, 20);
+            label6.Size = new Size(87, 15);
             label6.TabIndex = 20;
             label6.Text = "Requested By:";
             // 
             // textBox5
             // 
-            textBox5.Location = new Point(7, 221);
+            textBox5.Location = new Point(7, 189);
             textBox5.Margin = new Padding(3, 3, 50, 15);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(295, 27);
+            textBox5.Size = new Size(295, 23);
             textBox5.TabIndex = 22;
             textBox5.TextChanged += textBox5_TextChanged;
-            // 
-            // requests_dataGridView
-            // 
-            requests_dataGridView.AllowUserToAddRows = false;
-            requests_dataGridView.AllowUserToDeleteRows = false;
-            requests_dataGridView.BackgroundColor = Color.White;
-            requests_dataGridView.BorderStyle = BorderStyle.None;
-            requests_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            requests_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            requests_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            requests_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            requests_dataGridView.Dock = DockStyle.Fill;
-            requests_dataGridView.Location = new Point(7, 41);
-            requests_dataGridView.Name = "requests_dataGridView";
-            requests_dataGridView.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            requests_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            requests_dataGridView.RowHeadersVisible = false;
-            requests_dataGridView.RowHeadersWidth = 51;
-            requests_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            requests_dataGridView.Size = new Size(788, 439);
-            requests_dataGridView.TabIndex = 2;
-            requests_dataGridView.CellContentClick += requests_dataGridView_CellContentClick;
             // 
             // RestockReqApproval_ADMIN
             // 
@@ -333,18 +337,19 @@
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "RestockReqApproval_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += RestockReqApproval_ADMIN_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)requests_dataGridView).EndInit();
             groupBox2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)requests_dataGridView).EndInit();
             ResumeLayout(false);
         }
 

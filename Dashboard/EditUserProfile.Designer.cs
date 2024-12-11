@@ -68,6 +68,7 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Margin = new Padding(3, 2, 3, 2);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -81,9 +82,9 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(groupBox1);
-            splitContainer1.Panel2.Padding = new Padding(15, 10, 15, 15);
-            splitContainer1.Size = new Size(687, 507);
-            splitContainer1.SplitterDistance = 243;
+            splitContainer1.Panel2.Padding = new Padding(13, 8, 13, 11);
+            splitContainer1.Size = new Size(601, 380);
+            splitContainer1.SplitterDistance = 212;
             splitContainer1.TabIndex = 1;
             // 
             // pictureBox3
@@ -92,9 +93,10 @@
             pictureBox3.BackColor = Color.FromArgb(0, 11, 71);
             pictureBox3.Cursor = Cursors.Hand;
             pictureBox3.Image = Properties.Resources._9054423_bx_arrow_back_icon__1_;
-            pictureBox3.Location = new Point(12, 445);
+            pictureBox3.Location = new Point(10, 334);
+            pictureBox3.Margin = new Padding(3, 2, 3, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(50, 50);
+            pictureBox3.Size = new Size(44, 38);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 4;
             pictureBox3.TabStop = false;
@@ -108,15 +110,15 @@
             tableLayoutPanel2.Controls.Add(button2, 0, 0);
             tableLayoutPanel2.Controls.Add(button1, 0, 2);
             tableLayoutPanel2.Dock = DockStyle.Top;
-            tableLayoutPanel2.Location = new Point(0, 219);
+            tableLayoutPanel2.Location = new Point(0, 164);
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.Padding = new Padding(15);
+            tableLayoutPanel2.Padding = new Padding(13, 11, 13, 11);
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(243, 184);
+            tableLayoutPanel2.Size = new Size(212, 138);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // button3
@@ -127,9 +129,10 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(18, 57);
+            button3.Location = new Point(16, 43);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(207, 29);
+            button3.Size = new Size(180, 22);
             button3.TabIndex = 4;
             button3.Text = "Delete Profile Picture";
             button3.UseVisualStyleBackColor = false;
@@ -146,9 +149,10 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(18, 19);
+            button2.Location = new Point(16, 14);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(207, 29);
+            button2.Size = new Size(180, 22);
             button2.TabIndex = 2;
             button2.Text = "Change Profile Picture";
             button2.UseVisualStyleBackColor = false;
@@ -165,9 +169,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(18, 115);
+            button1.Location = new Point(16, 87);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(207, 29);
+            button1.Size = new Size(180, 22);
             button1.TabIndex = 3;
             button1.Text = "Save Changes";
             button1.UseVisualStyleBackColor = false;
@@ -183,11 +188,12 @@
             tableLayoutPanel1.Controls.Add(pictureBox2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Padding = new Padding(20);
+            tableLayoutPanel1.Padding = new Padding(18, 15, 18, 15);
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(243, 219);
+            tableLayoutPanel1.Size = new Size(212, 164);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox2
@@ -195,12 +201,14 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BorderStyle = BorderStyle.FixedSingle;
             pictureBox2.Image = Properties.Resources._1564534_customer_man_user_account_profile_icon;
-            pictureBox2.Location = new Point(23, 23);
+            pictureBox2.Location = new Point(21, 17);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(197, 173);
+            pictureBox2.Size = new Size(170, 130);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // pictureBox1
             // 
@@ -208,9 +216,10 @@
             pictureBox1.BackColor = Color.FromArgb(0, 11, 71);
             pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = Properties.Resources.logout_button;
-            pictureBox1.Location = new Point(12, 852);
+            pictureBox1.Location = new Point(10, 639);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(50, 50);
+            pictureBox1.Size = new Size(44, 38);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -222,10 +231,11 @@
             groupBox1.FlatStyle = FlatStyle.Flat;
             groupBox1.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             groupBox1.ForeColor = Color.FromArgb(0, 11, 71);
-            groupBox1.Location = new Point(15, 10);
+            groupBox1.Location = new Point(13, 8);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(10);
-            groupBox1.Size = new Size(410, 482);
+            groupBox1.Padding = new Padding(9, 8, 9, 8);
+            groupBox1.Size = new Size(359, 361);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "User Profile";
@@ -246,30 +256,32 @@
             flowLayoutPanel1.Controls.Add(textBox6);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(10, 44);
+            flowLayoutPanel1.Location = new Point(9, 35);
+            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(390, 428);
+            flowLayoutPanel1.Size = new Size(341, 318);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label6.Location = new Point(3, 3);
-            label6.Margin = new Padding(3, 3, 3, 10);
+            label6.Location = new Point(3, 2);
+            label6.Margin = new Padding(3, 2, 3, 8);
             label6.Name = "label6";
-            label6.Size = new Size(112, 23);
+            label6.Size = new Size(90, 19);
             label6.TabIndex = 5;
             label6.Text = "Staff/Admin";
+            label6.Click += label6_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label1.Location = new Point(3, 39);
-            label1.Margin = new Padding(3, 3, 3, 0);
+            label1.Location = new Point(3, 31);
+            label1.Margin = new Padding(3, 2, 3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(89, 23);
+            label1.Size = new Size(76, 19);
             label1.TabIndex = 0;
             label1.Text = "Username";
             // 
@@ -277,21 +289,22 @@
             // 
             textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Font = new Font("Segoe UI", 10F);
-            textBox1.Location = new Point(3, 65);
-            textBox1.Margin = new Padding(3, 3, 3, 10);
+            textBox1.Location = new Point(3, 52);
+            textBox1.Margin = new Padding(3, 2, 3, 8);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(364, 30);
+            textBox1.Size = new Size(319, 25);
             textBox1.TabIndex = 6;
             textBox1.Text = "New Username";
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label2.Location = new Point(3, 108);
-            label2.Margin = new Padding(3, 3, 3, 0);
+            label2.Location = new Point(3, 87);
+            label2.Margin = new Padding(3, 2, 3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(91, 23);
+            label2.Size = new Size(76, 19);
             label2.TabIndex = 1;
             label2.Text = "Full Name";
             // 
@@ -299,31 +312,34 @@
             // 
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 10F);
-            textBox2.Location = new Point(3, 134);
+            textBox2.Location = new Point(3, 108);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(364, 30);
+            textBox2.Size = new Size(319, 25);
             textBox2.TabIndex = 7;
             textBox2.Text = "First Name";
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // textBox4
             // 
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Font = new Font("Segoe UI", 10F);
-            textBox4.Location = new Point(3, 170);
-            textBox4.Margin = new Padding(3, 3, 3, 10);
+            textBox4.Location = new Point(3, 137);
+            textBox4.Margin = new Padding(3, 2, 3, 8);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(364, 30);
+            textBox4.Size = new Size(319, 25);
             textBox4.TabIndex = 9;
-            textBox4.Text = "First Name";
+            textBox4.Text = "LastName";
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(3, 213);
-            label3.Margin = new Padding(3, 3, 3, 0);
+            label3.Location = new Point(3, 172);
+            label3.Margin = new Padding(3, 2, 3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(179, 23);
+            label3.Size = new Size(151, 19);
             label3.TabIndex = 2;
             label3.Text = "example@gmail.com";
             // 
@@ -331,21 +347,22 @@
             // 
             textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Segoe UI", 10F);
-            textBox3.Location = new Point(3, 239);
-            textBox3.Margin = new Padding(3, 3, 3, 10);
+            textBox3.Location = new Point(3, 193);
+            textBox3.Margin = new Padding(3, 2, 3, 8);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(364, 30);
+            textBox3.Size = new Size(319, 25);
             textBox3.TabIndex = 8;
             textBox3.Text = "New Email Add";
+            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label4.Location = new Point(3, 282);
-            label4.Margin = new Padding(3, 3, 3, 0);
+            label4.Location = new Point(3, 228);
+            label4.Margin = new Padding(3, 2, 3, 0);
             label4.Name = "label4";
-            label4.Size = new Size(120, 23);
+            label4.Size = new Size(97, 19);
             label4.TabIndex = 3;
             label4.Text = "09123456789";
             // 
@@ -353,21 +370,22 @@
             // 
             textBox5.BorderStyle = BorderStyle.FixedSingle;
             textBox5.Font = new Font("Segoe UI", 10F);
-            textBox5.Location = new Point(3, 308);
-            textBox5.Margin = new Padding(3, 3, 3, 10);
+            textBox5.Location = new Point(3, 249);
+            textBox5.Margin = new Padding(3, 2, 3, 8);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(364, 30);
+            textBox5.Size = new Size(319, 25);
             textBox5.TabIndex = 10;
             textBox5.Text = "New Contact No.";
+            textBox5.TextChanged += textBox5_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label5.Location = new Point(3, 351);
-            label5.Margin = new Padding(3, 3, 3, 0);
+            label5.Location = new Point(3, 284);
+            label5.Margin = new Padding(3, 2, 3, 0);
             label5.Name = "label5";
-            label5.Size = new Size(142, 23);
+            label5.Size = new Size(116, 19);
             label5.TabIndex = 4;
             label5.Text = "1234 Sample St.";
             // 
@@ -375,22 +393,26 @@
             // 
             textBox6.BorderStyle = BorderStyle.FixedSingle;
             textBox6.Font = new Font("Segoe UI", 10F);
-            textBox6.Location = new Point(3, 377);
+            textBox6.Location = new Point(328, 2);
+            textBox6.Margin = new Padding(3, 2, 3, 2);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(364, 30);
+            textBox6.Size = new Size(319, 25);
             textBox6.TabIndex = 11;
             textBox6.Text = "New Address";
+            textBox6.TextChanged += textBox6_TextChanged;
             // 
             // EditUserProfile
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(687, 507);
+            ClientSize = new Size(601, 380);
             Controls.Add(splitContainer1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "EditUserProfile";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EditUserProfile";
+            Load += EditUserProfile_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();

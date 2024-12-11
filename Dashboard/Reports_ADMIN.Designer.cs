@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -114,8 +114,8 @@
             // 
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            splitContainer1.Size = new Size(1539, 840);
-            splitContainer1.SplitterDistance = 312;
+            splitContainer1.Size = new Size(1370, 749);
+            splitContainer1.SplitterDistance = 277;
             splitContainer1.TabIndex = 5;
             // 
             // panel3
@@ -137,7 +137,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(312, 840);
+            panel3.Size = new Size(277, 749);
             panel3.TabIndex = 41;
             // 
             // panel4
@@ -145,11 +145,12 @@
             panel4.Controls.Add(tableLayoutPanel2);
             panel4.Controls.Add(pictureBox7);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 719);
+            panel4.Location = new Point(0, 628);
             panel4.Margin = new Padding(0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(312, 121);
+            panel4.Size = new Size(277, 121);
             panel4.TabIndex = 0;
+            panel4.Paint += panel4_Paint;
             // 
             // tableLayoutPanel2
             // 
@@ -370,7 +371,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1223, 840);
+            panel1.Size = new Size(1089, 749);
             panel1.TabIndex = 0;
             // 
             // panel5
@@ -381,7 +382,7 @@
             panel5.Location = new Point(0, 0);
             panel5.Margin = new Padding(0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1223, 48);
+            panel5.Size = new Size(1089, 48);
             panel5.TabIndex = 2;
             // 
             // flowLayoutPanel4
@@ -391,7 +392,7 @@
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
-            flowLayoutPanel4.Location = new Point(1016, 0);
+            flowLayoutPanel4.Location = new Point(882, 0);
             flowLayoutPanel4.Margin = new Padding(0);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Padding = new Padding(10, 5, 10, 0);
@@ -403,11 +404,11 @@
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(99, 10);
+            orgName_label.Location = new Point(113, 10);
             orgName_label.Margin = new Padding(3, 5, 3, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;
-            orgName_label.Size = new Size(85, 23);
+            orgName_label.Size = new Size(71, 19);
             orgName_label.TabIndex = 2;
             orgName_label.Text = "C-SHARK";
             // 
@@ -416,7 +417,7 @@
             notify_pictureBox.BackColor = Color.Transparent;
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
-            notify_pictureBox.Location = new Point(46, 8);
+            notify_pictureBox.Location = new Point(60, 8);
             notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
@@ -435,7 +436,7 @@
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(0, 50, 0, 0);
-            panel2.Size = new Size(1223, 840);
+            panel2.Size = new Size(1089, 749);
             panel2.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -445,10 +446,10 @@
             flowLayoutPanel1.Controls.Add(button6);
             flowLayoutPanel1.Controls.Add(button7);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
-            flowLayoutPanel1.Location = new Point(0, 719);
+            flowLayoutPanel1.Location = new Point(0, 628);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(10);
-            flowLayoutPanel1.Size = new Size(1223, 121);
+            flowLayoutPanel1.Size = new Size(1089, 121);
             flowLayoutPanel1.TabIndex = 21;
             // 
             // button6
@@ -495,7 +496,7 @@
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(0, 291);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1223, 429);
+            groupBox2.Size = new Size(1089, 429);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Account List";
@@ -507,30 +508,30 @@
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserNo, ProfilePic, Username, StaffName, EmailAdd, Contact });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 30);
+            dataGridView1.Location = new Point(3, 25);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1217, 396);
+            dataGridView1.Size = new Size(1083, 401);
             dataGridView1.TabIndex = 20;
             // 
             // UserNo
@@ -596,7 +597,7 @@
             groupBox1.Location = new Point(0, 50);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(5, 5, 5, 500);
-            groupBox1.Size = new Size(1223, 241);
+            groupBox1.Size = new Size(1089, 241);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Generation of Reports";
@@ -615,14 +616,14 @@
             tableLayoutPanel1.Controls.Add(label4, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Top;
             tableLayoutPanel1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            tableLayoutPanel1.Location = new Point(5, 32);
+            tableLayoutPanel1.Location = new Point(5, 27);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(5);
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Size = new Size(1213, 194);
+            tableLayoutPanel1.Size = new Size(1079, 194);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // button3
@@ -631,7 +632,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(356, 20);
+            button3.Location = new Point(317, 20);
             button3.Margin = new Padding(5, 15, 5, 15);
             button3.Name = "button3";
             button3.Size = new Size(177, 31);
@@ -649,7 +650,7 @@
             label3.Dock = DockStyle.Fill;
             label3.Location = new Point(8, 127);
             label3.Name = "label3";
-            label3.Size = new Size(340, 62);
+            label3.Size = new Size(301, 62);
             label3.TabIndex = 0;
             label3.Text = "ORDERS REPORT";
             label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -660,7 +661,7 @@
             label5.Dock = DockStyle.Fill;
             label5.Location = new Point(8, 5);
             label5.Name = "label5";
-            label5.Size = new Size(340, 61);
+            label5.Size = new Size(301, 61);
             label5.TabIndex = 2;
             label5.Text = "INVENTORY REPORT";
             label5.TextAlign = ContentAlignment.MiddleLeft;
@@ -671,7 +672,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(356, 81);
+            button2.Location = new Point(317, 81);
             button2.Margin = new Padding(5, 15, 5, 15);
             button2.Name = "button2";
             button2.Size = new Size(177, 31);
@@ -689,7 +690,7 @@
             orderPDF_button.FlatStyle = FlatStyle.Flat;
             orderPDF_button.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             orderPDF_button.ForeColor = Color.White;
-            orderPDF_button.Location = new Point(356, 142);
+            orderPDF_button.Location = new Point(317, 142);
             orderPDF_button.Margin = new Padding(5, 15, 5, 15);
             orderPDF_button.Name = "orderPDF_button";
             orderPDF_button.Size = new Size(177, 32);
@@ -707,7 +708,7 @@
             label4.Dock = DockStyle.Fill;
             label4.Location = new Point(8, 66);
             label4.Name = "label4";
-            label4.Size = new Size(340, 61);
+            label4.Size = new Size(301, 61);
             label4.TabIndex = 1;
             label4.Text = "SALE REPORT";
             label4.TextAlign = ContentAlignment.MiddleLeft;
@@ -717,7 +718,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
-            ClientSize = new Size(1539, 840);
+            ClientSize = new Size(1370, 749);
             Controls.Add(splitContainer1);
             ForeColor = Color.FromArgb(0, 11, 71);
             Name = "Reports_ADMIN";

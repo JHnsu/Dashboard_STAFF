@@ -28,7 +28,7 @@ namespace Dashboard_STAFF
 
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
+            Inventory inventoryAdmin = new Inventory();
             inventoryAdmin.Show();
             this.Hide();
         }
@@ -57,12 +57,11 @@ namespace Dashboard_STAFF
         {
             if (e.RowIndex >= 0)
             {
-                string orderId = salesOrder_dataGridView.Rows[e.RowIndex].Cells["ID"].Value.ToString();
-                string itemName = salesOrder_dataGridView.Rows[e.RowIndex].Cells["Item"].Value.ToString();
+                string orderId = salesOrder_dataGridView.Rows[e.RowIndex].Cells["Item ID"].Value.ToString();
+                string itemName = salesOrder_dataGridView.Rows[e.RowIndex].Cells["Item Name"].Value.ToString();
                 string receiver = salesOrder_dataGridView.Rows[e.RowIndex].Cells["Receiver"].Value.ToString();
-                string status = salesOrder_dataGridView.Rows[e.RowIndex].Cells["Order Status"].Value.ToString();
 
-                MessageBox.Show($"Order ID: {orderId}\nItem Name: {itemName}\nReceiver: {receiver}\nStatus: {status}",
+                MessageBox.Show($"Item ID: {orderId}\nItem Name: {itemName}\nReceiver: {receiver}",
                                 "Selected Sales Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -70,6 +69,21 @@ namespace Dashboard_STAFF
         private void SalesOrder_ADMIN_Load(object sender, EventArgs e)
         {
             LoadSalesOrders();
+            TotalSales();
+            TotalShipped();
+            PopulateFilters();
+        }
+        private void PopulateFilters()
+        {
+            comboBox2.Items.Clear();
+            comboBox2.Items.Add("Item ID");
+            comboBox2.Items.Add("Item Name");
+            comboBox2.Items.Add("Brand");
+            comboBox2.Items.Add("Quantity");
+            comboBox2.Items.Add("Price");
+            comboBox2.Items.Add("Receiver");
+            comboBox2.Items.Add("Date");
+            comboBox2.SelectedIndex = 0;
         }
         private void LoadSalesOrders()
         {
@@ -81,31 +95,26 @@ namespace Dashboard_STAFF
 
                     string query = @"
                         SELECT 
-                            s.SaleID AS 'ID',
-                            s.ItemName AS 'Item',
+                            s.ItemID AS 'Item ID',
+                            s.ItemName AS 'Item Name',
                             s.Brand AS 'Brand',
                             s.Quantity AS 'Quantity',
                             s.Price AS 'Price',
                             s.Receiver AS 'Receiver',
-                            s.OrderStatus AS 'Order Status',
                             s.SaleDate AS 'Date'
-                        FROM Sales s";
+                        FROM Sales s
+                        WHERE s.OrderStatus = 'Completed';";
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
                         salesOrder_dataGridView.DataSource = dataTable;
                     }
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -123,44 +132,40 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
+
                     string query = @"
                 SELECT 
-                    s.SaleID AS 'ID',
-                    s.ItemName AS 'Item',
+                    s.ItemID AS 'Item ID',
+                    s.ItemName AS 'Item Name',
                     s.Brand AS 'Brand',
                     s.Quantity AS 'Quantity',
                     s.Price AS 'Price',
                     s.Receiver AS 'Receiver',
-                    s.OrderStatus AS 'Order Status',
                     s.SaleDate AS 'Date'
                 FROM Sales s
                 WHERE 
-                    s.SaleID LIKE @SearchQuery OR
-                    s.ItemName LIKE @SearchQuery OR
-                    s.Brand LIKE @SearchQuery OR
-                    s.Quantity LIKE @SearchQuery OR
-                    s.Price LIKE @SearchQuery OR
-                    s.Receiver LIKE @SearchQuery OR
-                    s.OrderStatus LIKE @SearchQuery OR
-                    s.SaleDate LIKE @SearchQuery";
+                    s.OrderStatus = 'Completed' AND
+                    (
+                        s.ItemID LIKE @SearchQuery OR
+                        s.ItemName LIKE @SearchQuery OR
+                        s.Brand LIKE @SearchQuery OR
+                        s.Quantity LIKE @SearchQuery OR
+                        s.Price LIKE @SearchQuery OR
+                        s.Receiver LIKE @SearchQuery OR
+                        s.SaleDate LIKE @SearchQuery
+                    )";
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         adapter.SelectCommand.Parameters.AddWithValue("@SearchQuery", $"%{searchQuery}%");
-
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
                         salesOrder_dataGridView.DataSource = dataTable;
                     }
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -182,9 +187,227 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-
+            UserProfile userprofile = new UserProfile();
+            userprofile.Show();
+            this.Hide();
         }
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            LoadSalesOrders();
+            TotalSales();
+            TotalShipped();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            //total number of sales
+        }
+        private void TotalSales()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Sales WHERE OrderStatus = 'Completed'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        int totalSales = Convert.ToInt32(cmd.ExecuteScalar());
+                        label4.Text = totalSales.ToString();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void label6_Click(object sender, EventArgs e)
+        {
+            //total number of shipped 
+        }
+        private void TotalShipped()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Sales WHERE OrderStatus = 'Shipped'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        int totalShipped = Convert.ToInt32(cmd.ExecuteScalar());
+                        label6.Text = totalShipped.ToString();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //sort
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+            string selectedSort = comboBox1.SelectedItem?.ToString();
+
+            if (!string.IsNullOrEmpty(selectedFilter) && !string.IsNullOrEmpty(selectedSort))
+            {
+                ApplyFilterAndSort(selectedFilter, selectedSort);
+            }
+        }
+        private void ApplyFilterAndSort(string filter, string sort)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT 
+                            s.ItemID AS 'Item ID',
+                            s.ItemName AS 'Item Name',
+                            s.Brand AS 'Brand',
+                            s.Quantity AS 'Quantity',
+                            s.Price AS 'Price',
+                            s.Receiver AS 'Receiver',
+                            s.SaleDate AS 'Date'
+                        FROM Sales s
+                        WHERE s.OrderStatus = 'Completed'";
+
+                    switch (filter)
+                    {
+                        case "Item ID":
+                            query += " ORDER BY ItemID";
+                            break;
+                        case "Item Name":
+                            query += " ORDER BY ItemName";
+                            break;
+                        case "Brand":
+                            query += " ORDER BY Brand";
+                            break;
+                        case "Quantity":
+                            query += " ORDER BY Quantity";
+                            break;
+                        case "Price":
+                            query += " ORDER BY Price";
+                            break;
+                        case "Receiver":
+                            query += " ORDER BY Receiver";
+                            break;
+                        case "Date":
+                            query += " ORDER BY SaleDate";
+                            break;
+                    }
+
+                    if (filter == "Item ID" || filter == "Price" || filter == "Quantity")
+                    {
+                        if (sort.Contains("Ascending") || sort.Contains("Lowest to Highest"))
+                            query += " ASC";
+                        else if (sort.Contains("Descending") || sort.Contains("Highest to Lowest"))
+                            query += " DESC";
+                    }
+                    else
+                    {
+                        if (sort.Contains("A-Z"))
+                            query += " ASC";
+                        else if (sort.Contains("Z-A"))
+                            query += " DESC";
+                        else if (sort.Contains("Newest"))
+                            query += " DESC";
+                        else if (sort.Contains("Oldest"))
+                            query += " ASC";
+                    }
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        salesOrder_dataGridView.DataSource = dataTable;
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //filter
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+
+            comboBox1.Items.Clear();
+            comboBox1.Enabled = false;
+
+            if (!string.IsNullOrEmpty(selectedFilter))
+            {
+                switch (selectedFilter)
+                {
+                    case "Item ID":
+                        comboBox1.Items.Add("Item ID (Ascending)");
+                        comboBox1.Items.Add("Item ID (Descending)");
+                        break;
+
+                    case "Item Name":
+                        comboBox1.Items.Add("Item Name (A-Z)");
+                        comboBox1.Items.Add("Item Name (Z-A)");
+                        break;
+
+                    case "Brand":
+                        comboBox1.Items.Add("Brand (A-Z)");
+                        comboBox1.Items.Add("Brand (Z-A)");
+                        break;
+
+                    case "Price":
+                        comboBox1.Items.Add("Lowest to Highest");
+                        comboBox1.Items.Add("Highest to Lowest");
+                        break;
+
+                    case "Quantity":
+                        comboBox1.Items.Add("Quantity(Ascending)");
+                        comboBox1.Items.Add("Quantity(Descending)");
+                        break;
+
+                    case "Receiver":
+                        comboBox1.Items.Add("Receiver (A-Z)");
+                        comboBox1.Items.Add("Receiver (Z-A)");
+                        break;
+
+                    case "Date":
+                        comboBox1.Items.Add("Newest");
+                        comboBox1.Items.Add("Oldest");
+                        break;
+
+                    default:
+                        MessageBox.Show("Invalid filter selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                }
+
+                comboBox1.Enabled = true;
+                comboBox1.SelectedIndex = 0;
+            }
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
         }

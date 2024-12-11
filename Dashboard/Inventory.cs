@@ -27,7 +27,7 @@ namespace Dashboard_STAFF
         }
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory inventory = new Inventory();
+            Inventory_ADMIN inventory = new Inventory_ADMIN();
             inventory.Show();
             this.Hide();
         }
@@ -47,7 +47,9 @@ namespace Dashboard_STAFF
         }
         private void profile_pictureBox_Click(object sender, EventArgs e)
         {
-
+            UserProfile userprofile = new UserProfile();
+            userprofile.Show();
+            this.Hide();
         }
 
         private void search_textBox_TextChanged(object sender, EventArgs e)
@@ -64,30 +66,24 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
                     string query = @"
-                    SELECT 
-                        po.PurchaseOrderID AS 'Order ID',
-                        i.SerialNumber AS 'Serial No',
-                        i.Category AS 'Type',
-                        i.ItemName AS 'Item Name',
-                        i.Brand,
-                        i.StockLevel AS 'Quantity',
-                        i.UnitPrice AS 'Price',
-                        i.StockStatus AS 'Stock Status',
-                        po.Status AS 'Order Status',
-                        po.OrderDate AS 'Order Date'
-                    FROM PurchaseOrders po
-                    INNER JOIN Inventory i ON po.ItemID = i.ItemID
-                    WHERE 
-                        po.PurchaseOrderID LIKE @SearchQuery OR
-                        i.SerialNumber LIKE @SearchQuery OR
-                        i.Category LIKE @SearchQuery OR
-                        i.ItemName LIKE @SearchQuery OR
-                        i.Brand LIKE @SearchQuery OR
-                        i.StockLevel LIKE @SearchQuery OR
-                        i.UnitPrice LIKE @SearchQuery OR
-                        i.StockStatus LIKE @SearchQuery OR
-                        po.Status LIKE @SearchQuery OR
-                        po.OrderDate LIKE @SearchQuery;";
+            SELECT 
+                i.ItemID  AS 'Item ID',
+                i.Category AS 'Type',
+                i.ItemName AS 'Item Name',
+                i.Brand,
+                i.StockLevel AS 'Quantity',
+                i.UnitPrice AS 'Price',
+                i.StockStatus AS 'Stock Status'
+            FROM Inventory i
+            WHERE 
+                i.ItemID LIKE @SearchQuery OR
+                i.Category LIKE @SearchQuery OR
+                i.ItemName LIKE @SearchQuery OR
+                i.Brand LIKE @SearchQuery OR
+                i.StockLevel LIKE @SearchQuery OR
+                i.UnitPrice LIKE @SearchQuery OR
+                i.StockStatus LIKE @SearchQuery;";
+
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
@@ -120,26 +116,26 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-
                     string query = @"
                 SELECT 
-                    SerialNumber AS 'Serial No', 
-                    Category AS 'Type', 
+                    ItemID AS 'Item ID',
                     ItemName AS 'Item Name', 
+                    Category AS 'Type', 
                     Brand, 
                     StockLevel AS 'Quantity', 
                     UnitPrice AS 'Price', 
                     StockStatus AS 'Stock Status'
                 FROM Inventory;";
 
-
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
                         inventory_dataGridView.DataSource = dataTable;
                     }
+                    TotalItemsCount();
+                    LowStockCount();
+                    OutofStockCount();
                 }
                 catch (MySqlException ex)
                 {
@@ -209,7 +205,7 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-                    string query = "SELECT COUNT(*) FROM Inventory WHERE StockLevel < MinimumStockLevel;";
+                    string query = "SELECT COUNT(*) FROM Inventory WHERE StockLevel > 0 AND StockLevel <= MinimumStockLevel;";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         int lowStockItems = Convert.ToInt32(cmd.ExecuteScalar());
@@ -253,111 +249,171 @@ namespace Dashboard_STAFF
             OutofStockCount();
             LowStockCount();
         }
+        private void PopulateFilters()
+        {
+            comboBox2.Items.Clear();
+            comboBox2.Items.Add("Item ID");
+            comboBox2.Items.Add("Item Name");
+            comboBox2.Items.Add("Category");
+            comboBox2.Items.Add("Brand");
+            comboBox2.Items.Add("Stock Status");
+            comboBox2.Items.Add("Price");
+            comboBox2.SelectedIndex = 0;
+        }
 
         private void Inventory_Load(object sender, EventArgs e)
         {
             LoadInventoryData();
-
-            comboBox1.Items.AddRange(new string[]
-           {
-                "Item Name (A-Z)",
-                "Stock Level (Highest to Lowest)",
-                "Most Recent"
-           });
-
-            comboBox2.Items.AddRange(new string[]
-            {
-                "Category",
-                "Brand",
-                "Stock Status"
-            });
-
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
+            TotalItemsCount();
+            LowStockCount();
+            OutofStockCount();
+            PopulateFilters();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplySortAndFilter();
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+            string selectedSort = comboBox1.SelectedItem?.ToString();
+
+            if (!string.IsNullOrEmpty(selectedFilter) && !string.IsNullOrEmpty(selectedSort))
+            {
+                ApplyFilterAndSort(selectedFilter, selectedSort);
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplySortAndFilter();
+            string selectedFilter = comboBox2.SelectedItem?.ToString();
+
+            comboBox1.Items.Clear();
+            comboBox1.Enabled = false;
+
+            if (!string.IsNullOrEmpty(selectedFilter))
+            {
+                switch (selectedFilter)
+                {
+                    case "Item ID":
+                        comboBox1.Items.Add("Item ID (Ascending)");
+                        comboBox1.Items.Add("Item ID (Descending)");
+                        break;
+
+                    case "Item Name":
+                        comboBox1.Items.Add("Item Name (A-Z)");
+                        comboBox1.Items.Add("Item Name (Z-A)");
+                        break;
+
+                    case "Category":
+                        comboBox1.Items.Add("Category (A-Z)");
+                        comboBox1.Items.Add("Category (Z-A)");
+                        break;
+
+                    case "Brand":
+                        comboBox1.Items.Add("Brand (A-Z)");
+                        comboBox1.Items.Add("Brand (Z-A)");
+                        break;
+
+                    case "Price":
+                        comboBox1.Items.Add("Lowest to Highest");
+                        comboBox1.Items.Add("Highest to Lowest");
+                        break;
+
+                    case "Stock Status":
+                        comboBox1.Items.Add("In Stock");
+                        comboBox1.Items.Add("Out of Stock");
+                        comboBox1.Items.Add("Low Stock");
+                        break;
+
+                    default:
+                        MessageBox.Show("Invalid filter selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                }
+
+                comboBox1.Enabled = true;
+                comboBox1.SelectedIndex = 0;
+            }
         }
-        private void ApplySortAndFilter()
+
+        private void ApplyFilterAndSort(string filter, string sort)
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-
-                    string sortBy = comboBox1.SelectedItem?.ToString();
-                    string filterBy = comboBox2.SelectedItem?.ToString();
-
                     string query = @"
-                    SELECT 
-                        SerialNumber AS 'Serial No',
-                        Category AS 'Type',
-                        ItemName AS 'Item Name',
-                        Brand,
-                        StockLevel AS 'Quantity',
-                        UnitPrice AS 'Price',
-                        StockStatus AS 'Stock Status',
-                        CreatedAt AS 'Date Added'
-                    FROM Inventory";
+                SELECT 
+                    ItemID AS 'Item ID',
+                    ItemName AS 'Item Name', 
+                    Category AS 'Type', 
+                    Brand, 
+                    StockLevel AS 'Quantity', 
+                    UnitPrice AS 'Price', 
+                    StockStatus AS 'Stock Status'
+                FROM Inventory 
+                WHERE 1=1";
 
-                    string filterCondition = "";
-                    if (!string.IsNullOrEmpty(filterBy))
+                    if (filter == "Stock Status")
                     {
-                        if (filterBy == "Category")
+                        switch (sort)
                         {
-                            filterCondition = " WHERE Category = @FilterValue";
-                        }
-                        else if (filterBy == "Brand")
-                        {
-                            filterCondition = " WHERE Brand = @FilterValue";
-                        }
-                        else if (filterBy == "Stock Status")
-                        {
-                            filterCondition = " WHERE StockStatus = @FilterValue";
+                            case "In Stock":
+                                query += " AND StockStatus = 'In Stock'";
+                                break;
+                            case "Out of Stock":
+                                query += " AND StockStatus = 'Out of Stock'";
+                                break;
+                            case "Low Stock":
+                                query += " AND StockStatus = 'Low Stock'";
+                                break;
                         }
                     }
 
-                    string sortCondition = "";
-                    if (!string.IsNullOrEmpty(sortBy))
+                    switch (filter)
                     {
-                        if (sortBy == "Item Name (A-Z)")
-                        {
-                            sortCondition = " ORDER BY ItemName ASC";
-                        }
-                        else if (sortBy == "Stock Level (Highest to Lowest)")
-                        {
-                            sortCondition = " ORDER BY StockLevel DESC";
-                        }
-                        else if (sortBy == "Most Recent")
-                        {
-                            sortCondition = " ORDER BY CreatedAt DESC";
-                        }
+                        case "Item ID":
+                            query += " ORDER BY ItemID";
+                            break;
+                        case "Item Name":
+                            query += " ORDER BY ItemName";
+                            break;
+                        case "Category":
+                            query += " ORDER BY Category";
+                            break;
+                        case "Brand":
+                            query += " ORDER BY Brand";
+                            break;
+                        case "Stock Status":
+                            query += " ORDER BY StockStatus";
+                            break;
+                        case "Price":
+                            query += " ORDER BY UnitPrice";
+                            break;
                     }
 
-                    query += filterCondition + sortCondition;
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    if (filter == "Item ID" || filter == "Price")
                     {
-                        if (!string.IsNullOrEmpty(filterBy))
-                        {
-                            cmd.Parameters.AddWithValue("@FilterValue", comboBox2.Text);
-                        }
+                        if (sort.Contains("Ascending") || sort.Contains("Lowest to Highest"))
+                            query += " ASC";
+                        else if (sort.Contains("Descending") || sort.Contains("Highest to Lowest"))
+                            query += " DESC";
+                    }
+                    else
+                    {
+                        if (sort.Contains("A-Z"))
+                            query += " ASC";
+                        else if (sort.Contains("Z-A"))
+                            query += " DESC";
+                        /*else if (sort.Contains("Newest"))
+                            query += " DESC";
+                        else if (sort.Contains("Oldest"))
+                            query += " ASC";*/
+                    }
 
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
-                        {
-                            DataTable dataTable = new DataTable();
-                            adapter.Fill(dataTable);
-
-                            inventory_dataGridView.DataSource = dataTable;
-                        }
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        inventory_dataGridView.DataSource = dataTable;
                     }
                 }
                 catch (MySqlException ex)
@@ -375,7 +431,6 @@ namespace Dashboard_STAFF
         {
             RestockRequest restockRequest = new RestockRequest();
             restockRequest.Show();
-            this.Hide();
         }
         private void button3_MouseHover(object sender, EventArgs e)
         {
@@ -387,5 +442,9 @@ namespace Dashboard_STAFF
             button3.BackColor = Color.FromArgb(0, 93, 217);
         }
 
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

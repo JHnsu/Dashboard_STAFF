@@ -20,6 +20,13 @@ namespace Dashboard_STAFF
         {
             InitializeComponent();
             LoadRestockRequests();
+
+            string username = CurrentUser.Username;
+
+            textBox2.ReadOnly = true;
+            textBox3.ReadOnly = true;
+            textBox4.ReadOnly = true;
+            textBox5.ReadOnly = true;
         }
         private void LoadRestockRequests()
         {
@@ -28,7 +35,7 @@ namespace Dashboard_STAFF
                 try
                 {
                     conn.Open();
-                    string query = "SELECT RequestID, SerialNumber, ItemName, QuantityRequested, RequestDate, RequestStatus FROM RestockRequests WHERE RequestStatus = 'Pending'";
+                    string query = "SELECT RequestID, ItemName, QuantityRequested, RequestedBy, RequestDate, RequestStatus FROM RestockRequests WHERE RequestStatus = 'Pending'";
                     MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -42,16 +49,16 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void GetCurrentStock(string serialNumber)
+        private void GetCurrentStock(string ItemID)
         {
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    string query = "SELECT StockLevel FROM Inventory WHERE SerialNumber = @SerialNumber";
+                    string query = "SELECT StockLevel FROM Inventory WHERE ItemID = @ItemID";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
+                    cmd.Parameters.AddWithValue("@ItemID", ItemID);
 
                     object result = cmd.ExecuteScalar();
                     textBox2.Text = result != null ? result.ToString() : "0";
@@ -78,7 +85,6 @@ namespace Dashboard_STAFF
                 MessageBox.Show("Please select either 'Approve' or 'Reject'.");
                 return;
             }
-            string approvedBy = CurrentUser.Username;
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -86,25 +92,30 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
 
-                    string query = "UPDATE RestockRequests SET RequestStatus = @Status, ApprovalDate = CURRENT_TIMESTAMP, ApprovedBy = @ApprovedBy WHERE RequestID = @RequestID";
+                    string query = @"
+                UPDATE RestockRequests 
+                SET RequestStatus = @Status, 
+                    ApprovalDate = CURRENT_TIMESTAMP, 
+                    ApprovedBy = @ApprovedBy 
+                WHERE RequestID = @RequestID";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Status", status);
-                    cmd.Parameters.AddWithValue("@ApprovedBy", approvedBy);
+                    cmd.Parameters.AddWithValue("@ApprovedBy", CurrentUser.Username);
                     cmd.Parameters.AddWithValue("@RequestID", selectedRequestID);
                     cmd.ExecuteNonQuery();
 
                     if (status == "Approved")
                     {
-                        string serialNumber = textBox2.Text;
-                        int requestedQuantity = int.Parse(textBox5.Text);
-
-                        string stockUpdateQuery = "UPDATE Inventory SET StockLevel = StockLevel + @Quantity WHERE SerialNumber = @SerialNumber";
+                        int requestedQuantity = int.Parse(textBox4.Text);
+                        string stockUpdateQuery = @"
+                    UPDATE Inventory 
+                    SET StockLevel = StockLevel + @Quantity 
+                    WHERE ItemName = @ItemName";
                         MySqlCommand stockCmd = new MySqlCommand(stockUpdateQuery, conn);
                         stockCmd.Parameters.AddWithValue("@Quantity", requestedQuantity);
-                        stockCmd.Parameters.AddWithValue("@SerialNumber", serialNumber);
+                        stockCmd.Parameters.AddWithValue("@ItemName", textBox3.Text);
                         stockCmd.ExecuteNonQuery();
                     }
-
 
                     MessageBox.Show($"Request {status} successfully!");
                     LoadRestockRequests();
@@ -116,6 +127,7 @@ namespace Dashboard_STAFF
                 }
             }
         }
+
         private void button1_MouseHover(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(99, 218, 255);
@@ -166,7 +178,7 @@ namespace Dashboard_STAFF
 
         }
 
-        private void requests_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void requests_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
             {
@@ -179,11 +191,14 @@ namespace Dashboard_STAFF
                 selectedRequestID = Convert.ToInt32(row.Cells["RequestID"].Value);
                 textBox2.Text = row.Cells["RequestID"].Value.ToString();
                 textBox3.Text = row.Cells["ItemName"].Value.ToString();
-                textBox5.Text = row.Cells["QuantityRequested"].Value.ToString();
-                textBox4.Text = row.Cells["RequestDate"].Value.ToString();
-
-                GetCurrentStock(row.Cells["SerialNumber"].Value.ToString());
+                textBox4.Text = row.Cells["QuantityRequested"].Value.ToString();
+                textBox5.Text = row.Cells["RequestedBy"].Value.ToString();
             }
+        }
+
+        private void RestockReqApproval_ADMIN_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -68,8 +68,9 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(100);
-            panel1.Size = new Size(1414, 929);
+            panel1.Size = new Size(1370, 772);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // panel2
             // 
@@ -81,7 +82,7 @@
             panel2.Location = new Point(100, 100);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(0, 40, 0, 0);
-            panel2.Size = new Size(1214, 729);
+            panel2.Size = new Size(1170, 572);
             panel2.TabIndex = 15;
             // 
             // panel3
@@ -91,7 +92,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 216);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1214, 513);
+            panel3.Size = new Size(1170, 356);
             panel3.TabIndex = 6;
             // 
             // flowLayoutPanel1
@@ -109,7 +110,7 @@
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(445, 50, 445, 3);
-            flowLayoutPanel1.Size = new Size(1214, 368);
+            flowLayoutPanel1.Size = new Size(1170, 211);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // label1
@@ -120,7 +121,7 @@
             label1.Location = new Point(445, 50);
             label1.Margin = new Padding(0);
             label1.Name = "label1";
-            label1.Size = new Size(94, 23);
+            label1.Size = new Size(80, 19);
             label1.TabIndex = 5;
             label1.Text = "Username:";
             // 
@@ -130,10 +131,10 @@
             textBox1.Cursor = Cursors.IBeam;
             textBox1.Font = new Font("Segoe UI", 9F);
             textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(445, 73);
+            textBox1.Location = new Point(445, 69);
             textBox1.Margin = new Padding(0, 0, 0, 30);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(325, 27);
+            textBox1.Size = new Size(325, 23);
             textBox1.TabIndex = 6;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -142,10 +143,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(0, 11, 71);
-            label2.Location = new Point(445, 130);
+            label2.Location = new Point(445, 122);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
-            label2.Size = new Size(90, 23);
+            label2.Size = new Size(77, 19);
             label2.TabIndex = 7;
             label2.Text = "Password:";
             // 
@@ -155,10 +156,10 @@
             textBox2.Cursor = Cursors.IBeam;
             textBox2.Font = new Font("Segoe UI", 9F);
             textBox2.ForeColor = Color.Black;
-            textBox2.Location = new Point(445, 153);
+            textBox2.Location = new Point(445, 141);
             textBox2.Margin = new Padding(0);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(325, 27);
+            textBox2.Size = new Size(325, 23);
             textBox2.TabIndex = 8;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -167,10 +168,10 @@
             checkBox1.AutoSize = true;
             checkBox1.FlatStyle = FlatStyle.Flat;
             checkBox1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(445, 180);
+            checkBox1.Location = new Point(445, 164);
             checkBox1.Margin = new Padding(0);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(118, 21);
+            checkBox1.Size = new Size(105, 17);
             checkBox1.TabIndex = 9;
             checkBox1.Text = "Show password";
             checkBox1.UseVisualStyleBackColor = true;
@@ -182,7 +183,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(530, 246);
+            button1.Location = new Point(855, 95);
             button1.Margin = new Padding(85, 45, 0, 0);
             button1.Name = "button1";
             button1.Size = new Size(155, 41);
@@ -201,10 +202,10 @@
             flowLayoutPanel2.Controls.Add(linkLabel2);
             flowLayoutPanel2.Controls.Add(label3);
             flowLayoutPanel2.Dock = DockStyle.Bottom;
-            flowLayoutPanel2.Location = new Point(0, 368);
+            flowLayoutPanel2.Location = new Point(0, 211);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Padding = new Padding(375, 0, 375, 0);
-            flowLayoutPanel2.Size = new Size(1214, 145);
+            flowLayoutPanel2.Size = new Size(1170, 145);
             flowLayoutPanel2.TabIndex = 3;
             // 
             // label4
@@ -214,7 +215,7 @@
             label4.ForeColor = Color.FromArgb(0, 93, 217);
             label4.Location = new Point(378, 0);
             label4.Name = "label4";
-            label4.Size = new Size(46, 20);
+            label4.Size = new Size(36, 15);
             label4.TabIndex = 15;
             label4.Text = "New?";
             // 
@@ -225,9 +226,9 @@
             linkLabel1.Font = new Font("Segoe UI", 9F);
             linkLabel1.ForeColor = SystemColors.ControlText;
             linkLabel1.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel1.Location = new Point(430, 0);
+            linkLabel1.Location = new Point(420, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(96, 20);
+            linkLabel1.Size = new Size(75, 15);
             linkLabel1.TabIndex = 13;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Register here";
@@ -239,10 +240,10 @@
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Segoe UI", 9F);
             linkLabel2.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel2.Location = new Point(694, 0);
+            linkLabel2.Location = new Point(663, 0);
             linkLabel2.Margin = new Padding(165, 0, 0, 0);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(125, 20);
+            linkLabel2.Size = new Size(100, 15);
             linkLabel2.TabIndex = 14;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Forgot Password?";
@@ -252,10 +253,10 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(575, 20);
+            label3.Location = new Point(575, 15);
             label3.Margin = new Padding(200, 0, 3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(50, 20);
+            label3.Size = new Size(38, 15);
             label3.TabIndex = 0;
             label3.Text = "label3";
             // 
@@ -267,7 +268,7 @@
             pictureBox2.Location = new Point(0, 40);
             pictureBox2.Margin = new Padding(0);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1214, 176);
+            pictureBox2.Size = new Size(1170, 176);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
@@ -288,7 +289,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(0, 11, 71);
-            ClientSize = new Size(1414, 929);
+            ClientSize = new Size(1370, 772);
             ControlBox = false;
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);

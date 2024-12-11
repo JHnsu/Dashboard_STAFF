@@ -26,6 +26,7 @@ namespace Dashboard_STAFF
         public static class CurrentUser
         {
             public static string Username { get; set; }
+            public static string Role { get; set; }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -66,6 +67,7 @@ namespace Dashboard_STAFF
 
                                 if (password == storedPassword)
                                 {
+                                    CurrentUser.Role = role;
                                     LogAction(username, "Login");
                                     MessageBox.Show($"Logged In Successfully as {role}!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -214,6 +216,11 @@ namespace Dashboard_STAFF
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

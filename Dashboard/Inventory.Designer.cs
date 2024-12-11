@@ -112,7 +112,7 @@ namespace Dashboard_STAFF
             splitContainer1.Panel2.Controls.Add(panel5);
             splitContainer1.Panel2.Controls.Add(panel2);
             splitContainer1.Panel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            splitContainer1.Size = new Size(1539, 840);
+            splitContainer1.Size = new Size(1370, 749);
             splitContainer1.SplitterDistance = 313;
             splitContainer1.TabIndex = 1;
             // 
@@ -133,7 +133,7 @@ namespace Dashboard_STAFF
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(313, 840);
+            panel3.Size = new Size(313, 749);
             panel3.TabIndex = 42;
             // 
             // panel4
@@ -141,11 +141,12 @@ namespace Dashboard_STAFF
             panel4.Controls.Add(tableLayoutPanel2);
             panel4.Controls.Add(profile_pictureBox);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 719);
+            panel4.Location = new Point(0, 628);
             panel4.Margin = new Padding(0);
             panel4.Name = "panel4";
             panel4.Size = new Size(313, 121);
             panel4.TabIndex = 61;
+            panel4.Paint += panel4_Paint;
             // 
             // tableLayoutPanel2
             // 
@@ -342,7 +343,7 @@ namespace Dashboard_STAFF
             panel5.Location = new Point(0, 0);
             panel5.Margin = new Padding(0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1222, 48);
+            panel5.Size = new Size(1053, 48);
             panel5.TabIndex = 3;
             // 
             // comboBox2
@@ -353,7 +354,7 @@ namespace Dashboard_STAFF
             comboBox2.Items.AddRange(new object[] { "Year", "Month", "Week" });
             comboBox2.Location = new Point(482, 12);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(120, 28);
+            comboBox2.Size = new Size(120, 23);
             comboBox2.TabIndex = 10;
             comboBox2.Text = "Filter";
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
@@ -366,7 +367,7 @@ namespace Dashboard_STAFF
             comboBox1.Items.AddRange(new object[] { "Year", "Month", "Week" });
             comboBox1.Location = new Point(348, 12);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(120, 28);
+            comboBox1.Size = new Size(120, 23);
             comboBox1.TabIndex = 9;
             comboBox1.Text = "Sort";
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -379,7 +380,7 @@ namespace Dashboard_STAFF
             flowLayoutPanel4.Controls.Add(pictureBox1);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
-            flowLayoutPanel4.Location = new Point(905, 0);
+            flowLayoutPanel4.Location = new Point(736, 0);
             flowLayoutPanel4.Margin = new Padding(0);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Padding = new Padding(10, 5, 10, 0);
@@ -391,11 +392,11 @@ namespace Dashboard_STAFF
             orgName_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             orgName_label.AutoSize = true;
             orgName_label.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            orgName_label.Location = new Point(209, 10);
+            orgName_label.Location = new Point(223, 10);
             orgName_label.Margin = new Padding(3, 5, 3, 0);
             orgName_label.Name = "orgName_label";
             orgName_label.RightToLeft = RightToLeft.Yes;
-            orgName_label.Size = new Size(85, 23);
+            orgName_label.Size = new Size(71, 19);
             orgName_label.TabIndex = 2;
             orgName_label.Text = "C-SHARK";
             // 
@@ -404,7 +405,7 @@ namespace Dashboard_STAFF
             notify_pictureBox.BackColor = Color.Transparent;
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
-            notify_pictureBox.Location = new Point(156, 8);
+            notify_pictureBox.Location = new Point(170, 8);
             notify_pictureBox.Margin = new Padding(25, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
@@ -417,7 +418,7 @@ namespace Dashboard_STAFF
             // 
             pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = Properties.Resources._9111058_refresh_ccw_icon;
-            pictureBox1.Location = new Point(101, 8);
+            pictureBox1.Location = new Point(115, 8);
             pictureBox1.Margin = new Padding(0, 3, 0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(30, 30);
@@ -433,7 +434,7 @@ namespace Dashboard_STAFF
             search_textBox.Location = new Point(9, 12);
             search_textBox.Name = "search_textBox";
             search_textBox.PlaceholderText = "Search";
-            search_textBox.Size = new Size(318, 27);
+            search_textBox.Size = new Size(318, 23);
             search_textBox.TabIndex = 1;
             search_textBox.TextChanged += search_textBox_TextChanged;
             // 
@@ -448,7 +449,7 @@ namespace Dashboard_STAFF
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(0, 50, 0, 0);
-            panel2.Size = new Size(1222, 840);
+            panel2.Size = new Size(1053, 749);
             panel2.TabIndex = 1;
             // 
             // groupBox2
@@ -459,7 +460,7 @@ namespace Dashboard_STAFF
             groupBox2.Location = new Point(0, 193);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(5, 20, 5, 5);
-            groupBox2.Size = new Size(1222, 647);
+            groupBox2.Size = new Size(1053, 556);
             groupBox2.TabIndex = 21;
             groupBox2.TabStop = false;
             groupBox2.Text = "Current Inventory";
@@ -490,7 +491,7 @@ namespace Dashboard_STAFF
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             inventory_dataGridView.Dock = DockStyle.Fill;
-            inventory_dataGridView.Location = new Point(5, 47);
+            inventory_dataGridView.Location = new Point(5, 42);
             inventory_dataGridView.Name = "inventory_dataGridView";
             inventory_dataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -501,9 +502,10 @@ namespace Dashboard_STAFF
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             inventory_dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            inventory_dataGridView.RowHeadersVisible = false;
             inventory_dataGridView.RowHeadersWidth = 51;
             inventory_dataGridView.ScrollBars = ScrollBars.Horizontal;
-            inventory_dataGridView.Size = new Size(1212, 595);
+            inventory_dataGridView.Size = new Size(1043, 509);
             inventory_dataGridView.TabIndex = 18;
             inventory_dataGridView.CellContentClick += inventory_dataGridView_CellContentClick;
             // 
@@ -516,7 +518,7 @@ namespace Dashboard_STAFF
             flowLayoutPanel1.Location = new Point(0, 137);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(10);
-            flowLayoutPanel1.Size = new Size(1222, 56);
+            flowLayoutPanel1.Size = new Size(1053, 56);
             flowLayoutPanel1.TabIndex = 20;
             // 
             // button3
@@ -545,7 +547,7 @@ namespace Dashboard_STAFF
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(0, 50);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1222, 87);
+            groupBox1.Size = new Size(1053, 87);
             groupBox1.TabIndex = 19;
             groupBox1.TabStop = false;
             groupBox1.Text = "Summary";
@@ -560,10 +562,10 @@ namespace Dashboard_STAFF
             flowLayoutPanel2.Controls.Add(label7);
             flowLayoutPanel2.Controls.Add(label8);
             flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 30);
+            flowLayoutPanel2.Location = new Point(3, 25);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Padding = new Padding(0, 10, 0, 0);
-            flowLayoutPanel2.Size = new Size(1216, 54);
+            flowLayoutPanel2.Size = new Size(1047, 59);
             flowLayoutPanel2.TabIndex = 18;
             // 
             // label3
@@ -572,17 +574,17 @@ namespace Dashboard_STAFF
             label3.Location = new Point(21, 10);
             label3.Margin = new Padding(21, 0, 10, 0);
             label3.Name = "label3";
-            label3.Size = new Size(122, 28);
+            label3.Size = new Size(98, 21);
             label3.TabIndex = 0;
             label3.Text = "Total items:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(153, 10);
+            label4.Location = new Point(129, 10);
             label4.Margin = new Padding(0, 0, 52, 0);
             label4.Name = "label4";
-            label4.Size = new Size(24, 28);
+            label4.Size = new Size(19, 21);
             label4.TabIndex = 1;
             label4.Text = "0";
             label4.Click += label4_Click;
@@ -590,20 +592,20 @@ namespace Dashboard_STAFF
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(250, 10);
+            label5.Location = new Point(221, 10);
             label5.Margin = new Padding(21, 0, 10, 0);
             label5.Name = "label5";
-            label5.Size = new Size(135, 28);
+            label5.Size = new Size(107, 21);
             label5.TabIndex = 2;
             label5.Text = "Out of stock:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(395, 10);
+            label6.Location = new Point(338, 10);
             label6.Margin = new Padding(0, 0, 52, 0);
             label6.Name = "label6";
-            label6.Size = new Size(24, 28);
+            label6.Size = new Size(19, 21);
             label6.TabIndex = 3;
             label6.Text = "0";
             label6.Click += label6_Click;
@@ -611,20 +613,20 @@ namespace Dashboard_STAFF
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(492, 10);
+            label7.Location = new Point(430, 10);
             label7.Margin = new Padding(21, 0, 10, 0);
             label7.Name = "label7";
-            label7.Size = new Size(112, 28);
+            label7.Size = new Size(90, 21);
             label7.TabIndex = 4;
             label7.Text = "Low stock:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(614, 10);
+            label8.Location = new Point(530, 10);
             label8.Margin = new Padding(0, 0, 52, 0);
             label8.Name = "label8";
-            label8.Size = new Size(24, 28);
+            label8.Size = new Size(19, 21);
             label8.TabIndex = 5;
             label8.Text = "0";
             label8.Click += label8_Click;
@@ -634,7 +636,7 @@ namespace Dashboard_STAFF
             AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
-            ClientSize = new Size(1539, 840);
+            ClientSize = new Size(1370, 749);
             Controls.Add(splitContainer1);
             ForeColor = Color.FromArgb(0, 11, 71);
             Name = "Inventory";
