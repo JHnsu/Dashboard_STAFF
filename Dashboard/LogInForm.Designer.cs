@@ -89,6 +89,7 @@
             // 
             panel3.Controls.Add(flowLayoutPanel1);
             panel3.Controls.Add(flowLayoutPanel2);
+            panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 216);
             panel3.Name = "panel3";
@@ -103,13 +104,12 @@
             flowLayoutPanel1.Controls.Add(label2);
             flowLayoutPanel1.Controls.Add(textBox2);
             flowLayoutPanel1.Controls.Add(checkBox1);
-            flowLayoutPanel1.Controls.Add(button1);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(445, 50, 445, 3);
+            flowLayoutPanel1.Padding = new Padding(430, 20, 445, 3);
             flowLayoutPanel1.Size = new Size(1170, 211);
             flowLayoutPanel1.TabIndex = 4;
             // 
@@ -118,10 +118,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label1.ForeColor = Color.FromArgb(0, 11, 71);
-            label1.Location = new Point(445, 50);
+            label1.Location = new Point(430, 20);
             label1.Margin = new Padding(0);
             label1.Name = "label1";
-            label1.Size = new Size(80, 19);
+            label1.Size = new Size(94, 23);
             label1.TabIndex = 5;
             label1.Text = "Username:";
             // 
@@ -131,10 +131,10 @@
             textBox1.Cursor = Cursors.IBeam;
             textBox1.Font = new Font("Segoe UI", 9F);
             textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(445, 69);
+            textBox1.Location = new Point(430, 43);
             textBox1.Margin = new Padding(0, 0, 0, 30);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(325, 23);
+            textBox1.Size = new Size(325, 27);
             textBox1.TabIndex = 6;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -143,10 +143,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(0, 11, 71);
-            label2.Location = new Point(445, 122);
+            label2.Location = new Point(430, 100);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
-            label2.Size = new Size(77, 19);
+            label2.Size = new Size(90, 23);
             label2.TabIndex = 7;
             label2.Text = "Password:";
             // 
@@ -156,10 +156,10 @@
             textBox2.Cursor = Cursors.IBeam;
             textBox2.Font = new Font("Segoe UI", 9F);
             textBox2.ForeColor = Color.Black;
-            textBox2.Location = new Point(445, 141);
+            textBox2.Location = new Point(430, 123);
             textBox2.Margin = new Padding(0);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(325, 23);
+            textBox2.Size = new Size(325, 27);
             textBox2.TabIndex = 8;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -168,10 +168,10 @@
             checkBox1.AutoSize = true;
             checkBox1.FlatStyle = FlatStyle.Flat;
             checkBox1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(445, 164);
+            checkBox1.Location = new Point(430, 150);
             checkBox1.Margin = new Padding(0);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(105, 17);
+            checkBox1.Size = new Size(118, 21);
             checkBox1.TabIndex = 9;
             checkBox1.Text = "Show password";
             checkBox1.UseVisualStyleBackColor = true;
@@ -183,7 +183,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(855, 95);
+            button1.Location = new Point(510, 214);
             button1.Margin = new Padding(85, 45, 0, 0);
             button1.Name = "button1";
             button1.Size = new Size(155, 41);
@@ -202,10 +202,10 @@
             flowLayoutPanel2.Controls.Add(linkLabel2);
             flowLayoutPanel2.Controls.Add(label3);
             flowLayoutPanel2.Dock = DockStyle.Bottom;
-            flowLayoutPanel2.Location = new Point(0, 211);
+            flowLayoutPanel2.Location = new Point(0, 258);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Padding = new Padding(375, 0, 375, 0);
-            flowLayoutPanel2.Size = new Size(1170, 145);
+            flowLayoutPanel2.Padding = new Padding(355, 0, 0, 0);
+            flowLayoutPanel2.Size = new Size(1170, 98);
             flowLayoutPanel2.TabIndex = 3;
             // 
             // label4
@@ -213,9 +213,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F);
             label4.ForeColor = Color.FromArgb(0, 93, 217);
-            label4.Location = new Point(378, 0);
+            label4.Location = new Point(358, 0);
             label4.Name = "label4";
-            label4.Size = new Size(36, 15);
+            label4.Size = new Size(46, 20);
             label4.TabIndex = 15;
             label4.Text = "New?";
             // 
@@ -226,9 +226,9 @@
             linkLabel1.Font = new Font("Segoe UI", 9F);
             linkLabel1.ForeColor = SystemColors.ControlText;
             linkLabel1.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel1.Location = new Point(420, 0);
+            linkLabel1.Location = new Point(410, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(75, 15);
+            linkLabel1.Size = new Size(96, 20);
             linkLabel1.TabIndex = 13;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Register here";
@@ -240,10 +240,10 @@
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Segoe UI", 9F);
             linkLabel2.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel2.Location = new Point(663, 0);
+            linkLabel2.Location = new Point(674, 0);
             linkLabel2.Margin = new Padding(165, 0, 0, 0);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(100, 15);
+            linkLabel2.Size = new Size(125, 20);
             linkLabel2.TabIndex = 14;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Forgot Password?";
@@ -253,12 +253,13 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(575, 15);
+            label3.Location = new Point(999, 0);
             label3.Margin = new Padding(200, 0, 3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(38, 15);
+            label3.Size = new Size(50, 20);
             label3.TabIndex = 0;
             label3.Text = "label3";
+            label3.Click += label3_Click;
             // 
             // pictureBox2
             // 
@@ -276,7 +277,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.image_removebg_preview;
-            pictureBox1.Location = new Point(1322, 12);
+            pictureBox1.Location = new Point(1278, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(80, 80);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -287,7 +288,6 @@
             // LogInForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(0, 11, 71);
             ClientSize = new Size(1370, 772);
             ControlBox = false;
