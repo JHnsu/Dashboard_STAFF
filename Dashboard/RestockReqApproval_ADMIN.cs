@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,12 @@ namespace Dashboard_STAFF
 {
     public partial class RestockReqApproval_ADMIN : Form
     {
+        private List<RestockProcess> restockProcesses = new List<RestockProcess>();
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
         int selectedRequestID = 0;
+
+        public int ItemID { get; private set; }
+
         public RestockReqApproval_ADMIN()
         {
             InitializeComponent();
@@ -71,7 +76,7 @@ namespace Dashboard_STAFF
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {           
             if (selectedRequestID == 0)
             {
                 MessageBox.Show("Please select a request to approve or reject.");
@@ -85,6 +90,9 @@ namespace Dashboard_STAFF
                 MessageBox.Show("Please select either 'Approve' or 'Reject'.");
                 return;
             }
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -126,6 +134,39 @@ namespace Dashboard_STAFF
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+            stopwatch.Stop();
+
+            string getItemIDQuery = @"
+                SELECT i.ItemID 
+                FROM RestockRequests rr
+                JOIN Inventory i ON rr.ItemName = i.ItemName
+                WHERE rr.RequestID = @RequestID";
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                conn.Open();
+                MySqlCommand getItemIDCmd = new MySqlCommand(getItemIDQuery, conn);
+                getItemIDCmd.Parameters.AddWithValue("@RequestID", selectedRequestID);
+                object result = getItemIDCmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    ItemID = Convert.ToInt32(result);
+                }
+                else
+                {
+                    // Handle the case where ItemID is not found
+                    MessageBox.Show("ItemID not found for the item.");
+                    ItemID = 0; // Or assign a default value
+                }
+            }
+            restockProcesses.Add(new RestockProcess
+            {
+                ItemID = ItemID,
+                ItemName = textBox3.Text,
+                BurstTime = stopwatch.ElapsedMilliseconds,
+                ArrivalTime = restockProcesses.Count == 0 ? 0 : restockProcesses.Last().ArrivalTime + restockProcesses.Last().BurstTime
+            });
+
         }
 
         private void button1_MouseHover(object sender, EventArgs e)
@@ -146,6 +187,14 @@ namespace Dashboard_STAFF
             textBox5.Clear();
             radioButton1.Checked = false;
             radioButton2.Checked = false;
+        }
+        private class RestockProcess
+        {
+            public int ItemID { get; set; }
+            public string ItemName { get; set; }
+            public long BurstTime { get; set; }
+            public DateTime OrderDate { get; set; }
+            public long ArrivalTime { get; set; }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -200,5 +249,37 @@ namespace Dashboard_STAFF
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (restockProcesses.Count == 0)
+            {
+                MessageBox.Show("No request to schedule.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var sortedProcesses = restockProcesses.OrderBy(p => p.ArrivalTime).ToList(); 
+            int totalWaitTime = 0;
+            int totalTurnaroundTime = 0;
+            int currentTime = 0;
+
+            StringBuilder output = new StringBuilder();
+            output.AppendLine("Processes | Arrival Time | Burst Time | Waiting Time");
+
+            foreach (var process in sortedProcesses)
+            {
+                int waitTime = currentTime;
+
+                totalWaitTime += waitTime;
+
+                output.AppendLine($"{process.ItemID} | {process.ArrivalTime} | {process.BurstTime} | {waitTime}");
+
+                currentTime += (int)process.BurstTime;
+            }
+
+            output.AppendLine($"Average Waiting Time: {(float)totalWaitTime / restockProcesses.Count}");
+
+            MessageBox.Show(output.ToString(), "FCFS Scheduling Output", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
+    
 }

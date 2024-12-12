@@ -50,6 +50,7 @@
             textBox4 = new TextBox();
             label6 = new Label();
             textBox5 = new TextBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -208,6 +209,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(button2);
             panel2.Controls.Add(button1);
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(7, 387);
@@ -226,7 +228,7 @@
             button1.ForeColor = Color.White;
             button1.Location = new Point(28, 20);
             button1.Name = "button1";
-            button1.Size = new Size(256, 38);
+            button1.Size = new Size(256, 26);
             button1.TabIndex = 18;
             button1.Text = "SUBMIT";
             button1.UseVisualStyleBackColor = false;
@@ -326,6 +328,22 @@
             textBox5.TabIndex = 22;
             textBox5.TextChanged += textBox5_TextChanged;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(0, 93, 217);
+            button2.Dock = DockStyle.Top;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(28, 46);
+            button2.Name = "button2";
+            button2.Size = new Size(256, 28);
+            button2.TabIndex = 19;
+            button2.Text = "SHOW";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
             // RestockReqApproval_ADMIN
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -373,5 +391,6 @@
         private TextBox textBox4;
         private TextBox textBox5;
         private DataGridView requests_dataGridView;
+        private Button button2;
     }
 }

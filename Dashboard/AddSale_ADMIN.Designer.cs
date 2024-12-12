@@ -140,7 +140,6 @@
             addSale_dataGridView.Size = new Size(698, 432);
             addSale_dataGridView.TabIndex = 19;
             addSale_dataGridView.CellClick += addSale_dataGridView_CellClick;
-            addSale_dataGridView.CellContentClick += addSale_dataGridView_CellContentClick;
             // 
             // groupBox2
             // 
@@ -226,7 +225,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(359, 23);
             textBox1.TabIndex = 15;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label3
             // 
@@ -247,7 +245,7 @@
             numericUpDown2.Name = "numericUpDown2";
             numericUpDown2.Size = new Size(108, 23);
             numericUpDown2.TabIndex = 17;
-            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
+
             // 
             // label4
             // 
@@ -268,7 +266,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(359, 23);
             textBox4.TabIndex = 19;
-            textBox4.TextChanged += textBox4_TextChanged;
+
             // 
             // label5
             // 
@@ -289,7 +287,7 @@
             dateTimePicker1.Size = new Size(359, 23);
             dateTimePicker1.TabIndex = 20;
             dateTimePicker1.Value = new DateTime(2024, 12, 8, 0, 0, 0, 0);
-            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+
             // 
             // AddSale_ADMIN
             // 

@@ -1,12 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dashboard_STAFF
@@ -14,7 +10,9 @@ namespace Dashboard_STAFF
     public partial class AddSale_ADMIN : Form
     {
         private int selectedItemID;
+        private List<SaleProcess> saleProcesses = new List<SaleProcess>();
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
+
         public AddSale_ADMIN()
         {
             InitializeComponent();
@@ -35,6 +33,8 @@ namespace Dashboard_STAFF
                 return;
             }
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 try
@@ -99,6 +99,9 @@ namespace Dashboard_STAFF
                                 }
 
                                 transaction.Commit();
+                                stopwatch.Stop();
+
+                                DisplayPrioritySchedulingResult();
 
                                 LoadInventoryData();
                                 ClearInputFields();
@@ -114,37 +117,77 @@ namespace Dashboard_STAFF
                 }
             }
         }
-        private void ClearInputFields()
+        private class SaleProcess
         {
-            textBox1.Clear(); 
-            textBox4.Clear(); 
-            numericUpDown2.Value = 1; 
-            dateTimePicker1.Value = DateTime.Now; 
-            selectedItemID = 0; 
-        }
-        private void button3_MouseHover(object sender, EventArgs e)
-        {
-            button3.BackColor = Color.FromArgb(99, 218, 255);
+            public int ItemID { get; set; }
+            public string ItemName { get; set; }
+            public long BurstTime { get; set; }
+            public DateTime OrderDate { get; set; }
         }
 
-        private void button3_MouseLeave(object sender, EventArgs e)
+
+        private void DisplayPrioritySchedulingResult()
         {
-            button3.BackColor = Color.FromArgb(0, 93, 217);
+            var processes = GetSalesAsProcesses();
+            int n = processes.Length;
+
+            PriorityScheduling ps = new PriorityScheduling();
+            var result = ps.RunPriorityScheduling(processes, n);
+
+            string resultMessage = "\nProcesses  Burst time  Waiting time  Turn around time\n";
+            int totalWt = 0, totalTat = 0;
+
+            foreach (var process in result)
+            {
+                totalWt += process.WaitingTime;
+                totalTat += process.TurnAroundTime;
+                resultMessage += $"{process.Pid}\t\t{process.Bt}\t\t{process.WaitingTime}\t\t{process.TurnAroundTime}\n";
+            }
+
+            resultMessage += $"Average waiting time = {(float)totalWt / n}\n";
+            resultMessage += $"Average turn around time = {(float)totalTat / n}";
+
+            MessageBox.Show(resultMessage, "Priority Scheduling Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        private Process[] GetSalesAsProcesses()
         {
-            //for quantity
-        }
+            var processes = new System.Collections.Generic.List<Process>();
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            //for receivers name
-        }
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT ItemID, Quantity, OrderStatus FROM Sales WHERE OrderStatus = 'Pending'";
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            //for date and time
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int itemID = Convert.ToInt32(reader["ItemID"]);
+                            int quantity = Convert.ToInt32(reader["Quantity"]);
+                            string orderStatus = reader["OrderStatus"].ToString();
+
+                            int priority = orderStatus == "Pending" ? 1 : 0;  // Example priority (Pending = high priority)
+
+                            processes.Add(new Process
+                            {
+                                Pid = itemID,
+                                Bt = quantity,
+                                Prior = priority
+                            });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving sales data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return processes.ToArray();
         }
 
         private void LoadInventoryData()
@@ -180,14 +223,24 @@ namespace Dashboard_STAFF
                 }
             }
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+        private void ClearInputFields()
         {
-            //for selected item
+            textBox1.Clear();
+            textBox4.Clear();
+            numericUpDown2.Value = 1;
+            dateTimePicker1.Value = DateTime.Now;
+            selectedItemID = 0;
         }
 
-        private void AddSale_ADMIN_Load(object sender, EventArgs e)
+        private void button3_MouseHover(object sender, EventArgs e)
         {
-            LoadInventoryData();
+            button3.BackColor = Color.FromArgb(99, 218, 255);
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.FromArgb(0, 93, 217);
         }
 
         private void addSale_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -218,9 +271,56 @@ namespace Dashboard_STAFF
             }
         }
 
-        private void addSale_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void AddSale_ADMIN_Load(object sender, EventArgs e)
+        {
+            LoadInventoryData();
+        }
+    }
+
+    public class Process
+    {
+        public int Pid { get; set; }  
+        public int Bt { get; set; }   
+        public int Prior { get; set; }  
+        public int WaitingTime { get; set; }
+        public int TurnAroundTime { get; set; }
+    }
+
+    public class PriorityScheduling
+    {
+        public Process[] RunPriorityScheduling(Process[] proc, int n)
         {
 
+            var sortedProc = proc.OrderByDescending(p => p.Prior).ToArray();
+
+            int[] wt = new int[n], tat = new int[n];
+            FindWaitingTime(sortedProc, n, wt);
+            FindTurnAroundTime(sortedProc, n, wt, tat);
+
+            for (int i = 0; i < n; i++)
+            {
+                sortedProc[i].WaitingTime = wt[i];
+                sortedProc[i].TurnAroundTime = tat[i];
+            }
+
+            return sortedProc;
+        }
+
+        private void FindWaitingTime(Process[] proc, int n, int[] wt)
+        {
+            wt[0] = 0;
+            for (int i = 1; i < n; i++)
+            {
+                wt[i] = proc[i - 1].Bt + wt[i - 1];
+            }
+        }
+
+        private void FindTurnAroundTime(Process[] proc, int n, int[] wt, int[] tat)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                tat[i] = proc[i].Bt + wt[i];
+            }
         }
     }
 }
