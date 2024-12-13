@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             groupBox1 = new GroupBox();
             notif_dataGridView = new DataGridView();
-            Type = new DataGridViewTextBoxColumn();
-            Item = new DataGridViewTextBoxColumn();
-            Details = new DataGridViewTextBoxColumn();
+            timer2 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)notif_dataGridView).BeginInit();
@@ -71,6 +70,7 @@
             // 
             notif_dataGridView.AllowUserToAddRows = false;
             notif_dataGridView.AllowUserToDeleteRows = false;
+            notif_dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             notif_dataGridView.BackgroundColor = Color.White;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.White;
@@ -81,7 +81,6 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             notif_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             notif_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            notif_dataGridView.Columns.AddRange(new DataGridViewColumn[] { Type, Item, Details });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -93,39 +92,20 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             notif_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             notif_dataGridView.Dock = DockStyle.Fill;
-            notif_dataGridView.Location = new Point(10, 37);
+            notif_dataGridView.Location = new Point(10, 32);
             notif_dataGridView.Margin = new Padding(0);
             notif_dataGridView.Name = "notif_dataGridView";
             notif_dataGridView.ReadOnly = true;
             notif_dataGridView.RowHeadersVisible = false;
             notif_dataGridView.RowHeadersWidth = 51;
-            notif_dataGridView.Size = new Size(491, 531);
+            notif_dataGridView.Size = new Size(491, 536);
             notif_dataGridView.TabIndex = 3;
             notif_dataGridView.CellContentClick += notif_dataGridView_CellContentClick;
             // 
-            // Type
+            // timer2
             // 
-            Type.HeaderText = "Type";
-            Type.MinimumWidth = 6;
-            Type.Name = "Type";
-            Type.ReadOnly = true;
-            Type.Width = 125;
-            // 
-            // Item
-            // 
-            Item.HeaderText = "Restock Req Return";
-            Item.MinimumWidth = 6;
-            Item.Name = "Item";
-            Item.ReadOnly = true;
-            Item.Width = 125;
-            // 
-            // Details
-            // 
-            Details.HeaderText = "Alert ReqStatus Returned";
-            Details.MinimumWidth = 6;
-            Details.Name = "Details";
-            Details.ReadOnly = true;
-            Details.Width = 125;
+            timer2.Interval = 10000;
+            timer2.Tick += timer2_Tick;
             // 
             // Notifications
             // 
@@ -149,8 +129,7 @@
         private Panel panel1;
         private GroupBox groupBox1;
         private DataGridView notif_dataGridView;
-        private DataGridViewTextBoxColumn Type;
-        private DataGridViewTextBoxColumn Item;
-        private DataGridViewTextBoxColumn Details;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

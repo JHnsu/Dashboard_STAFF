@@ -152,10 +152,5 @@ namespace Dashboard_STAFF
                 numericUpDown1.Value = stockLevel > 0 ? stockLevel : 1;
             }
         }
-
-        private void inventory_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

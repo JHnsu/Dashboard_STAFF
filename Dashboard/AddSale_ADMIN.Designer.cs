@@ -245,7 +245,6 @@
             numericUpDown2.Name = "numericUpDown2";
             numericUpDown2.Size = new Size(108, 23);
             numericUpDown2.TabIndex = 17;
-
             // 
             // label4
             // 
@@ -266,7 +265,6 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(359, 23);
             textBox4.TabIndex = 19;
-
             // 
             // label5
             // 
@@ -287,7 +285,7 @@
             dateTimePicker1.Size = new Size(359, 23);
             dateTimePicker1.TabIndex = 20;
             dateTimePicker1.Value = new DateTime(2024, 12, 8, 0, 0, 0, 0);
-
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // AddSale_ADMIN
             // 

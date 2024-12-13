@@ -9,16 +9,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Dashboard_STAFF.LogInForm;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Dashboard_STAFF
 {
     public partial class UserProfile : Form
     {
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
-        public UserProfile()
+        public UserProfile(string fullName, string email)
         {
             InitializeComponent();
-            string username = CurrentUser.Username;
+
+            label1.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;  
+            label3.Text = email;
+
+            if (string.IsNullOrWhiteSpace(CurrentUser.Username))
+            {
+                MessageBox.Show("No user is logged in. Please log in again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            LoadUserData();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -47,8 +58,18 @@ namespace Dashboard_STAFF
 
         private void button2_Click(object sender, EventArgs e)
         {
-            UserProfile userProfile = new UserProfile();
-            userProfile.Show();
+            if (string.IsNullOrWhiteSpace(CurrentUser.Username))
+            {
+                MessageBox.Show("No user is logged in. Please log in again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            EditUserProfile editUserProfile = new EditUserProfile(CurrentUser.UserID, CurrentUser.Username, CurrentUser.Role,
+                                                                   CurrentUser.FullName, CurrentUser.Email,
+                                                                   CurrentUser.PhoneNumber, CurrentUser.Address, CurrentUser.ProfilePicture);
+
+            editUserProfile.Show();
+
             this.Hide();
         }
         private void button2_MouseHover(object sender, EventArgs e)
@@ -99,7 +120,6 @@ namespace Dashboard_STAFF
         {
             try
             {
-                // Ensure that the username is not empty or null
                 if (string.IsNullOrWhiteSpace(CurrentUser.Username))
                 {
                     MessageBox.Show("No user is logged in. Please log in again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -110,21 +130,16 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
 
-                    // Query to select all user data based on the logged-in username
-                    string query = "SELECT Username, CONCAT(FirstName, ' ', LastName) AS FullName, Email, Role, ProfilePicture, PhoneNumber, Address " +
-                                   "FROM users WHERE Username = @username";
+                    string query = @"SELECT Username, CONCAT(FirstName, ' ', LastName) AS FullName, Email, Role, ProfilePicture, PhoneNumber, Address 
+                             FROM users WHERE Username = @username";
 
-                    // Create command and add parameters to prevent SQL injection
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@username", CurrentUser.Username);
 
-                    // Execute query and read data
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        // Check if the user exists in the database
                         if (reader.Read())
                         {
-                            // Set the label texts to display the fetched data
                             label6.Text = $"Role: {reader["Role"]}";
                             label1.Text = $"Username: {reader["Username"]}";
                             label2.Text = $"Full Name: {reader["FullName"]}";
@@ -132,7 +147,6 @@ namespace Dashboard_STAFF
                             label4.Text = $"Phone Number: {reader["PhoneNumber"]}";
                             label5.Text = $"Address: {reader["Address"]}";
 
-                            // Check if there is a profile picture and load it if available
                             if (reader["ProfilePicture"] != DBNull.Value)
                             {
                                 byte[] imageBytes = (byte[])reader["ProfilePicture"];
@@ -144,15 +158,13 @@ namespace Dashboard_STAFF
                         }
                         else
                         {
-                            // Handle case if no data is found for the username
-                            MessageBox.Show("User data could not be found. Please ensure the user exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("User data not found. Please ensure the user exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle any errors that occur during database interaction
                 MessageBox.Show($"Failed to load user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -162,6 +174,12 @@ namespace Dashboard_STAFF
         private void UserProfile_Load(object sender, EventArgs e)
         {
             LoadUserData();
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }

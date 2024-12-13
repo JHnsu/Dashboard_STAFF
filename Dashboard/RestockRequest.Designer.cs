@@ -232,7 +232,6 @@
             inventory_dataGridView.Size = new Size(788, 446);
             inventory_dataGridView.TabIndex = 19;
             inventory_dataGridView.CellClick += inventory_dataGridView_CellClick;
-            inventory_dataGridView.CellContentClick += inventory_dataGridView_CellContentClick;
             // 
             // splitContainer1
             // 

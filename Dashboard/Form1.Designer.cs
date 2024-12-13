@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -56,6 +57,7 @@
             flowLayoutPanel4 = new FlowLayoutPanel();
             orgName_label = new Label();
             notify_pictureBox = new PictureBox();
+            pictureBox1 = new PictureBox();
             search_textBox = new TextBox();
             panel2 = new Panel();
             panel8 = new Panel();
@@ -79,6 +81,7 @@
             quantityHand_progressBar = new ProgressBar();
             label5 = new Label();
             label4 = new Label();
+            timercheckNotifications = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -95,6 +98,7 @@
             panel5.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)notify_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
@@ -207,6 +211,7 @@
             button2.Text = "Full Name";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -223,6 +228,7 @@
             button1.Text = "example@gmail.com";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox7
             // 
@@ -378,6 +384,7 @@
             flowLayoutPanel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel4.Controls.Add(orgName_label);
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
+            flowLayoutPanel4.Controls.Add(pictureBox1);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel4.Location = new Point(847, 0);
@@ -412,7 +419,16 @@
             notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             notify_pictureBox.TabIndex = 4;
             notify_pictureBox.TabStop = false;
-            notify_pictureBox.Click += notify_pictureBox_Click;
+            notify_pictureBox.Click += notify_pictureBox_Click_1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(42, 8);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
             // 
             // search_textBox
             // 
@@ -682,6 +698,7 @@
             totalShipped_label.TabIndex = 0;
             totalShipped_label.Text = "000";
             totalShipped_label.TextAlign = ContentAlignment.MiddleCenter;
+            totalShipped_label.Click += totalShipped_label_Click;
             // 
             // totalRestocked_label
             // 
@@ -739,6 +756,7 @@
             quantityReceived_progressBar.Name = "quantityReceived_progressBar";
             quantityReceived_progressBar.Size = new Size(511, 23);
             quantityReceived_progressBar.TabIndex = 3;
+            quantityReceived_progressBar.Click += quantityReceived_progressBar_Click_1;
             // 
             // quantityHand_progressBar
             // 
@@ -800,6 +818,7 @@
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)notify_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel8.ResumeLayout(false);
             splitContainer3.Panel1.ResumeLayout(false);
@@ -869,5 +888,7 @@
         private Label orgName_label;
         private PictureBox notify_pictureBox;
         private TextBox search_textBox;
+        private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timercheckNotifications;
     }
 }

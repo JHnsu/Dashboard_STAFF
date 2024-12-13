@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
@@ -54,18 +55,13 @@
             flowLayoutPanel4 = new FlowLayoutPanel();
             orgName_label = new Label();
             notify_pictureBox = new PictureBox();
+            pictureBox1 = new PictureBox();
             panel2 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button6 = new Button();
             button7 = new Button();
             groupBox2 = new GroupBox();
             dataGridView1 = new DataGridView();
-            UserNo = new DataGridViewTextBoxColumn();
-            ProfilePic = new DataGridViewImageColumn();
-            Username = new DataGridViewTextBoxColumn();
-            StaffName = new DataGridViewTextBoxColumn();
-            EmailAdd = new DataGridViewTextBoxColumn();
-            Contact = new DataGridViewTextBoxColumn();
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             button3 = new Button();
@@ -74,6 +70,7 @@
             button2 = new Button();
             orderPDF_button = new Button();
             label4 = new Label();
+            timercheckNotifications = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -91,6 +88,7 @@
             panel5.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)notify_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -182,6 +180,7 @@
             button4.Text = "Full Name";
             button4.TextAlign = ContentAlignment.MiddleLeft;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button5
             // 
@@ -198,6 +197,7 @@
             button5.Text = "example@gmail.com";
             button5.TextAlign = ContentAlignment.MiddleLeft;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // pictureBox7
             // 
@@ -390,6 +390,7 @@
             flowLayoutPanel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel4.Controls.Add(orgName_label);
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
+            flowLayoutPanel4.Controls.Add(pictureBox1);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel4.Location = new Point(882, 0);
@@ -422,9 +423,18 @@
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
             notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            notify_pictureBox.TabIndex = 4;
+            notify_pictureBox.TabIndex = 6;
             notify_pictureBox.TabStop = false;
-            notify_pictureBox.Click += notify_pictureBox_Click;
+            notify_pictureBox.Click += notify_pictureBox_Click_1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(44, 8);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -505,22 +515,22 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserNo, ProfilePic, Username, StaffName, EmailAdd, Contact });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = Color.FromArgb(0, 11, 71);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -531,63 +541,10 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(1083, 401);
             dataGridView1.TabIndex = 20;
-            // 
-            // UserNo
-            // 
-            UserNo.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            UserNo.HeaderText = "User No.";
-            UserNo.MinimumWidth = 6;
-            UserNo.Name = "UserNo";
-            UserNo.ReadOnly = true;
-            UserNo.Visible = false;
-            UserNo.Width = 125;
-            // 
-            // ProfilePic
-            // 
-            ProfilePic.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ProfilePic.HeaderText = "Profile Picture";
-            ProfilePic.MinimumWidth = 200;
-            ProfilePic.Name = "ProfilePic";
-            ProfilePic.ReadOnly = true;
-            ProfilePic.Width = 200;
-            // 
-            // Username
-            // 
-            Username.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Username.HeaderText = "Username";
-            Username.MinimumWidth = 200;
-            Username.Name = "Username";
-            Username.ReadOnly = true;
-            Username.Width = 200;
-            // 
-            // StaffName
-            // 
-            StaffName.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            StaffName.HeaderText = "Full Name";
-            StaffName.MinimumWidth = 300;
-            StaffName.Name = "StaffName";
-            StaffName.ReadOnly = true;
-            StaffName.Width = 300;
-            // 
-            // EmailAdd
-            // 
-            EmailAdd.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            EmailAdd.HeaderText = "Email Address";
-            EmailAdd.MinimumWidth = 250;
-            EmailAdd.Name = "EmailAdd";
-            EmailAdd.ReadOnly = true;
-            EmailAdd.Width = 250;
-            // 
-            // Contact
-            // 
-            Contact.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Contact.HeaderText = "Contact No.";
-            Contact.MinimumWidth = 250;
-            Contact.Name = "Contact";
-            Contact.ReadOnly = true;
-            Contact.Width = 250;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // groupBox1
             // 
@@ -724,6 +681,7 @@
             Name = "Reports_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Reports";
+            Load += Reports_ADMIN_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -742,6 +700,7 @@
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)notify_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
@@ -777,7 +736,6 @@
         private Panel panel5;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label orgName_label;
-        private PictureBox notify_pictureBox;
         private GroupBox groupBox1;
         private TableLayoutPanel tableLayoutPanel1;
         private Button button3;
@@ -788,14 +746,11 @@
         private Button orderPDF_button;
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn UserNo;
-        private DataGridViewImageColumn ProfilePic;
-        private DataGridViewTextBoxColumn Username;
-        private DataGridViewTextBoxColumn StaffName;
-        private DataGridViewTextBoxColumn EmailAdd;
-        private DataGridViewTextBoxColumn Contact;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button6;
         private Button button7;
+        private System.Windows.Forms.Timer timercheckNotifications;
+        private PictureBox notify_pictureBox;
+        private PictureBox pictureBox1;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
@@ -87,6 +88,8 @@
             quantityHand_progressBar = new ProgressBar();
             label5 = new Label();
             label4 = new Label();
+            pictureBox1 = new PictureBox();
+            timercheckNotifications = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -124,6 +127,7 @@
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -210,6 +214,7 @@
             button2.Text = "Full Name";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -226,6 +231,7 @@
             button1.Text = "example@gmail.com";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox7
             // 
@@ -418,6 +424,7 @@
             flowLayoutPanel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel4.Controls.Add(orgName_label);
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
+            flowLayoutPanel4.Controls.Add(pictureBox1);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel4.Location = new Point(847, 0);
@@ -873,6 +880,15 @@
             label4.TabIndex = 0;
             label4.Text = "Quantity in Hand";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(44, 8);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            // 
             // Form1_ADMIN
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -926,6 +942,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -980,5 +997,7 @@
         private DataGridView lowItems_dataGridView;
         private GroupBox groupBox3;
         private DataGridView requests_dataGridView;
+        private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timercheckNotifications;
     }
 }

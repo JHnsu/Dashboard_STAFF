@@ -29,8 +29,8 @@ namespace Dashboard_STAFF
             radioButton2.Checked = false;
             textBox1.ReadOnly = false;
             textBox4.ReadOnly = false;
-            numericUpDown2.Enabled = true;
-            dateTimePicker1.Enabled = true;
+            numericUpDown2.Enabled = false;
+            dateTimePicker1.Enabled = false;
         }
 
         private void button3_Click(object sender, EventArgs e)

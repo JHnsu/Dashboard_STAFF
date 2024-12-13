@@ -75,6 +75,7 @@
             splitContainer1.Size = new Size(601, 380);
             splitContainer1.SplitterDistance = 212;
             splitContainer1.TabIndex = 0;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // tableLayoutPanel2
             // 

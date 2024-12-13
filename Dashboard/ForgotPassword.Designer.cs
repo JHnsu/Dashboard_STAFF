@@ -71,7 +71,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(100, 100);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1214, 729);
+            panel1.Size = new Size(1170, 572);
             panel1.TabIndex = 3;
             // 
             // panel2
@@ -83,7 +83,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1214, 729);
+            panel2.Size = new Size(1170, 572);
             panel2.TabIndex = 5;
             // 
             // splitContainer1
@@ -99,7 +99,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(flowLayoutPanel3);
-            splitContainer1.Size = new Size(1214, 140);
+            splitContainer1.Size = new Size(1170, 0);
             splitContainer1.SplitterDistance = 541;
             splitContainer1.SplitterWidth = 140;
             splitContainer1.TabIndex = 4;
@@ -113,7 +113,7 @@
             flowLayoutPanel2.Location = new Point(177, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Padding = new Padding(30);
-            flowLayoutPanel2.Size = new Size(364, 140);
+            flowLayoutPanel2.Size = new Size(364, 0);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // label3
@@ -124,7 +124,7 @@
             label3.ForeColor = Color.FromArgb(43, 42, 76);
             label3.Location = new Point(33, 30);
             label3.Name = "label3";
-            label3.Size = new Size(188, 23);
+            label3.Size = new Size(159, 19);
             label3.TabIndex = 21;
             label3.Text = "Create New Password:";
             // 
@@ -133,11 +133,11 @@
             textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Segoe UI", 10.2F);
             textBox3.ForeColor = Color.Black;
-            textBox3.Location = new Point(33, 57);
+            textBox3.Location = new Point(198, 34);
             textBox3.Margin = new Padding(3, 4, 3, 4);
             textBox3.Name = "textBox3";
             textBox3.PasswordChar = '*';
-            textBox3.Size = new Size(299, 30);
+            textBox3.Size = new Size(299, 26);
             textBox3.TabIndex = 22;
             // 
             // flowLayoutPanel3
@@ -149,7 +149,7 @@
             flowLayoutPanel3.Location = new Point(0, 0);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Padding = new Padding(30);
-            flowLayoutPanel3.Size = new Size(364, 140);
+            flowLayoutPanel3.Size = new Size(364, 0);
             flowLayoutPanel3.TabIndex = 1;
             // 
             // label4
@@ -160,7 +160,7 @@
             label4.ForeColor = Color.FromArgb(43, 42, 76);
             label4.Location = new Point(33, 30);
             label4.Name = "label4";
-            label4.Size = new Size(161, 23);
+            label4.Size = new Size(135, 19);
             label4.TabIndex = 24;
             label4.Text = "Confirm Password:";
             // 
@@ -169,11 +169,11 @@
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Font = new Font("Segoe UI", 10.2F);
             textBox4.ForeColor = Color.Black;
-            textBox4.Location = new Point(33, 57);
+            textBox4.Location = new Point(174, 34);
             textBox4.Margin = new Padding(3, 4, 3, 4);
             textBox4.Name = "textBox4";
             textBox4.PasswordChar = '*';
-            textBox4.Size = new Size(299, 30);
+            textBox4.Size = new Size(299, 26);
             textBox4.TabIndex = 25;
             // 
             // tableLayoutPanel3
@@ -182,12 +182,12 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.Controls.Add(button1, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Bottom;
-            tableLayoutPanel3.Location = new Point(0, 596);
+            tableLayoutPanel3.Location = new Point(0, 439);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.Padding = new Padding(0, 30, 0, 0);
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1214, 133);
+            tableLayoutPanel3.Size = new Size(1170, 133);
             tableLayoutPanel3.TabIndex = 3;
             // 
             // button1
@@ -198,7 +198,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(490, 33);
+            button1.Location = new Point(468, 33);
             button1.Name = "button1";
             button1.Size = new Size(233, 52);
             button1.TabIndex = 15;
@@ -220,7 +220,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1214, 346);
+            tableLayoutPanel2.Size = new Size(1170, 346);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -233,7 +233,7 @@
             flowLayoutPanel1.Controls.Add(textBox2);
             flowLayoutPanel1.Controls.Add(button2);
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(378, 10);
+            flowLayoutPanel1.Location = new Point(356, 10);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(0, 30, 0, 0);
@@ -248,7 +248,7 @@
             label1.ForeColor = Color.FromArgb(43, 42, 76);
             label1.Location = new Point(3, 30);
             label1.Name = "label1";
-            label1.Size = new Size(128, 23);
+            label1.Size = new Size(107, 19);
             label1.TabIndex = 23;
             label1.Text = "Email Address:";
             // 
@@ -257,10 +257,10 @@
             textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Font = new Font("Segoe UI", 10.2F);
             textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(3, 57);
+            textBox1.Location = new Point(3, 53);
             textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(440, 30);
+            textBox1.Size = new Size(440, 26);
             textBox1.TabIndex = 24;
             // 
             // button3
@@ -270,7 +270,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(3, 96);
+            button3.Location = new Point(3, 88);
             button3.Margin = new Padding(3, 5, 3, 50);
             button3.Name = "button3";
             button3.Size = new Size(178, 33);
@@ -288,9 +288,9 @@
             label2.BackColor = Color.White;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(43, 42, 76);
-            label2.Location = new Point(3, 179);
+            label2.Location = new Point(3, 171);
             label2.Name = "label2";
-            label2.Size = new Size(94, 23);
+            label2.Size = new Size(78, 19);
             label2.TabIndex = 26;
             label2.Text = "Enter OTP:";
             // 
@@ -299,10 +299,10 @@
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 10.2F);
             textBox2.ForeColor = Color.Black;
-            textBox2.Location = new Point(3, 206);
+            textBox2.Location = new Point(3, 194);
             textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(440, 30);
+            textBox2.Size = new Size(440, 26);
             textBox2.TabIndex = 27;
             // 
             // button2
@@ -312,7 +312,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(3, 245);
+            button2.Location = new Point(3, 229);
             button2.Margin = new Padding(3, 5, 3, 5);
             button2.Name = "button2";
             button2.Size = new Size(178, 33);
@@ -334,7 +334,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(1214, 110);
+            tableLayoutPanel1.Size = new Size(1170, 110);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label5
@@ -344,9 +344,9 @@
             label5.BackColor = Color.White;
             label5.Font = new Font("Segoe UI", 30F, FontStyle.Bold);
             label5.ForeColor = Color.FromArgb(43, 42, 76);
-            label5.Location = new Point(348, 21);
+            label5.Location = new Point(379, 28);
             label5.Name = "label5";
-            label5.Size = new Size(518, 67);
+            label5.Size = new Size(411, 54);
             label5.TabIndex = 25;
             label5.Text = "FORGOT PASSWORD";
             label5.TextAlign = ContentAlignment.MiddleCenter;
@@ -368,7 +368,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
-            ClientSize = new Size(1414, 929);
+            ClientSize = new Size(1370, 772);
             ControlBox = false;
             Controls.Add(pictureBox1);
             Controls.Add(panel1);

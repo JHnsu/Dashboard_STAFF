@@ -9,21 +9,127 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.Crmf;
+using static Dashboard_STAFF.LogInForm;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Dashboard_STAFF
 {
     public partial class Form1_ADMIN : Form
     {
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
+        private int lastNotificationCount = 0;
         public Form1_ADMIN()
         {
             InitializeComponent();
+            InitializeNotificationIndicator();
 
             LoadLowStockItems();
             LoadTotalRestockCount();
             LoadTotalShippedCount();
             LoadRestockRequests();
             search_textBox.TextChanged += search_textBox_TextChanged;
+        }
+
+        private void InitializeNotificationIndicator()
+        {
+            pictureBox1.Visible = false;
+        }
+
+        private void CheckNewNotificationsTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HasNewNotifications())
+                {
+                    pictureBox1.Visible = true;
+                }
+                else
+                {
+                    pictureBox1.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking for new notifications: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool HasNewNotifications()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Notifications";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        int currentNotificationCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (currentNotificationCount > lastNotificationCount)
+                        {
+                            lastNotificationCount = currentNotificationCount;
+                            return true;
+                        }
+                        else if (currentNotificationCount == 0)
+                        {
+                            lastNotificationCount = 0;
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking for new notifications: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private int GetNotificationCount()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Notifications";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching notification count: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+
+        private void MarkNotificationsAsRead()
+        {
+            try
+            {
+                string query = "UPDATE Notifications SET IsRead = 1 WHERE IsRead = 0";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                pictureBox1.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error marking notifications as read: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void home_btn_Click(object sender, EventArgs e)
@@ -33,7 +139,7 @@ namespace Dashboard_STAFF
 
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory inventoryAdmin = new Inventory();
+            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
             inventoryAdmin.Show();
             this.Hide();
         }
@@ -64,6 +170,27 @@ namespace Dashboard_STAFF
         {
             string searchQuery = search_textBox.Text.Trim();
             SearchAll(searchQuery);
+        }
+        private byte[] GetProfilePictureFromDatabase(int userId)
+        {
+            byte[] imageBytes = null;
+
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                conn.Open();
+                string query = "SELECT ProfilePicture FROM users WHERE UserId = @UserId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    var result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        imageBytes = (byte[])result;
+                    }
+                }
+            }
+
+            return imageBytes;
         }
 
         private void SearchAll(string searchQuery)
@@ -219,7 +346,7 @@ namespace Dashboard_STAFF
 
                     string query = @"SELECT COUNT(*) 
                              FROM sales
-                             WHERE OrderStatus = 'Shipped'";
+                             WHERE OrderStatus = 'Pending'";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -236,6 +363,16 @@ namespace Dashboard_STAFF
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            Timer checkNotificationsTimer = new Timer
+            {
+                Interval = 10000
+            };
+            checkNotificationsTimer.Tick += CheckNewNotificationsTimer_Tick;
+            checkNotificationsTimer.Start();
+
+            pictureBox1.Visible = false;
+            lastNotificationCount = GetNotificationCount();
+
             LoadQuantityProgress();
             LoadLowStockItems();
             LoadTotalRestockCount();
@@ -247,6 +384,29 @@ namespace Dashboard_STAFF
             comboBox1.Items.Add("This Year");
 
             comboBox1.SelectedItem = "This Year";
+
+            button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            button1.Text = LogInForm.CurrentUser.Email;
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(CurrentUser.ProfilePicture))
+                    {
+                        pictureBox7.Image = Image.FromStream(ms);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                    pictureBox7.Image = null;
+                }
+            }
+            else
+            {
+                pictureBox7.Image = null;
+            }
         }
 
         private void LoadLowStockItems()
@@ -346,7 +506,10 @@ namespace Dashboard_STAFF
 
         private void notify_pictureBox_Click(object sender, EventArgs e)
         {
+            Notifications popup = new Notifications();
+            popup.Show();
 
+            pictureBox1.Visible = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -486,14 +649,67 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-            UserProfile userprofile = new UserProfile();
-            userprofile.Show();
-            this.Hide();
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(CurrentUser.ProfilePicture))
+                    {
+                        pictureBox7.Image = Image.FromStream(ms);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
+                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
+
+                    pictureBox7.Image = Image.FromFile(filePath);
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
+
+            UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
+            userDetailsForm.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Text = CurrentUser.Email;
+
+            UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
+            userDetailsForm.Show();
+            this.Hide();
         }
     }
 }

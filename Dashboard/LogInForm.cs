@@ -27,6 +27,14 @@ namespace Dashboard_STAFF
         {
             public static string Username { get; set; }
             public static string Role { get; set; }
+            public static string FirstName { get; set; }
+            public static string LastName { get; set; }
+            public static string Email { get; set; }
+            public static byte[] ProfilePicture { get; set; }
+            public static int UserID { get; internal set; }
+            public static string Address { get; internal set; }
+            public static string PhoneNumber { get; internal set; }
+            public static string FullName { get; internal set; }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,84 +52,82 @@ namespace Dashboard_STAFF
                 return;
             }
 
-            else
+            try
             {
-                try
+                using (MySqlConnection conn = new MySqlConnection(connString))
                 {
-                    MySqlConnection conn = new MySqlConnection(connString);
-                    using (conn)
+                    conn.Open();
+
+                    string query = "SELECT Username, AccountPassword, Role, FirstName, LastName, Email, ProfilePicture FROM users WHERE Username=@uname";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@uname", username);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        conn.Open();
-
-                        string query = "SELECT AccountPassword, Role FROM users WHERE username=@uname";
-                        MySqlCommand cmd = new MySqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@uname", username);
-
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
+                            reader.Read();
+                            string storedPassword = reader["AccountPassword"].ToString();
+                            string role = reader["Role"].ToString();
+                            CurrentUser.FirstName = reader["FirstName"].ToString();
+                            CurrentUser.LastName = reader["LastName"].ToString();
+
+                            if (password == storedPassword)
                             {
-                                reader.Read();
-                                string storedPassword = reader["AccountPassword"].ToString();
-                                string role = reader["Role"].ToString();
+                                // Set current user details
+                                CurrentUser.Username = username;
+                                CurrentUser.Role = role;
+                                string FullName = CurrentUser.FirstName + " " + CurrentUser.LastName;
+                                CurrentUser.Email = reader["Email"].ToString();
+                                CurrentUser.ProfilePicture = reader["ProfilePicture"] as byte[];
 
-                                if (password == storedPassword)
+                                LogAction(username, "Login");
+                                MessageBox.Show($"Logged In Successfully as {role}!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                loginAttempts = 0;
+
+                                if (role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    CurrentUser.Role = role;
-                                    LogAction(username, "Login");
-                                    MessageBox.Show($"Logged In Successfully as {role}!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                    loginAttempts = 0;
-
-                                    if (role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        Form1_ADMIN logInform = new Form1_ADMIN();
-                                        logInform.Show();
-                                        this.Hide();
-                                    }
-                                    else if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        Dashboard dashboard = new Dashboard();
-                                        dashboard.Show();
-                                        this.Hide();
-                                    }
+                                    Form1_ADMIN adminForm = new Form1_ADMIN();
+                                    adminForm.Show();
+                                    this.Hide();
                                 }
-                                else
+                                else if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    loginAttempts++;
-                                    if (loginAttempts >= 3)
-                                    {
-                                        MessageBox.Show("You have reached the maximum number of login attempts. Please try again later.", "Login Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        button1.Enabled = false;
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Incorrect username or password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    }
+                                    Dashboard dashboard = new Dashboard();
+                                    dashboard.Show();
+                                    this.Hide();
                                 }
                             }
                             else
                             {
-                                loginAttempts++;
-                                if (loginAttempts >= 3)
-                                {
-                                    MessageBox.Show("You have reached the maximum number of login attempts. Please try again later.", "Login Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    button1.Enabled = false;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Username not found.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
+                                HandleFailedLogin();
                             }
                         }
-
-                        conn.Close();
+                        else
+                        {
+                            HandleFailedLogin();
+                        }
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleFailedLogin()
+        {
+            loginAttempts++;
+            if (loginAttempts >= 3)
+            {
+                MessageBox.Show("You have reached the maximum number of login attempts. Please try again later.", "Login Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                button1.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Incorrect username or password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -226,6 +232,11 @@ namespace Dashboard_STAFF
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LogInForm_Load(object sender, EventArgs e)
         {
 
         }

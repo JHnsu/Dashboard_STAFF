@@ -8,36 +8,142 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static Dashboard_STAFF.LogInForm;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Dashboard_STAFF
 {
     public partial class SalesOrder_ADMIN : Form
     {
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
+        private int lastNotificationCount = 0;
         public SalesOrder_ADMIN()
         {
             InitializeComponent();
+            InitializeNotificationIndicator();
+        }
+
+
+        private void InitializeNotificationIndicator()
+        {
+            pictureBox1.Visible = false;
+        }
+
+        private void CheckNewNotificationsTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HasNewNotifications())
+                {
+                    pictureBox1.Visible = true;
+                }
+                else
+                {
+                    pictureBox1.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking for new notifications: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool HasNewNotifications()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Notifications";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        int currentNotificationCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (currentNotificationCount > lastNotificationCount)
+                        {
+                            lastNotificationCount = currentNotificationCount;
+                            return true;
+                        }
+                        else if (currentNotificationCount == 0)
+                        {
+                            lastNotificationCount = 0;
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking for new notifications: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private int GetNotificationCount()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Notifications";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching notification count: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+
+        private void MarkNotificationsAsRead()
+        {
+            try
+            {
+                string query = "UPDATE Notifications SET IsRead = 1 WHERE IsRead = 0";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                pictureBox1.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error marking notifications as read: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void home_btn_Click(object sender, EventArgs e)
         {
-            Form1_ADMIN form1_ADMIN = new Form1_ADMIN();
-            form1_ADMIN.Show();
+            Form1_ADMIN dashboard = new Form1_ADMIN();
+            dashboard.Show();
             this.Hide();
         }
 
+
         private void inventory_btn_Click(object sender, EventArgs e)
         {
-            Inventory inventoryAdmin = new Inventory();
+            Inventory_ADMIN inventoryAdmin = new Inventory_ADMIN();
             inventoryAdmin.Show();
             this.Hide();
         }
 
         private void salesOrders_btn_Click(object sender, EventArgs e)
         {
-            SalesOrder_ADMIN salesorder = new SalesOrder_ADMIN();
-            salesorder.Show();
-            this.Hide();
+            this.Show();
         }
         private void purchaseOrders_btn_Click(object sender, EventArgs e)
         {
@@ -51,6 +157,31 @@ namespace Dashboard_STAFF
             Reports_ADMIN reports = new Reports_ADMIN();
             reports.Show();
             this.Hide();
+        }
+
+        private void TotalPendingRequest()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Sales WHERE OrderStatus = 'Pending'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        int totalPending = Convert.ToInt32(cmd.ExecuteScalar());
+                        label7.Text = totalPending.ToString();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void salesOrder_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -68,10 +199,44 @@ namespace Dashboard_STAFF
 
         private void SalesOrder_ADMIN_Load(object sender, EventArgs e)
         {
+            Timer checkNotificationsTimer = new Timer
+            {
+                Interval = 10000
+            };
+            checkNotificationsTimer.Tick += CheckNewNotificationsTimer_Tick;
+            checkNotificationsTimer.Start();
+
+            pictureBox1.Visible = false;
+            lastNotificationCount = GetNotificationCount();
+            
             LoadSalesOrders();
             TotalSales();
             TotalShipped();
+            TotalPendingRequest();
             PopulateFilters();
+
+            button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            button6.Text = LogInForm.CurrentUser.Email;
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(CurrentUser.ProfilePicture))
+                    {
+                        pictureBox7.Image = Image.FromStream(ms);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                    pictureBox7.Image = null;
+                }
+            }
+            else
+            {
+                pictureBox7.Image = null;
+            }
         }
         private void PopulateFilters()
         {
@@ -84,6 +249,28 @@ namespace Dashboard_STAFF
             comboBox2.Items.Add("Receiver");
             comboBox2.Items.Add("Date");
             comboBox2.SelectedIndex = 0;
+        }
+
+        private byte[] GetProfilePictureFromDatabase(int userId)
+        {
+            byte[] imageBytes = null;
+
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                conn.Open();
+                string query = "SELECT ProfilePicture FROM users WHERE UserId = @UserId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    var result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        imageBytes = (byte[])result;
+                    }
+                }
+            }
+
+            return imageBytes;
         }
         private void LoadSalesOrders()
         {
@@ -172,8 +359,8 @@ namespace Dashboard_STAFF
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AddSale_ADMIN addOrder_ADMIN = new AddSale_ADMIN();
-            addOrder_ADMIN.Show();
+            ReviewSaleReq reviewSaleReq = new ReviewSaleReq();
+            reviewSaleReq.Show();
         }
         private void button3_MouseHover(object sender, EventArgs e)
         {
@@ -187,15 +374,51 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-            UserProfile userprofile = new UserProfile();
-            userprofile.Show();
-            this.Hide();
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(CurrentUser.ProfilePicture))
+                    {
+                        pictureBox7.Image = Image.FromStream(ms);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
+            {
+                try
+                {
+                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
+                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
+
+                    pictureBox7.Image = Image.FromFile(filePath);
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show("Error loading profile picture: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LoadSalesOrders();
             TotalSales();
             TotalShipped();
+            TotalPendingRequest();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -410,6 +633,37 @@ namespace Dashboard_STAFF
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
+
+            UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
+            userDetailsForm.Show();
+            this.Hide();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            button6.Text = CurrentUser.Email;
+
+            UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
+            userDetailsForm.Show();
+            this.Hide();
+        }
+
+        private void timercheckNotifications_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void notify_pictureBox_Click_1(object sender, EventArgs e)
+        {
+            Notifications popup = new Notifications();
+            popup.Show();
+
+            pictureBox1.Visible = false;
         }
     }
 }

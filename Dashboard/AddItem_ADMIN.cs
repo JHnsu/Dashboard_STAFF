@@ -26,12 +26,12 @@ namespace Dashboard_STAFF
             if (string.IsNullOrEmpty(textBox2.Text.Trim()) ||
                   string.IsNullOrEmpty(textBox3.Text.Trim()) ||
                   string.IsNullOrEmpty(textBox4.Text.Trim()) ||
-                  numericUpDown1.Value == 0 ||   
+                  numericUpDown1.Value == 0 ||
                   numericUpDown2.Value == 0 ||
                   numericUpDown3.Value == 0)
             {
                 MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; 
+                return;
             }
             string stockStatus = "In Stock";
             decimal quantity = numericUpDown1.Value;
@@ -69,7 +69,7 @@ namespace Dashboard_STAFF
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Item added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);   
+                            MessageBox.Show("Item added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ItemAdded?.Invoke();
                             ClearFormFields();
                         }
@@ -107,6 +107,11 @@ namespace Dashboard_STAFF
         private void button3_MouseLeave(object sender, EventArgs e)
         {
             button3.BackColor = Color.FromArgb(0, 93, 217);
+        }
+
+        private void AddItem_ADMIN_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

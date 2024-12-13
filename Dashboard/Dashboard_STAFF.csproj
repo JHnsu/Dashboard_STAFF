@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="itext" Version="9.0.0" />
+    <PackageReference Include="itext7" Version="9.0.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
     <PackageReference Include="NuGet.Frameworks" Version="6.12.1" />
     <PackageReference Include="PDFsharp" Version="6.1.1" />

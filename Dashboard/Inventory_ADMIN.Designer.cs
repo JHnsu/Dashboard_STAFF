@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -74,6 +75,7 @@
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
+            timercheckNotifications = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -186,6 +188,7 @@
             button2.Text = "Full Name";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button6
             // 
@@ -202,6 +205,7 @@
             button6.Text = "example@gmail.com";
             button6.TextAlign = ContentAlignment.MiddleLeft;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // profile_pictureBox
             // 
@@ -452,25 +456,22 @@
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
             notify_pictureBox.Location = new Point(170, 8);
-            notify_pictureBox.Margin = new Padding(25, 3, 20, 3);
+            notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
             notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            notify_pictureBox.TabIndex = 4;
+            notify_pictureBox.TabIndex = 6;
             notify_pictureBox.TabStop = false;
+            notify_pictureBox.Click += notify_pictureBox_Click_1;
             // 
             // pictureBox1
             // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = Properties.Resources._9111058_refresh_ccw_icon;
-            pictureBox1.Location = new Point(115, 8);
-            pictureBox1.Margin = new Padding(0, 3, 0, 0);
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(154, 8);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 30);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 4;
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // search_textBox
             // 
@@ -804,8 +805,9 @@
         private ComboBox comboBox1;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label orgName_label;
+        private TextBox search_textBox;
         private PictureBox notify_pictureBox;
         private PictureBox pictureBox1;
-        private TextBox search_textBox;
+        private System.Windows.Forms.Timer timercheckNotifications;
     }
 }

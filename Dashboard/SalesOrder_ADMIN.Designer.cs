@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -65,10 +66,13 @@
             button3 = new Button();
             groupBox1 = new GroupBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
+            label2 = new Label();
+            label7 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            timercheckNotifications = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -180,6 +184,7 @@
             button2.Text = "Full Name";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button6
             // 
@@ -196,6 +201,7 @@
             button6.Text = "example@gmail.com";
             button6.TextAlign = ContentAlignment.MiddleLeft;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // pictureBox7
             // 
@@ -434,25 +440,22 @@
             notify_pictureBox.Cursor = Cursors.Hand;
             notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
             notify_pictureBox.Location = new Point(170, 8);
-            notify_pictureBox.Margin = new Padding(25, 3, 20, 3);
+            notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
             notify_pictureBox.Name = "notify_pictureBox";
             notify_pictureBox.Size = new Size(30, 30);
             notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            notify_pictureBox.TabIndex = 4;
+            notify_pictureBox.TabIndex = 6;
             notify_pictureBox.TabStop = false;
+            notify_pictureBox.Click += notify_pictureBox_Click_1;
             // 
             // pictureBox1
             // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = Properties.Resources._9111058_refresh_ccw_icon;
-            pictureBox1.Location = new Point(115, 8);
-            pictureBox1.Margin = new Padding(0, 3, 0, 0);
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(154, 8);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 30);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 4;
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // search_textBox
             // 
@@ -560,7 +563,7 @@
             button3.Name = "button3";
             button3.Size = new Size(186, 32);
             button3.TabIndex = 3;
-            button3.Text = "Create Item Sales";
+            button3.Text = "Review Sale Requests";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             button3.MouseEnter += button3_MouseHover;
@@ -582,6 +585,8 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel2.Controls.Add(label2);
+            flowLayoutPanel2.Controls.Add(label7);
             flowLayoutPanel2.Controls.Add(label3);
             flowLayoutPanel2.Controls.Add(label4);
             flowLayoutPanel2.Controls.Add(label5);
@@ -593,10 +598,30 @@
             flowLayoutPanel2.Size = new Size(1046, 59);
             flowLayoutPanel2.TabIndex = 18;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(21, 10);
+            label2.Margin = new Padding(21, 0, 10, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(150, 21);
+            label2.TabIndex = 6;
+            label2.Text = "Pending Requests:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(181, 10);
+            label7.Margin = new Padding(0, 0, 52, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(19, 21);
+            label7.TabIndex = 7;
+            label7.Text = "0";
+            // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(21, 10);
+            label3.Location = new Point(273, 10);
             label3.Margin = new Padding(21, 0, 10, 0);
             label3.Name = "label3";
             label3.Size = new Size(95, 21);
@@ -606,7 +631,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(126, 10);
+            label4.Location = new Point(378, 10);
             label4.Margin = new Padding(0, 0, 52, 0);
             label4.Name = "label4";
             label4.Size = new Size(19, 21);
@@ -617,7 +642,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(218, 10);
+            label5.Location = new Point(470, 10);
             label5.Margin = new Padding(21, 0, 10, 0);
             label5.Name = "label5";
             label5.Size = new Size(119, 21);
@@ -627,13 +652,17 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(347, 10);
+            label6.Location = new Point(599, 10);
             label6.Margin = new Padding(0, 0, 52, 0);
             label6.Name = "label6";
             label6.Size = new Size(19, 21);
             label6.TabIndex = 3;
             label6.Text = "0";
             label6.Click += label6_Click;
+            // 
+            // timercheckNotifications
+            // 
+            timercheckNotifications.Tick += timercheckNotifications_Tick;
             // 
             // SalesOrder_ADMIN
             // 
@@ -645,7 +674,7 @@
             ForeColor = Color.FromArgb(0, 11, 71);
             Name = "SalesOrder_ADMIN";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "SalesOrder";
+            Text = "SalesOrder_ADMIN";
             Load += SalesOrder_ADMIN_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
@@ -712,8 +741,11 @@
         private ComboBox comboBox1;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label orgName_label;
+        private TextBox search_textBox;
+        private Label label2;
+        private Label label7;
+        private System.Windows.Forms.Timer timercheckNotifications;
         private PictureBox notify_pictureBox;
         private PictureBox pictureBox1;
-        private TextBox search_textBox;
     }
 }

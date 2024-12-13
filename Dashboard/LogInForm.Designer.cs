@@ -39,12 +39,12 @@
             label2 = new Label();
             textBox2 = new TextBox();
             checkBox1 = new CheckBox();
-            button1 = new Button();
             flowLayoutPanel2 = new FlowLayoutPanel();
             label4 = new Label();
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
             label3 = new Label();
+            button1 = new Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
@@ -121,7 +121,7 @@
             label1.Location = new Point(430, 20);
             label1.Margin = new Padding(0);
             label1.Name = "label1";
-            label1.Size = new Size(94, 23);
+            label1.Size = new Size(80, 19);
             label1.TabIndex = 5;
             label1.Text = "Username:";
             // 
@@ -131,10 +131,10 @@
             textBox1.Cursor = Cursors.IBeam;
             textBox1.Font = new Font("Segoe UI", 9F);
             textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(430, 43);
+            textBox1.Location = new Point(430, 39);
             textBox1.Margin = new Padding(0, 0, 0, 30);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(325, 27);
+            textBox1.Size = new Size(325, 23);
             textBox1.TabIndex = 6;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -143,10 +143,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(0, 11, 71);
-            label2.Location = new Point(430, 100);
+            label2.Location = new Point(430, 92);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
-            label2.Size = new Size(90, 23);
+            label2.Size = new Size(77, 19);
             label2.TabIndex = 7;
             label2.Text = "Password:";
             // 
@@ -156,10 +156,10 @@
             textBox2.Cursor = Cursors.IBeam;
             textBox2.Font = new Font("Segoe UI", 9F);
             textBox2.ForeColor = Color.Black;
-            textBox2.Location = new Point(430, 123);
+            textBox2.Location = new Point(430, 111);
             textBox2.Margin = new Padding(0);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(325, 27);
+            textBox2.Size = new Size(325, 23);
             textBox2.TabIndex = 8;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -168,32 +168,14 @@
             checkBox1.AutoSize = true;
             checkBox1.FlatStyle = FlatStyle.Flat;
             checkBox1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(430, 150);
+            checkBox1.Location = new Point(430, 134);
             checkBox1.Margin = new Padding(0);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(118, 21);
+            checkBox1.Size = new Size(105, 17);
             checkBox1.TabIndex = 9;
             checkBox1.Text = "Show password";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(0, 93, 217);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(510, 214);
-            button1.Margin = new Padding(85, 45, 0, 0);
-            button1.Name = "button1";
-            button1.Size = new Size(155, 41);
-            button1.TabIndex = 12;
-            button1.Text = "LOGIN";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            button1.MouseEnter += button1_MouseHover;
-            button1.MouseLeave += button1_MouseLeave;
-            button1.MouseHover += button1_MouseHover;
             // 
             // flowLayoutPanel2
             // 
@@ -215,7 +197,7 @@
             label4.ForeColor = Color.FromArgb(0, 93, 217);
             label4.Location = new Point(358, 0);
             label4.Name = "label4";
-            label4.Size = new Size(46, 20);
+            label4.Size = new Size(36, 15);
             label4.TabIndex = 15;
             label4.Text = "New?";
             // 
@@ -226,9 +208,9 @@
             linkLabel1.Font = new Font("Segoe UI", 9F);
             linkLabel1.ForeColor = SystemColors.ControlText;
             linkLabel1.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel1.Location = new Point(410, 0);
+            linkLabel1.Location = new Point(400, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(96, 20);
+            linkLabel1.Size = new Size(75, 15);
             linkLabel1.TabIndex = 13;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Register here";
@@ -240,10 +222,10 @@
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Segoe UI", 9F);
             linkLabel2.LinkColor = Color.FromArgb(0, 93, 217);
-            linkLabel2.Location = new Point(674, 0);
+            linkLabel2.Location = new Point(643, 0);
             linkLabel2.Margin = new Padding(165, 0, 0, 0);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(125, 20);
+            linkLabel2.Size = new Size(100, 15);
             linkLabel2.TabIndex = 14;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Forgot Password?";
@@ -253,13 +235,31 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(999, 0);
+            label3.Location = new Point(943, 0);
             label3.Margin = new Padding(200, 0, 3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(50, 20);
+            label3.Size = new Size(38, 15);
             label3.TabIndex = 0;
             label3.Text = "label3";
             label3.Click += label3_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(0, 93, 217);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(510, 214);
+            button1.Margin = new Padding(85, 45, 0, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(155, 41);
+            button1.TabIndex = 12;
+            button1.Text = "LOGIN";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            button1.MouseEnter += button1_MouseHover;
+            button1.MouseLeave += button1_MouseLeave;
+            button1.MouseHover += button1_MouseHover;
             // 
             // pictureBox2
             // 
@@ -298,6 +298,7 @@
             Name = "LogInForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Load += LogInForm_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
