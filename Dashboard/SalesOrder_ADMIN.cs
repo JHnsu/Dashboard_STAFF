@@ -208,7 +208,7 @@ namespace Dashboard_STAFF
 
             pictureBox1.Visible = false;
             lastNotificationCount = GetNotificationCount();
-            
+
             LoadSalesOrders();
             TotalSales();
             TotalShipped();
@@ -241,6 +241,7 @@ namespace Dashboard_STAFF
         private void PopulateFilters()
         {
             comboBox2.Items.Clear();
+            comboBox2.Items.Add("No Filter");
             comboBox2.Items.Add("Item ID");
             comboBox2.Items.Add("Item Name");
             comboBox2.Items.Add("Brand");
@@ -249,6 +250,10 @@ namespace Dashboard_STAFF
             comboBox2.Items.Add("Receiver");
             comboBox2.Items.Add("Date");
             comboBox2.SelectedIndex = 0;
+            comboBox1.Enabled = false; 
+            comboBox1.Items.Clear();
+
+            LoadSalesOrders();
         }
 
         private byte[] GetProfilePictureFromDatabase(int userId)
@@ -374,7 +379,6 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-
             if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
             {
                 try
@@ -393,32 +397,10 @@ namespace Dashboard_STAFF
             {
                 MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
-            {
-                try
-                {
-                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
-                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
-
-                    pictureBox7.Image = Image.FromFile(filePath);
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show("Error loading profile picture: " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            LoadSalesOrders();
-            TotalSales();
-            TotalShipped();
-            TotalPendingRequest();
+
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -580,6 +562,12 @@ namespace Dashboard_STAFF
             comboBox1.Items.Clear();
             comboBox1.Enabled = false;
 
+            if (selectedFilter == "No Filter")
+            {
+                LoadSalesOrders(); 
+                return; 
+            }
+
             if (!string.IsNullOrEmpty(selectedFilter))
             {
                 switch (selectedFilter)
@@ -641,7 +629,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -650,7 +637,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void timercheckNotifications_Tick(object sender, EventArgs e)
@@ -664,6 +650,14 @@ namespace Dashboard_STAFF
             popup.Show();
 
             pictureBox1.Visible = false;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            LoadSalesOrders();
+            TotalSales();
+            TotalShipped();
+            TotalPendingRequest();
         }
     }
 }

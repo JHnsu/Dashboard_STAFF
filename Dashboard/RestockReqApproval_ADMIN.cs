@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Dashboard_STAFF.LogInForm;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Dashboard_STAFF
 {
@@ -73,9 +74,8 @@ namespace Dashboard_STAFF
                 }
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
-        {           
+        {
             if (selectedRequestID == 0)
             {
                 MessageBox.Show("Please select a request to approve or reject.");
@@ -90,19 +90,19 @@ namespace Dashboard_STAFF
                 return;
             }
 
-
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
 
+                    // Update the restock request
                     string query = @"
-                UPDATE RestockRequests 
-                SET RequestStatus = @Status, 
-                    ApprovalDate = CURRENT_TIMESTAMP, 
-                    ApprovedBy = @ApprovedBy 
-                WHERE RequestID = @RequestID";
+            UPDATE RestockRequests 
+            SET RequestStatus = @Status, 
+                ApprovalDate = CURRENT_TIMESTAMP, 
+                ApprovedBy = @ApprovedBy 
+            WHERE RequestID = @RequestID";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Status", status);
                     cmd.Parameters.AddWithValue("@ApprovedBy", CurrentUser.Username);
@@ -112,17 +112,77 @@ namespace Dashboard_STAFF
                     if (status == "Approved")
                     {
                         int requestedQuantity = int.Parse(textBox4.Text);
-                        string stockUpdateQuery = @"
-                    UPDATE Inventory 
-                    SET StockLevel = StockLevel + @Quantity 
-                    WHERE ItemName = @ItemName";
-                        MySqlCommand stockCmd = new MySqlCommand(stockUpdateQuery, conn);
-                        stockCmd.Parameters.AddWithValue("@Quantity", requestedQuantity);
-                        stockCmd.Parameters.AddWithValue("@ItemName", textBox3.Text);
-                        stockCmd.ExecuteNonQuery();
-                    }
+                        string itemName = textBox3.Text;
 
-                    MessageBox.Show($"Request {status} successfully!");
+                        // Check if item name is empty or null
+                        if (string.IsNullOrEmpty(itemName))
+                        {
+                            MessageBox.Show("Item name cannot be empty.");
+                            return;
+                        }
+
+                        // Fetch the item details (including Brand and Price) from the Inventory table
+                        string inventoryQuery = @"
+                SELECT ItemID, Brand, UnitPrice AS Price 
+                FROM Inventory 
+                WHERE ItemName = @ItemName";
+                        MySqlCommand inventoryCmd = new MySqlCommand(inventoryQuery, conn);
+                        inventoryCmd.Parameters.AddWithValue("@ItemName", itemName);
+
+                        using (MySqlDataReader reader = inventoryCmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int itemID = reader.GetInt32("ItemID");
+                                string brand = reader.GetString("Brand");
+                                decimal price = reader.GetDecimal("Price");
+
+                                // Check if the Brand or Price is null or empty
+                                if (string.IsNullOrEmpty(brand) || price == 0)
+                                {
+                                    MessageBox.Show("Brand or Price is missing for the selected item in the Inventory table.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                                // After reader is closed, proceed with updating stock and inserting purchase order
+                                reader.Close();
+
+                                // Update the stock level in Inventory
+                                string stockUpdateQuery = @"
+                        UPDATE Inventory 
+                        SET StockLevel = StockLevel + @Quantity 
+                        WHERE ItemName = @ItemName AND ItemID = @ItemID";
+                                MySqlCommand stockCmd = new MySqlCommand(stockUpdateQuery, conn);
+                                stockCmd.Parameters.AddWithValue("@Quantity", requestedQuantity);
+                                stockCmd.Parameters.AddWithValue("@ItemName", itemName);
+                                stockCmd.Parameters.AddWithValue("@ItemID", itemID);
+                                stockCmd.ExecuteNonQuery();
+
+                                decimal totalPrice = requestedQuantity * price;
+
+                                // Insert the purchase order
+                                string purchaseOrderQuery = @"
+                        INSERT INTO PurchaseOrders (ItemID, ItemName, Brand, Quantity, RequestedBy, TotalPrice, PurchaseDate)
+                        VALUES (@ItemID, @ItemName, @Brand, @Quantity, @RequestedBy, @TotalPrice, CURRENT_TIMESTAMP)";
+                                using (MySqlCommand purchaseCmd = new MySqlCommand(purchaseOrderQuery, conn))
+                                {
+                                    purchaseCmd.Parameters.AddWithValue("@ItemID", itemID);
+                                    purchaseCmd.Parameters.AddWithValue("@ItemName", itemName);
+                                    purchaseCmd.Parameters.AddWithValue("@Brand", brand);  // Brand is now included
+                                    purchaseCmd.Parameters.AddWithValue("@Quantity", requestedQuantity);
+                                    purchaseCmd.Parameters.AddWithValue("@RequestedBy", textBox5.Text);
+                                    purchaseCmd.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                                    purchaseCmd.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Item not found in Inventory. Please check the item name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+                    }
+                    MessageBox.Show($"Request {status} successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadRestockRequests();
                     ClearFields();
                 }
@@ -130,8 +190,10 @@ namespace Dashboard_STAFF
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-            }       
+            }
         }
+
+
 
         private void button1_MouseHover(object sender, EventArgs e)
         {

@@ -15,13 +15,21 @@ namespace Dashboard_STAFF
 {
     public partial class UserProfile : Form
     {
+
         string connString = "server=localhost;port=3306;database=techinventorydb;user=root;password=";
+
+        private string fullName;
+        private string email;
+
         public UserProfile(string fullName, string email)
         {
             InitializeComponent();
 
             label1.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;  
             label3.Text = email;
+            this.fullName = fullName;
+            this.email = email;
+            DisplayUserProfile();
 
             if (string.IsNullOrWhiteSpace(CurrentUser.Username))
             {
@@ -31,7 +39,17 @@ namespace Dashboard_STAFF
 
             LoadUserData();
         }
-
+        private void DisplayUserProfile()
+        {
+            label2.Text = fullName;
+            label3.Text = email;
+        }
+        public void RefreshUserProfile(string updatedFullName, string updatedEmail)
+        {
+            // Update the details with the new data
+            label2.Text = updatedFullName;
+            label3.Text = updatedEmail;
+        }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             /*if (CurrentUser.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))

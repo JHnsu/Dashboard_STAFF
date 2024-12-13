@@ -71,11 +71,6 @@ namespace Dashboard_STAFF
         {
             InitializeComponent();
         }
-
-        public EditUserProfile(int userID)
-        {
-        }
-
         public EditUserProfile(int userID, string? username, string role, string fullName, string email, string phoneNumber, string address, byte[] profilePicture1) : this(userID, username, role, fullName)
         {
             this.email = email;
@@ -180,6 +175,13 @@ namespace Dashboard_STAFF
 
                     if (rowsAffected > 0)
                     {
+                        LoadUserProfile(CurrentUser.Username);
+                        CurrentUser.Username = textBox1.Text.Trim();
+                        CurrentUser.FullName = textBox2.Text.Trim() + " " + textBox4.Text.Trim();
+                        CurrentUser.Email = textBox3.Text.Trim();
+                        CurrentUser.PhoneNumber = textBox5.Text.Trim();
+                        CurrentUser.Address = textBox6.Text.Trim();
+
                         MessageBox.Show("Profile updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                     }
@@ -306,6 +308,7 @@ namespace Dashboard_STAFF
                             if (reader["ProfilePicture"] != DBNull.Value)
                             {
                                 byte[] pictureData = (byte[])reader["ProfilePicture"];
+                                CurrentUser.ProfilePicture = pictureData;
                                 MemoryStream ms = new MemoryStream(pictureData);
                                 pictureBox2.Image = Image.FromStream(ms);
                             }
@@ -346,6 +349,7 @@ namespace Dashboard_STAFF
                             if (reader["ProfilePicture"] != DBNull.Value)
                             {
                                 byte[] pictureData = (byte[])reader["ProfilePicture"];
+                                CurrentUser.ProfilePicture = pictureData;
                                 MemoryStream ms = new MemoryStream(pictureData);
                                 pictureBox2.Image = Image.FromStream(ms);
                             }

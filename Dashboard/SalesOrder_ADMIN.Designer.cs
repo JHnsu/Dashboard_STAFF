@@ -73,6 +73,7 @@
             label5 = new Label();
             label6 = new Label();
             timercheckNotifications = new System.Windows.Forms.Timer(components);
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -96,6 +97,7 @@
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -412,6 +414,7 @@
             flowLayoutPanel4.Controls.Add(orgName_label);
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
             flowLayoutPanel4.Controls.Add(pictureBox1);
+            flowLayoutPanel4.Controls.Add(pictureBox2);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel4.Location = new Point(735, 0);
@@ -664,6 +667,17 @@
             // 
             timercheckNotifications.Tick += timercheckNotifications_Tick;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources._9111058_refresh_ccw_icon;
+            pictureBox2.Location = new Point(115, 8);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(33, 30);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 9;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
             // SalesOrder_ADMIN
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -702,6 +716,7 @@
             groupBox1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -747,5 +762,6 @@
         private System.Windows.Forms.Timer timercheckNotifications;
         private PictureBox notify_pictureBox;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }

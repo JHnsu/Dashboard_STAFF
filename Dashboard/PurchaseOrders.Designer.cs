@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -53,6 +53,8 @@
             comboBox1 = new ComboBox();
             flowLayoutPanel4 = new FlowLayoutPanel();
             orgName_label = new Label();
+            notify_pictureBox = new PictureBox();
+            pictureBox1 = new PictureBox();
             search_textBox = new TextBox();
             panel1 = new Panel();
             groupBox2 = new GroupBox();
@@ -63,8 +65,7 @@
             label5 = new Label();
             label6 = new Label();
             timercheckNotifications = new System.Windows.Forms.Timer(components);
-            notify_pictureBox = new PictureBox();
-            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -79,13 +80,14 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             panel5.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)notify_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)purchaseOrders_dataGridView).BeginInit();
             groupBox1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)notify_pictureBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -374,6 +376,7 @@
             flowLayoutPanel4.Controls.Add(orgName_label);
             flowLayoutPanel4.Controls.Add(notify_pictureBox);
             flowLayoutPanel4.Controls.Add(pictureBox1);
+            flowLayoutPanel4.Controls.Add(pictureBox2);
             flowLayoutPanel4.Dock = DockStyle.Right;
             flowLayoutPanel4.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel4.Location = new Point(737, 0);
@@ -395,6 +398,29 @@
             orgName_label.Size = new Size(71, 19);
             orgName_label.TabIndex = 2;
             orgName_label.Text = "C-SHARK";
+            // 
+            // notify_pictureBox
+            // 
+            notify_pictureBox.BackColor = Color.Transparent;
+            notify_pictureBox.Cursor = Cursors.Hand;
+            notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
+            notify_pictureBox.Location = new Point(170, 8);
+            notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
+            notify_pictureBox.Name = "notify_pictureBox";
+            notify_pictureBox.Size = new Size(30, 30);
+            notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            notify_pictureBox.TabIndex = 6;
+            notify_pictureBox.TabStop = false;
+            notify_pictureBox.Click += notify_pictureBox_Click_1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.OliveDrab;
+            pictureBox1.Location = new Point(154, 8);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(10, 10);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
             // 
             // search_textBox
             // 
@@ -441,23 +467,23 @@
             purchaseOrders_dataGridView.BackgroundColor = Color.White;
             purchaseOrders_dataGridView.BorderStyle = BorderStyle.None;
             purchaseOrders_dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            purchaseOrders_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            purchaseOrders_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             purchaseOrders_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(0, 11, 71);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(0, 93, 217);
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            purchaseOrders_dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(0, 11, 71);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 93, 217);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            purchaseOrders_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             purchaseOrders_dataGridView.Dock = DockStyle.Fill;
             purchaseOrders_dataGridView.Location = new Point(5, 42);
             purchaseOrders_dataGridView.Name = "purchaseOrders_dataGridView";
@@ -525,28 +551,16 @@
             label6.Text = "0";
             label6.Click += label6_Click;
             // 
-            // notify_pictureBox
+            // pictureBox2
             // 
-            notify_pictureBox.BackColor = Color.Transparent;
-            notify_pictureBox.Cursor = Cursors.Hand;
-            notify_pictureBox.Image = Properties.Resources._2203538_alarm_bell_notification_ring_icon;
-            notify_pictureBox.Location = new Point(170, 8);
-            notify_pictureBox.Margin = new Padding(3, 3, 20, 3);
-            notify_pictureBox.Name = "notify_pictureBox";
-            notify_pictureBox.Size = new Size(30, 30);
-            notify_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            notify_pictureBox.TabIndex = 6;
-            notify_pictureBox.TabStop = false;
-            notify_pictureBox.Click += notify_pictureBox_Click_1;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.OliveDrab;
-            pictureBox1.Location = new Point(154, 8);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(10, 10);
-            pictureBox1.TabIndex = 7;
-            pictureBox1.TabStop = false;
+            pictureBox2.Image = Properties.Resources._9111058_refresh_ccw_icon;
+            pictureBox2.Location = new Point(115, 8);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(33, 30);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 11;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // PurchaseOrders
             // 
@@ -576,14 +590,15 @@
             panel5.PerformLayout();
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)notify_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)purchaseOrders_dataGridView).EndInit();
             groupBox1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)notify_pictureBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -623,5 +638,6 @@
         private PictureBox notify_pictureBox;
         private PictureBox pictureBox1;
         private System.Windows.Forms.Timer timercheckNotifications;
+        private PictureBox pictureBox2;
     }
 }

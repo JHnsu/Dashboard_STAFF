@@ -22,6 +22,7 @@ namespace Dashboard_STAFF
             string itemName = textBox2.Text.Trim();
             int quantity = (int)numericUpDown1.Value;
             decimal unitPrice = 0;
+            string brand = string.Empty;
 
             if (quantity <= 0)
             {
@@ -41,8 +42,9 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
 
+                    // Check if the item exists in the Inventory table and get Brand and Price
                     string validationQuery = @"
-                        SELECT COUNT(*) 
+                        SELECT Brand, UnitPrice 
                         FROM Inventory 
                         WHERE ItemName = @ItemName";
 
@@ -50,19 +52,27 @@ namespace Dashboard_STAFF
                     {
                         cmd.Parameters.AddWithValue("@ItemName", itemName);
 
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-                        if (count == 0)
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("Invalid Item Name. Please check your inputs.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            if (reader.Read())
+                            {
+                                brand = reader.GetString("Brand");
+                                unitPrice = reader.GetDecimal("UnitPrice");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid Item Name. Please check your inputs.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                         }
                     }
 
                     MessageBox.Show("Restock Request Submitted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    // Insert into RestockRequests table
                     string insertQuery = @"
-                        INSERT INTO RestockRequests (RequestedBy, QuantityRequested, RequestStatus, ItemName, Price)
-                        VALUES (@RequestedBy, @QuantityRequested, 'Pending', @ItemName, @Price)";
+                        INSERT INTO RestockRequests (RequestedBy, QuantityRequested, RequestStatus, ItemName, Price, Brand)
+                        VALUES (@RequestedBy, @QuantityRequested, 'Pending', @ItemName, @Price, @Brand)";
 
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, conn))
                     {
@@ -70,10 +80,12 @@ namespace Dashboard_STAFF
                         insertCmd.Parameters.AddWithValue("@QuantityRequested", quantity);
                         insertCmd.Parameters.AddWithValue("@ItemName", itemName);
                         insertCmd.Parameters.AddWithValue("@Price", unitPrice);
+                        insertCmd.Parameters.AddWithValue("@Brand", brand);
 
                         insertCmd.ExecuteNonQuery();
                     }
 
+                    // Clear the fields after submission
                     textBox2.Clear();
                     numericUpDown1.Value = 0;
                     textBox1.Clear();
@@ -104,15 +116,17 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
                     string query = @"
-                        SELECT 
-                            ItemID AS 'Item ID',
-                            ItemName AS 'Item Name', 
-                            Category AS 'Type', 
-                            UnitPrice AS 'Price', 
-                            StockLevel AS 'Quantity', 
-                            StockStatus AS 'Stock Status'
-                        FROM Inventory
-                        WHERE StockLevel <= 0;";
+                    SELECT 
+                        ItemID AS 'Item ID',
+                        ItemName AS 'Item Name', 
+                        Category AS 'Type', 
+                        UnitPrice AS 'Price', 
+                        StockLevel AS 'Quantity', 
+                        StockStatus AS 'Stock Status'
+                    FROM Inventory
+                    WHERE StockLevel <= 0 
+                       OR StockLevel < MinimumStockLevel;";
+
 
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
                     {

@@ -71,7 +71,9 @@
             notif_dataGridView.AllowUserToAddRows = false;
             notif_dataGridView.AllowUserToDeleteRows = false;
             notif_dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            notif_dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             notif_dataGridView.BackgroundColor = Color.White;
+            notif_dataGridView.BorderStyle = BorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.White;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);

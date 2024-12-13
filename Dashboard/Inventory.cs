@@ -170,25 +170,6 @@ namespace Dashboard_STAFF
             {
                 MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
-            {
-                try
-                {
-                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
-                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
-
-                    profile_pictureBox.Image = Image.FromFile(filePath);
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show("Error loading profile picture: " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void search_textBox_TextChanged(object sender, EventArgs e)
@@ -650,7 +631,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -659,7 +639,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void notify_pictureBox_Click_1(object sender, EventArgs e)

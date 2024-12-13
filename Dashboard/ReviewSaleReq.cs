@@ -46,9 +46,14 @@ namespace Dashboard_STAFF
                 MessageBox.Show("Please select 'Approve' or 'Reject'.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (pendingOrders_dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an order to process.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             string ItemID = pendingOrders_dataGridView.SelectedRows[0].Cells["Item ID"].Value.ToString();
-            string orderStatus = radioButton1.Checked ? "Shipped" : "Cancelled";
+            string orderStatus = radioButton1.Checked ? "Completed" : "Cancelled";
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -72,6 +77,7 @@ namespace Dashboard_STAFF
                             MessageBox.Show($"Order successfully {orderStatus.ToLower()}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearFields();
                             LoadPendingOrders();
+
                         }
                         else
                         {

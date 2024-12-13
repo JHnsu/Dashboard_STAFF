@@ -274,7 +274,7 @@ namespace Dashboard_STAFF
                     conn.Open();
 
                     string query = @"SELECT RequestID, RequestedBy, QuantityRequested, RequestStatus, 
-                             ItemName, Brand, Price 
+                             ItemName, Brand
                              FROM restockrequests
                              WHERE ItemName LIKE @searchQuery
                              OR RequestedBy LIKE @searchQuery
@@ -296,7 +296,6 @@ namespace Dashboard_STAFF
                         requests_dataGridView.Columns["RequestStatus"].HeaderText = "Status";
                         requests_dataGridView.Columns["ItemName"].HeaderText = "Item Name";
                         requests_dataGridView.Columns["Brand"].HeaderText = "Brand";
-                        requests_dataGridView.Columns["Price"].HeaderText = "Price";
                     }
                 }
             }
@@ -469,13 +468,13 @@ namespace Dashboard_STAFF
                         }
                     }
 
-                    string toReceiveQuery = @"SELECT SUM(Quantity) AS TotalToReceive FROM PurchaseOrders WHERE Status = 'Pending'";
+                    string toReceiveQuery = @"SELECT SUM(Quantity) AS TotalToReceive FROM PurchaseOrders";
                     using (MySqlCommand cmd = new MySqlCommand(toReceiveQuery, conn))
                     {
                         object resultToReceive = cmd.ExecuteScalar();
                         int totalToReceive = (resultToReceive != DBNull.Value) ? Convert.ToInt32(resultToReceive) : 0;
 
-                        string maxReceiveQuery = @"SELECT SUM(Quantity) AS TotalExpectedReceive FROM PurchaseOrders WHERE Status = 'Pending'";
+                        string maxReceiveQuery = @"SELECT SUM(QuantityRequested) AS TotalExpectedReceive FROM restockrequests WHERE RequestStatus = 'Pending'";
                         using (MySqlCommand maxReceiveCmd = new MySqlCommand(maxReceiveQuery, conn))
                         {
                             object maxReceiveResult = maxReceiveCmd.ExecuteScalar();
@@ -551,7 +550,7 @@ namespace Dashboard_STAFF
                     conn.Open();
 
                     string query = @"SELECT RequestID, RequestedBy, QuantityRequested, RequestStatus, 
-                             ItemName, Brand, Price 
+                             ItemName, Brand
                              FROM restockrequests";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -568,7 +567,6 @@ namespace Dashboard_STAFF
                         requests_dataGridView.Columns["RequestStatus"].HeaderText = "Status";
                         requests_dataGridView.Columns["ItemName"].HeaderText = "Item Name";
                         requests_dataGridView.Columns["Brand"].HeaderText = "Brand";
-                        requests_dataGridView.Columns["Price"].HeaderText = "Price";
                     }
                 }
             }
@@ -649,7 +647,6 @@ namespace Dashboard_STAFF
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-
             if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
             {
                 try
@@ -658,25 +655,6 @@ namespace Dashboard_STAFF
                     {
                         pictureBox7.Image = Image.FromStream(ms);
                     }
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show("Error loading profile picture: " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
-            {
-                try
-                {
-                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
-                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
-
-                    pictureBox7.Image = Image.FromFile(filePath);
                 }
                 catch (ArgumentException ex)
                 {
@@ -700,7 +678,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -709,7 +686,12 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
+
+        }
+
+        private void quantityReceived_progressBar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

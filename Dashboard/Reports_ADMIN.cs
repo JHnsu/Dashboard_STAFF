@@ -66,7 +66,7 @@ namespace Dashboard_STAFF
         }
         private void orderPDF_button_Click(object sender, EventArgs e)
         {
-            //order report
+            // Order report
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connString))
@@ -85,7 +85,6 @@ namespace Dashboard_STAFF
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string selectedPath = saveFileDialog.FileName;
-
 
                         PdfDocument pdf = new PdfDocument();
                         pdf.Info.Title = "Orders Report";
@@ -116,7 +115,7 @@ namespace Dashboard_STAFF
                         yPoint += 30;
 
                         // Table Header
-                        string[] headers = { "Item ID", "Item Name", "Brand", "Quantity", "Total Price", "Receiver", "Purchase Date" };
+                        string[] headers = { "Item ID", "Item Name", "Brand", "Quantity", "Total Price", "Purchase Date" };
                         int numColumns = headers.Length;
 
                         // Determine column widths based on the longest content
@@ -148,6 +147,11 @@ namespace Dashboard_STAFF
                         }
                         yPoint += 20; // Space below headers
 
+                        // Initialize total counters
+                        double totalPurchasePrice = 0;
+                        int totalItemsPurchased = 0;
+
+                        // Add Data Rows
                         // Add Data Rows
                         foreach (DataRow row in inventoryData.Rows)
                         {
@@ -178,6 +182,11 @@ namespace Dashboard_STAFF
                             }
                             yPoint += 20; // Move to the next row
 
+                            // Calculate total purchase price and items
+                            double totalPrice = Convert.ToDouble(row["TotalPrice"]);
+                            totalPurchasePrice += totalPrice;
+                            totalItemsPurchased += Convert.ToInt32(row["Quantity"]);
+
                             // Prevent overflow by checking yPoint
                             if (yPoint > page.Height - 40)
                             {
@@ -195,6 +204,23 @@ namespace Dashboard_STAFF
                                 yPoint += 20; // Space below headers
                             }
                         }
+
+                        // Add Footer Here
+                        yPoint += 30;
+
+                        // Check if there's enough space for the footer, otherwise create a new page
+                        if (yPoint > page.Height - 40)
+                        {
+                            page = pdf.AddPage(); // Add a new page if content exceeds the height
+                            gfx = XGraphics.FromPdfPage(page);
+                            yPoint = 30; // Reset yPoint for the new page
+                        }
+
+                        // Draw the footer
+                        gfx.DrawString("Total Items Purchased: " + totalItemsPurchased, boldFont, XBrushes.Black, new XPoint(leftMargin, yPoint));
+                        yPoint += 20;
+                        gfx.DrawString("Total Purchase Amount: ₱" + totalPurchasePrice.ToString("N2"), boldFont, XBrushes.Black, new XPoint(leftMargin, yPoint));
+
                         pdf.Save(selectedPath);
 
                         MessageBox.Show("PDF saved successfully to: " + selectedPath, "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -205,9 +231,7 @@ namespace Dashboard_STAFF
             {
                 MessageBox.Show("Error generating PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
         }
-
 
         private void orderPDF_button_MouseHover(object sender, EventArgs e)
         {
@@ -342,7 +366,7 @@ namespace Dashboard_STAFF
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //inventory report
+            // inventory report
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connString))
@@ -361,7 +385,6 @@ namespace Dashboard_STAFF
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string selectedPath = saveFileDialog.FileName;
-
 
                         PdfDocument pdf = new PdfDocument();
                         pdf.Info.Title = "Inventory Report";
@@ -424,6 +447,12 @@ namespace Dashboard_STAFF
                         }
                         yPoint += 20; // Space below headers
 
+                        // Counters for stock status
+                        int totalItems = 0;
+                        int lowStockItems = 0;
+                        int inStockItems = 0;
+                        int outOfStockItems = 0;
+
                         // Add Data Rows
                         foreach (DataRow row in inventoryData.Rows)
                         {
@@ -454,6 +483,13 @@ namespace Dashboard_STAFF
                             }
                             yPoint += 20; // Move to the next row
 
+                            // Track stock status
+                            totalItems++;
+                            string stockStatus = row["StockStatus"].ToString();
+                            if (stockStatus.ToLower() == "low stock") lowStockItems++;
+                            if (stockStatus.ToLower() == "in stock") inStockItems++;
+                            if (stockStatus.ToLower() == "out of stock") outOfStockItems++;
+
                             // Prevent overflow by checking yPoint
                             if (yPoint > page.Height - 40)
                             {
@@ -471,6 +507,21 @@ namespace Dashboard_STAFF
                                 yPoint += 20; // Space below headers
                             }
                         }
+
+                        // Footer: Total items, low stock, in stock, out of stock
+                        yPoint += 30; // Space before footer
+
+                        gfx.DrawString($"Total Items: {totalItems}", font, XBrushes.Black, new XPoint(leftMargin, yPoint));
+                        yPoint += 20; 
+
+                        gfx.DrawString($"Low Stock: {lowStockItems}", font, XBrushes.Black, new XPoint(leftMargin, yPoint));
+                        yPoint += 20;
+
+                        gfx.DrawString($"In Stock: {inStockItems}", font, XBrushes.Black, new XPoint(leftMargin, yPoint));
+                        yPoint += 20; 
+
+                        gfx.DrawString($"Out of Stock: {outOfStockItems}", font, XBrushes.Black, new XPoint(leftMargin, yPoint));
+
                         pdf.Save(selectedPath);
 
                         MessageBox.Show("PDF saved successfully to: " + selectedPath, "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -495,26 +546,26 @@ namespace Dashboard_STAFF
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //sales re[ort
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connString))
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Sales";
+                    string query = "SELECT * FROM sales";
                     MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
-                    DataTable salesData = new DataTable();
-                    adapter.Fill(salesData);
+                    DataTable inventoryData = new DataTable();
+                    adapter.Fill(inventoryData);
 
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf"; 
-                    saveFileDialog.DefaultExt = "pdf"; 
-                    saveFileDialog.FileName = "Sales_Report_" + DateTime.Now.ToString("yyyyMMdd") + ".pdf"; 
+                    saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+                    saveFileDialog.DefaultExt = "pdf";
+                    saveFileDialog.FileName = "Sales_Report_" + DateTime.Now.ToString("yyyyMMdd") + ".pdf";
 
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        string selectedPath = saveFileDialog.FileName; 
+                        string selectedPath = saveFileDialog.FileName;
 
-    
                         PdfDocument pdf = new PdfDocument();
                         pdf.Info.Title = "Sales Report";
 
@@ -541,18 +592,18 @@ namespace Dashboard_STAFF
                         // Date Generated
                         string dateGenerated = "Date Generated: " + DateTime.Now.ToString("MMMM dd, yyyy");
                         gfx.DrawString(dateGenerated, font, XBrushes.Black, new XPoint(leftMargin, yPoint));
-                        yPoint += 30; 
+                        yPoint += 30;
 
                         // Table Header
-                        string[] headers = { "Sale ID", "Item Name", "Brand", "Quantity", "Price", "Total Price", "Receiver" };
+                        string[] headers = { "Item ID", "Item Name", "Brand", "Quantity", "Total Price", "Sale Date" };
                         int numColumns = headers.Length;
 
                         // Determine column widths based on the longest content
                         double[] columnWidths = new double[numColumns];
                         for (int i = 0; i < headers.Length; i++)
                         {
-                            columnWidths[i] = gfx.MeasureString(headers[i], boldFont).Width; 
-                            foreach (DataRow row in salesData.Rows)
+                            columnWidths[i] = gfx.MeasureString(headers[i], boldFont).Width;
+                            foreach (DataRow row in inventoryData.Rows)
                             {
                                 double contentWidth = gfx.MeasureString(row[headers[i].Replace(" ", "")].ToString(), font).Width;
                                 columnWidths[i] = Math.Max(columnWidths[i], contentWidth);
@@ -576,8 +627,12 @@ namespace Dashboard_STAFF
                         }
                         yPoint += 20; // Space below headers
 
+                        // Initialize total counters
+                        double totalSalesAmount = 0;
+                        int totalItemsSold = 0;
+
                         // Add Data Rows
-                        foreach (DataRow row in salesData.Rows)
+                        foreach (DataRow row in inventoryData.Rows)
                         {
                             xPoint = leftMargin; // Reset X for each row
                             for (int i = 0; i < headers.Length; i++)
@@ -606,6 +661,11 @@ namespace Dashboard_STAFF
                             }
                             yPoint += 20; // Move to the next row
 
+                            // Calculate total sales amount and items sold
+                            double totalPrice = Convert.ToDouble(row["TotalPrice"]);
+                            totalSalesAmount += totalPrice;
+                            totalItemsSold += Convert.ToInt32(row["Quantity"]);
+
                             // Prevent overflow by checking yPoint
                             if (yPoint > page.Height - 40)
                             {
@@ -623,6 +683,23 @@ namespace Dashboard_STAFF
                                 yPoint += 20; // Space below headers
                             }
                         }
+
+                        // Add Footer Here
+                        yPoint += 30;
+
+                        // Check if there's enough space for the footer, otherwise create a new page
+                        if (yPoint > page.Height - 40)
+                        {
+                            page = pdf.AddPage(); // Add a new page if content exceeds the height
+                            gfx = XGraphics.FromPdfPage(page);
+                            yPoint = 30; // Reset yPoint for the new page
+                        }
+
+                        // Draw the footer
+                        gfx.DrawString("Total Items Sold: " + totalItemsSold, boldFont, XBrushes.Black, new XPoint(leftMargin, yPoint));
+                        yPoint += 20;
+                        gfx.DrawString("Total Sales Amount: ₱" + totalSalesAmount.ToString("N2"), boldFont, XBrushes.Black, new XPoint(leftMargin, yPoint));
+
                         pdf.Save(selectedPath);
 
                         MessageBox.Show("PDF saved successfully to: " + selectedPath, "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -634,6 +711,7 @@ namespace Dashboard_STAFF
                 MessageBox.Show("Error generating PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void button2_MouseHover(object sender, EventArgs e)
         {
             button2.BackColor = Color.FromArgb(99, 218, 255);
@@ -950,7 +1028,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -959,7 +1036,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void notify_pictureBox_Click_1(object sender, EventArgs e)

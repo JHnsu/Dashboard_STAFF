@@ -196,16 +196,14 @@ namespace Dashboard_STAFF
         private void LoadPurchaseOrders()
         {
             string query = @"
-                SELECT 
-                    ItemID AS 'Item ID',
-                    ItemName AS 'Item Name', 
-                    Brand, 
-                    Quantity AS 'Quantity', 
-                    Receiver AS 'Receiver', 
-                    TotalPrice AS 'Total Price', 
-                    DATE(PurchaseDate) AS 'Purchase Date'
-                FROM PurchaseOrders
-                WHERE Status = 'Completed';";
+            SELECT 
+                ItemID AS 'Item ID',
+                ItemName AS 'Item Name', 
+                Brand, 
+                Quantity AS 'Quantity', 
+                TotalPrice AS 'Total Price', 
+                DATE(PurchaseDate) AS 'Purchase Date'
+            FROM PurchaseOrders;";
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -258,7 +256,7 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
 
-                    string query = "SELECT COUNT(*) FROM PurchaseOrders WHERE Status = 'Completed'";
+                    string query = "SELECT COUNT(*) FROM PurchaseOrders";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         int totalPurchases = Convert.ToInt32(cmd.ExecuteScalar());
@@ -279,14 +277,18 @@ namespace Dashboard_STAFF
         private void PopulateFilters()
         {
             comboBox2.Items.Clear();
+            comboBox2.Items.Add("No Filter");
             comboBox2.Items.Add("Item ID");
             comboBox2.Items.Add("Item Name");
             comboBox2.Items.Add("Brand");
             comboBox2.Items.Add("Quantity");
-            comboBox2.Items.Add("Receiver");
             comboBox2.Items.Add("Total Price");
             comboBox2.Items.Add("Purchase Date");
             comboBox2.SelectedIndex = 0;
+            comboBox1.Enabled = false;
+            comboBox1.Items.Clear();
+
+            LoadPurchaseOrders();
         }
 
         private void SearchAll(string searchQuery)
@@ -303,18 +305,15 @@ namespace Dashboard_STAFF
                             ItemName AS 'Item Name',
                             Brand,
                             Quantity AS 'Quantity',
-                            Receiver,
                             TotalPrice AS 'Total Price',
                             DATE(PurchaseDate) AS 'Purchase Date'
                         FROM PurchaseOrders
                         WHERE 
-                            Status = 'Completed' AND
                             (
                                 ItemID LIKE @SearchQuery OR
                                 ItemName LIKE @SearchQuery OR
                                 Brand LIKE @SearchQuery OR
                                 Quantity LIKE @SearchQuery OR
-                                Receiver LIKE @SearchQuery OR
                                 TotalPrice LIKE @SearchQuery OR
                                 PurchaseDate LIKE @SearchQuery
                             );";
@@ -342,14 +341,11 @@ namespace Dashboard_STAFF
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            LoadPurchaseOrders();
-            CountTotalPurchases();
-            PopulateFilters();
+
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-
             if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
             {
                 try
@@ -358,25 +354,6 @@ namespace Dashboard_STAFF
                     {
                         pictureBox7.Image = Image.FromStream(ms);
                     }
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show("Error loading profile picture: " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
-            {
-                try
-                {
-                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
-                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
-
-                    pictureBox7.Image = Image.FromFile(filePath);
                 }
                 catch (ArgumentException ex)
                 {
@@ -413,16 +390,14 @@ namespace Dashboard_STAFF
                 {
                     conn.Open();
                     string query = @"
-                SELECT 
-                    ItemID AS 'Item ID', 
-                    ItemName AS 'Item Name', 
-                    Brand, 
-                    Quantity AS 'Quantity',  
-                    Receiver AS 'Receiver', 
-                    TotalPrice AS 'Total Price', 
-                    DATE(PurchaseDate) AS 'Purchase Date' 
-                FROM PurchaseOrders 
-                WHERE Status = 'Completed'";
+                        SELECT 
+                            ItemID AS 'Item ID', 
+                            ItemName AS 'Item Name', 
+                            Brand, 
+                            Quantity AS 'Quantity',  
+                            TotalPrice AS 'Total Price', 
+                            DATE(PurchaseDate) AS 'Purchase Date' 
+                        FROM PurchaseOrders";
 
                     switch (filter)
                     {
@@ -437,9 +412,6 @@ namespace Dashboard_STAFF
                             break;
                         case "Quantity":
                             query += " ORDER BY Quantity";
-                            break;
-                        case "Receiver":
-                            query += " ORDER BY Receiver";
                             break;
                         case "Total Price":
                             query += " ORDER BY TotalPrice";
@@ -493,6 +465,13 @@ namespace Dashboard_STAFF
             comboBox1.Items.Clear();
             comboBox1.Enabled = false;
 
+
+            if (selectedFilter == "No Filter")
+            {
+                LoadPurchaseOrders();
+                return;
+            }
+
             if (!string.IsNullOrEmpty(selectedFilter))
             {
                 switch (selectedFilter)
@@ -512,10 +491,6 @@ namespace Dashboard_STAFF
                     case "Quantity":
                         comboBox1.Items.Add("Quantity (Ascending)");
                         comboBox1.Items.Add("Quantity (Descending)");
-                        break;
-                    case "Receiver":
-                        comboBox1.Items.Add("Receiver (A-Z)");
-                        comboBox1.Items.Add("Receiver (Z-A)");
                         break;
                     case "Total Price":
                         comboBox1.Items.Add("Lowest to Highest");
@@ -556,7 +531,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -565,7 +539,6 @@ namespace Dashboard_STAFF
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void notify_pictureBox_Click_1(object sender, EventArgs e)
@@ -574,6 +547,13 @@ namespace Dashboard_STAFF
             popup.Show();
 
             pictureBox1.Visible = false;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            LoadPurchaseOrders();
+            CountTotalPurchases();
+            PopulateFilters();
         }
     }
 }

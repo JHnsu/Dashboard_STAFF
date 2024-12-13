@@ -62,6 +62,10 @@ namespace Dashboard_STAFF
 
         private void profile_pictureBox_Click(object sender, EventArgs e)
         {
+            ReloadProfilePicture();
+        }
+        private void ReloadProfilePicture()
+        {
             if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
             {
                 try
@@ -70,25 +74,6 @@ namespace Dashboard_STAFF
                     {
                         profile_pictureBox.Image = Image.FromStream(ms);
                     }
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show("Error loading profile picture: " + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (CurrentUser.ProfilePicture != null && CurrentUser.ProfilePicture.Length > 0)
-            {
-                try
-                {
-                    string filePath = Path.Combine(Application.StartupPath, "temp_image.jpg");
-                    File.WriteAllBytes(filePath, CurrentUser.ProfilePicture);
-
-                    profile_pictureBox.Image = Image.FromFile(filePath);
                 }
                 catch (ArgumentException ex)
                 {
@@ -273,6 +258,7 @@ namespace Dashboard_STAFF
             LowStockCount();
             OutofStockCount();
             PopulateFilters();
+            ReloadProfilePicture();
 
             button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
             button6.Text = LogInForm.CurrentUser.Email;
@@ -764,21 +750,19 @@ namespace Dashboard_STAFF
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {         
             button2.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
-
+       
         private void button6_Click(object sender, EventArgs e)
         {
             button6.Text = CurrentUser.Email;
 
             UserProfile userDetailsForm = new UserProfile(CurrentUser.FirstName + " " + CurrentUser.LastName, CurrentUser.Email);
             userDetailsForm.Show();
-            this.Hide();
         }
 
         private void notify_pictureBox_Click_1(object sender, EventArgs e)
